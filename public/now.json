@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "alias": "hillan02-trivia-tracker-app",
+  "name": "trivia-tracker-app",
+  "routes": [
+    {
+      "src": "^/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": ".*",
+      "dest": "/index.html"
+    }
+  ]
+}
