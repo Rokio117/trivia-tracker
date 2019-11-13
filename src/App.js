@@ -1,9 +1,33 @@
 import React from "react";
-import WelcomePage from "./components/welcomePage/welcomePage";
+import CreateEvent from "../src/components/forms/createEvent/createEvent";
+import LoginForm from "./components/forms/loginForm/loginForm";
+import ManageTeam from "./components/forms/manageTeam/manageTeam";
+import PickTeam from "./components/forms/pickTeam/pickTeam";
+import RegisterTeam from "./components/forms/registerTeam/registerTeam";
+import RegisterUser from "./components/forms/registerUser/registerUser";
+import Settings from "./components/forms/settings/settings";
+
+import Home from "./components/homePage/home/home";
+import NavBar from "./components/homePage/navBar/navBar";
 import NoTeamPage from "./components/homePage/noTeamPage/noTeamPage";
+import Roster from "./components/homePage/roster/roster";
+import Standings from "./components/homePage/standings/standings";
+import WelcomePage from "./components/welcomePage/welcomePage";
+
+import { Route } from "react-router-dom";
 import "./App.css";
 function App() {
-  return <NoTeamPage />;
+  return (
+    <>
+      <Route exact path="/" component={WelcomePage}></Route>
+      <Route path="/teamPick" component={PickTeam}></Route>
+      <Route path="/manage" component={ManageTeam}></Route>
+      <Route path="/settings" component={Settings}></Route>
+      <Route path="/addEvent" component={CreateEvent}></Route>
+      <Route path="/new" component={RegisterTeam}></Route>
+      <Route path="/home" component={Home}></Route>
+    </>
+  );
 }
 
 export default App;

@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+#navParent {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #bbb;
+  padding: 15px;
+}

@@ -1,0 +1,10 @@
+* {
+  text-align: center;
+}
+label {
+  font-weight: bold;
+}
+
+.position {
+  display: inline-block;
+}

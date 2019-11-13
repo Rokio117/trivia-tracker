@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#standings {
+  background-color: #aaa;
+}
+
+#wins {
+  font-weight: bold;
+  font-size: 25px;
+}
+.place {
+  display: inline;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+p,
+ul,
+label {
+  font-weight: bold;
+}
