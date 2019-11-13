@@ -14,11 +14,11 @@ import Roster from "./components/homePage/roster/roster";
 import Standings from "./components/homePage/standings/standings";
 import WelcomePage from "./components/welcomePage/welcomePage";
 
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 function App() {
   return (
-    <>
+    <Switch>
       <Route exact path="/" component={WelcomePage}></Route>
       <Route path="/teamPick" component={PickTeam}></Route>
       <Route path="/manage" component={ManageTeam}></Route>
@@ -26,7 +26,7 @@ function App() {
       <Route path="/addEvent" component={CreateEvent}></Route>
       <Route path="/new" component={RegisterTeam}></Route>
       <Route path="/home" component={Home}></Route>
-    </>
+    </Switch>
   );
 }
 

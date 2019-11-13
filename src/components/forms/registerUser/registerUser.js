@@ -4,7 +4,7 @@ class RegisterUser extends Component {
   render() {
     return (
       <div>
-        <label htmlFor="signUp" class="formLabel">
+        <label htmlFor="signUp" className="formLabel">
           New? Sign Up
         </label>
         <form id="signUp">

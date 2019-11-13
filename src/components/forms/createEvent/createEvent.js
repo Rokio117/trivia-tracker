@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./createEvent.css";
 class CreateEvent extends Component {
   render() {
@@ -20,13 +21,13 @@ class CreateEvent extends Component {
             <label htmlFor="position" id="positionLabel">
               Position:
             </label>
-            <input type="radio" name="position" class="position">
+            <input type="radio" name="position" className="position">
               1st
             </input>
-            <input type="radio" name="position" class="position">
+            <input type="radio" name="position" className="position">
               2nd
             </input>
-            <input type="radio" name="position" class="position">
+            <input type="radio" name="position" className="position">
               3rd
             </input>
             <br></br>
@@ -45,6 +46,9 @@ class CreateEvent extends Component {
             <label htmlFor="location">Location:</label>
             <input type="text" id="location" required></input>
             <button type="submit">Submit</button>
+            <button type="cancel" onClick={this.props.history.push("/home")}>
+              Cancel
+            </button>
           </form>
         </fieldset>
       </div>
@@ -52,4 +56,4 @@ class CreateEvent extends Component {
   }
 }
 
-export default CreateEvent;
+export default withRouter(CreateEvent);
