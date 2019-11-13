@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./pickTeam.css";
 class PickTeam extends Component {
   render() {
@@ -8,7 +9,13 @@ class PickTeam extends Component {
           <h1>Select Team:</h1>
         </header>
         <fieldset>
-          <form>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              console.log(e.target.value);
+              this.props.history.push("/home");
+            }}
+          >
             <select>
               <option>Team 1</option>
               <option>Team 2</option>
@@ -16,6 +23,12 @@ class PickTeam extends Component {
               <option>Team 4</option>
             </select>
             <button type="submit">Submit</button>
+            <button
+              type="button"
+              onClick={() => this.props.history.push("/home")}
+            >
+              Cancel
+            </button>
           </form>
         </fieldset>
       </div>
@@ -23,4 +36,4 @@ class PickTeam extends Component {
   }
 }
 
-export default PickTeam;
+export default withRouter(PickTeam);

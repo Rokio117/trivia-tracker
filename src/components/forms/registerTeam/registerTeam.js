@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./registerTeam.css";
 class RegisterTeam extends Component {
   render() {
@@ -8,11 +9,17 @@ class RegisterTeam extends Component {
           <h2>Register Team</h2>
         </header>
         <fieldset>
-          <form>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              console.log(e.value);
+              this.props.history.push("/home");
+            }}
+          >
             <label htmlFor="teamName">Team Name:</label>
-            <input type="text" id="teamName"></input>
+            <input type="text" id="teamName" required></input>
             <label htmlFor="winnings">Winnings</label>
-            <input type="text" id="winnings"></input>
+            <input type="text" id="winnings" required></input>
             <label htmlFor="first">1st Place Wins:</label>
             <input type="text" id="first"></input>
             <label htmlFor="second">2nd Place Wins:</label>
@@ -20,9 +27,14 @@ class RegisterTeam extends Component {
             <label htmlFor="third">3rd Place Wins:</label>
             <input type="text" id="third"></input>
             <label htmlFor="icon">Choose an icon</label>
-            <select id="icon"></select>
+            <select id="icon" required></select>
             <button type="submit">Submit</button>
-            <button type="cancel">Cancel</button>
+            <button
+              type="button"
+              onClick={() => this.props.history.push("/home")}
+            >
+              Cancel
+            </button>
           </form>
         </fieldset>
       </div>
@@ -30,4 +42,4 @@ class RegisterTeam extends Component {
   }
 }
 
-export default RegisterTeam;
+export default withRouter(RegisterTeam);

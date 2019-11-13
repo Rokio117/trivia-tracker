@@ -7,13 +7,13 @@ class Standings extends Component {
       <section id="standings">
         <h2>Standings</h2>
         <p id="wins">Wins:6</p>
-        <p id="firstPlace" class="place">
+        <p id="firstPlace" className="place">
           1st: 1
         </p>
-        <p id="secondPlace" class="place">
+        <p id="secondPlace" className="place">
           2nd: 2
         </p>
-        <p id="thirdPlace" class="place">
+        <p id="thirdPlace" className="place">
           3rd: 3
         </p>
         <p id="winnings">Winnings:$85</p>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./manageTeam.css";
 class ManageTeam extends Component {
   render() {
@@ -8,7 +9,13 @@ class ManageTeam extends Component {
           <h1>Manage Team</h1>
         </header>
         <fieldset>
-          <form>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              console.log(e.target);
+              this.props.history.push("/home");
+            }}
+          >
             <label htmlFor="addPlayer">Add Player:</label>
             <input type="text" id="addPlayer"></input>
             <br></br>
@@ -45,7 +52,12 @@ class ManageTeam extends Component {
             </select>
             <br></br>
             <button type="submit">Submit</button>
-            <button type="cancel">Cancel</button>
+            <button
+              type="button"
+              onClick={() => this.props.history.push("/home")}
+            >
+              Cancel
+            </button>
           </form>
         </fieldset>
       </div>
@@ -53,4 +65,4 @@ class ManageTeam extends Component {
   }
 }
 
-export default ManageTeam;
+export default withRouter(ManageTeam);

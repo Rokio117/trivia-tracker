@@ -1,16 +1,23 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./settings.css";
 
 class Settings extends Component {
-  rend() {
+  render() {
     return (
       <div>
         <header>
           <h1>Settings</h1>
         </header>
         <fieldset>
-          <form>
-            <label htmlFor="name">Name</label>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              console.log(e.target);
+              this.props.history.push("/home");
+            }}
+          >
+            <label htmlFor="name">Change Name:</label>
             <input type="text" id="name"></input>
             <label htmlFor="emblem">Emblem:</label>
             <select id="emblem">
@@ -19,6 +26,13 @@ class Settings extends Component {
               <option>♦</option>
               <option>♥</option>
             </select>
+            <button type="submit">Submit</button>
+            <button
+              type="button"
+              onClick={() => this.props.history.push("/home")}
+            >
+              Cancel
+            </button>
           </form>
         </fieldset>
       </div>
@@ -26,4 +40,4 @@ class Settings extends Component {
   }
 }
 
-export default Settings;
+export default withRouter(Settings);
