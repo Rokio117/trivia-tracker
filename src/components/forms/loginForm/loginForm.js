@@ -1,14 +1,44 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./loginForm.css";
+import STORE from "../../../store";
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loginName: "",
-      loginPassword: ""
+      loginPassword: "",
+      loginError: false
     };
   }
+
+  validateLogin = (userName, password) => {
+    const user = STORE.users.filter(user => user.userName === userName)[0];
+
+    if (!user) {
+      this.setState({ loginError: true });
+
+      return false;
+    } else if (user.password !== password) {
+      this.setState({ loginError: true });
+
+      return false;
+    }
+
+    this.setState({ loginError: false });
+    this.props.loginUser(userName);
+    this.props.loginTeam(user.teams[0].teamCode);
+    this.props.history.push("/home");
+    return true;
+  };
+
+  loginError = error => {
+    if (error) {
+      return <p id="errorMessage">Wrong User Name or Password</p>;
+    }
+  };
+
   render() {
     return (
       <div>
@@ -19,9 +49,8 @@ class LoginForm extends Component {
           id="login"
           onSubmit={e => {
             e.preventDefault();
-            console.log("login form onSubmit ran");
-            this.props.validateUser(this.state.validateUser);
-            this.props.validatePassword(this.state.loginPassword);
+
+            this.validateLogin(this.state.loginName, this.state.loginPassword);
           }}
         >
           <label htmlFor="logName">User Name</label>
@@ -40,6 +69,7 @@ class LoginForm extends Component {
               this.setState({ loginPassword: e.target.value });
             }}
           ></input>
+          {this.loginError(this.state.loginError)}
           <button type="submit">Login</button>
         </form>
       </div>
@@ -47,4 +77,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

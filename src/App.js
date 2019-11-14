@@ -14,29 +14,35 @@ import Roster from "./components/homePage/roster/roster";
 import Standings from "./components/homePage/standings/standings";
 import WelcomePage from "./components/welcomePage/welcomePage";
 
+import STORE from "./store";
+
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
+import store from "./store";
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: "",
-      team: ""
+      team: "",
+      userinfo: {},
+      teamInfo: {}
     };
   }
 
-  validateUser = userName => {
-    console.log("validateUser Ran", userName);
-    //this.setState({ user: userName });
+  loginUser = userName => {
+    //after the form validation, this function will set the user and team in state,
+    //as well as fetching the user and team info and storing it in state
+    console.log("loginUser Ran", userName);
+    const userInfo = store.users.find(user => user.userName === userName);
+    const teamCode = userInfo.teams[0].teamCode;
+    const teamInfo = store.teams.find(team => team.teamCode === teamCode);
+    this.setState({ user: userName, userInfo: userInfo, teamInfo: teamInfo });
   };
 
-  validatePassword = password => {
-    console.log("validate password ran", password);
-  };
-
-  updateTeam = teamName => {
+  loginTeam = teamName => {
     console.log("updateTeam Ran", teamName);
-    //this.setState({ team: teamName });
+    this.setState({ team: teamName });
   };
 
   render() {
@@ -48,9 +54,8 @@ class App extends Component {
           component={props => {
             return (
               <WelcomePage
-                updateUser={this.updateUser}
-                updateTeam={this.updateTeam}
-                validatePassword={this.validatePassword}
+                loginUser={this.loginUser}
+                loginTeam={this.loginTeam}
               />
             );
           }}

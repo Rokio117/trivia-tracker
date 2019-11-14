@@ -3,8 +3,12 @@ export default {
     {
       userName: "Rokio",
       name: "Nick",
-      teams: ["We'll Win Again Someday"],
-      teamPw: "password",
+      teams: [
+        {
+          teamName: "We'll Win Again Someday",
+          teamCode: "password"
+        }
+      ],
       password: "password",
       wins: 0,
       role: "Captain"
@@ -13,6 +17,7 @@ export default {
   teams: [
     {
       name: "We'll Win Again Someday",
+      teamCode: "password",
       members: ["Rokio"],
       wins: 0,
       firstPlace: 0,

@@ -13,14 +13,12 @@ class WelcomePage extends Component {
           so you can look back at your past roster for each game.
         </p>
         <LoginForm
-          validateUser={this.props.validateUser}
-          updateTeam={this.props.updateTeam}
-          validatePassword={this.props.validatePassword}
+          loginUser={this.props.loginUser}
+          loginTeam={this.props.loginTeam}
         />
         <RegisterUser
-          updateUser={this.props.updateUser}
-          updateTeam={this.props.updateTeam}
-          validatePassword={this.props.validatePassword}
+          loginUser={this.props.loginUser}
+          loginTeam={this.props.loginTeam}
         />
       </div>
     );
