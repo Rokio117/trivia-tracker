@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+#extendButton {
+  display: inline-block;
+  padding: 0px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#compressedList {
+  margin: 0px;
+}

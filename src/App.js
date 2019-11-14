@@ -24,10 +24,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: "",
-      team: "",
-      userInfo: {},
-      teamInfo: {}
+      user: "Rokio",
+      team: "password",
+      userInfo: STORE.users[0],
+      teamInfo: STORE.teams[0]
     };
   }
 

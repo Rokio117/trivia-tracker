@@ -2,14 +2,10 @@ import React, { Component } from "react";
 import HistoryDisplay from "./historyDisplay";
 
 class HistoryList extends Component {
+  makeList = () =>
+    this.props.events.map(event => <HistoryDisplay event={event} />);
   render() {
-    return (
-      <div>
-        {this.props.events.map(event => {
-          return <HistoryDisplay event={event} />;
-        })}
-      </div>
-    );
+    return <>{this.makeList()}</>;
   }
 }
 
