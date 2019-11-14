@@ -15,6 +15,7 @@ import Standings from "./components/homePage/standings/standings";
 import WelcomePage from "./components/welcomePage/welcomePage";
 
 import STORE from "./store";
+import TriviaContext from "./context";
 
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -47,26 +48,31 @@ class App extends Component {
 
   render() {
     return (
-      <Switch>
-        <Route
-          exact
-          path="/"
-          component={props => {
-            return (
-              <WelcomePage
-                loginUser={this.loginUser}
-                loginTeam={this.loginTeam}
-              />
-            );
-          }}
-        ></Route>
-        <Route path="/teamPick" component={PickTeam}></Route>
-        <Route path="/manage" component={ManageTeam}></Route>
-        <Route path="/settings" component={Settings}></Route>
-        <Route path="/addEvent" component={CreateEvent}></Route>
-        <Route path="/new" component={RegisterTeam}></Route>
-        <Route path="/home" component={Home}></Route>
-      </Switch>
+      <TriviaContext.Provider
+        userInfo={this.state.userinfo}
+        teamInfo={this.state.teamInfo}
+      >
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={props => {
+              return (
+                <WelcomePage
+                  loginUser={this.loginUser}
+                  loginTeam={this.loginTeam}
+                />
+              );
+            }}
+          ></Route>
+          <Route path="/teamPick" component={PickTeam}></Route>
+          <Route path="/manage" component={ManageTeam}></Route>
+          <Route path="/settings" component={Settings}></Route>
+          <Route path="/addEvent" component={CreateEvent}></Route>
+          <Route path="/new" component={RegisterTeam}></Route>
+          <Route path="/home" component={Home}></Route>
+        </Switch>
+      </TriviaContext.Provider>
     );
   }
 }
