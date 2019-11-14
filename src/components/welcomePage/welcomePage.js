@@ -12,8 +12,16 @@ class WelcomePage extends Component {
           roster, wins, and more. After a game of trivia add details to the win
           so you can look back at your past roster for each game.
         </p>
-        <LoginForm />
-        <RegisterUser />
+        <LoginForm
+          validateUser={this.props.validateUser}
+          updateTeam={this.props.updateTeam}
+          validatePassword={this.props.validatePassword}
+        />
+        <RegisterUser
+          updateUser={this.props.updateUser}
+          updateTeam={this.props.updateTeam}
+          validatePassword={this.props.validatePassword}
+        />
       </div>
     );
   }

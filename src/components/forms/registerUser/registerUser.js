@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import "./registerUser.css";
 class RegisterUser extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      signUpUserName: "",
+      signUpName: "",
+      signUpPassword: "",
+      signUpRepeatPassword: "",
+      teamCode: ""
+    };
+  }
   render() {
     return (
       <div>
