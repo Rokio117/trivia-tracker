@@ -29,7 +29,9 @@ export default {
           date: "1/22/19",
           location: "Paddy's Pub",
           winOrLoss: "Loss",
-          roster: ["Rokio"]
+          roster: ["Rokio"],
+          position: "2nd",
+          winnings: 20
         }
       ]
     }

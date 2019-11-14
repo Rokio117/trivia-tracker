@@ -26,7 +26,7 @@ class App extends Component {
     this.state = {
       user: "",
       team: "",
-      userinfo: {},
+      userInfo: {},
       teamInfo: {}
     };
   }
@@ -49,8 +49,10 @@ class App extends Component {
   render() {
     return (
       <TriviaContext.Provider
-        userInfo={this.state.userinfo}
-        teamInfo={this.state.teamInfo}
+        value={{
+          userInfo: this.state.userInfo,
+          teamInfo: this.state.teamInfo
+        }}
       >
         <Switch>
           <Route

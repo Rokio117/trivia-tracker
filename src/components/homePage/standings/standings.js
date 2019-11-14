@@ -1,30 +1,38 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import "./standings.css";
+import TriviaContext from "../../../context";
+import HistoryList from "./historyList";
+
 class Standings extends Component {
   render() {
     return (
-      <section id="standings">
-        <h2>Standings</h2>
-        <p id="wins">Wins:6</p>
-        <p id="firstPlace" className="place">
-          1st: 1
-        </p>
-        <p id="secondPlace" className="place">
-          2nd: 2
-        </p>
-        <p id="thirdPlace" className="place">
-          3rd: 3
-        </p>
-        <p id="winnings">Winnings:$85</p>
-        <label htmlFor="history">History</label>
-        <ul id="history">
-          <li>1/22/19 Paddy's Pub Loss</li>
-          <li>1/16/19 Paddy's Pub Loss</li>
-          <li>1/8/19 Paddy's Pub Loss</li>
-          <li>1/1/19 Paddy's Pub WIN</li>
-        </ul>
-      </section>
+      <TriviaContext.Consumer>
+        {value => {
+          console.log(value.teamInfo.history, "value.teaminfo.history");
+
+          return (
+            <section id="standings">
+              <h2>Standings</h2>
+              <p id="wins">Total Wins(top 3){value.teamInfo.wins}</p>
+              <p id="firstPlace" className="place">
+                1st: {value.teamInfo.firstPlace}
+              </p>
+              <p id="secondPlace" className="place">
+                2nd: {value.teamInfo.secondPlace}
+              </p>
+              <p id="thirdPlace" className="place">
+                3rd: {value.teamInfo.thirdPlace}
+              </p>
+              <p id="winnings">Winnings:$ {value.teamInfo.winnings}</p>
+              <label htmlFor="history">History</label>
+              <ul id="history">
+                <HistoryList events={value.teamInfo.history} />
+              </ul>
+            </section>
+          );
+        }}
+      </TriviaContext.Consumer>
     );
   }
 }

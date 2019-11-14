@@ -8,12 +8,13 @@ class Home extends Component {
   render() {
     return (
       <TriviaContext.Consumer>
-        {context => {
+        {value => {
+          console.log(value);
           return (
             <>
               <NavBar />
               <header>
-                <h1>{context.teamInfo.name}</h1>
+                <h1>{value.teamInfo.name}</h1>
               </header>
               <Standings />
               <Roster />
