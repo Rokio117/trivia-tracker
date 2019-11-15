@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+
 import CreateEvent from "../src/components/forms/createEvent/createEvent";
 import LoginForm from "./components/forms/loginForm/loginForm";
 import ManageTeam from "./components/forms/manageTeam/manageTeam";
@@ -47,17 +49,32 @@ class App extends Component {
 
   changeTeam = teamCode => {
     console.log("changeteam ran", teamCode);
-    const teamInfo = store.teams.find(team => (team.teamcode = teamCode));
+    const teamInfo = store.teams.find(team => team.teamCode === teamCode);
     console.log(teamInfo, "teaminfo ");
-    this.setState({ teamInfo: teamInfo });
+    this.setState({ teamInfo: teamInfo, team: teamCode });
   };
+  logout = () => {
+    console.log("logout ran");
+    if (window.confirm("Are you sure?")) {
+      this.setState({
+        user: "",
+        team: "",
+        userInfo: "",
+        teamInfo: ""
+      });
+      this.props.history.push("/");
+    }
+  };
+
   render() {
     console.log(this.state, "this.state in render");
     return (
       <TriviaContext.Provider
         value={{
           userInfo: this.state.userInfo,
-          teamInfo: this.state.teamInfo
+          teamInfo: this.state.teamInfo,
+          user: this.state.user,
+          team: this.state.team
         }}
       >
         <Switch>
@@ -83,11 +100,16 @@ class App extends Component {
           <Route path="/settings" component={Settings}></Route>
           <Route path="/addEvent" component={CreateEvent}></Route>
           <Route path="/new" component={RegisterTeam}></Route>
-          <Route path="/home" component={Home}></Route>
+          <Route
+            path="/home"
+            component={props => {
+              return <Home logout={this.logout} />;
+            }}
+          ></Route>
         </Switch>
       </TriviaContext.Provider>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

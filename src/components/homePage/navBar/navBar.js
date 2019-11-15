@@ -23,6 +23,9 @@ class NavBar extends Component {
         <NavLink className="navBarLink" to={"/new"}>
           New team
         </NavLink>
+        <button id="log-out-button" onClick={() => this.props.logout()}>
+          Log out
+        </button>
       </nav>
     );
   }

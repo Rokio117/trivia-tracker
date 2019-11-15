@@ -11,7 +11,7 @@ class Home extends Component {
         {value => {
           return (
             <>
-              <NavBar />
+              <NavBar logout={this.props.logout} />
               <header>
                 <h1>{value.teamInfo.name}</h1>
               </header>

@@ -40,7 +40,7 @@ export default {
         },
         {
           teamName: "Paddy's Pub",
-          teamCode: "password"
+          teamCode: "password2"
         }
       ],
       password: "password",
