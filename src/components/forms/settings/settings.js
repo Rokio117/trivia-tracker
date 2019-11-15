@@ -13,7 +13,6 @@ class Settings extends Component {
           <form
             onSubmit={e => {
               e.preventDefault();
-              console.log(e.target);
               this.props.history.push("/home");
             }}
           >

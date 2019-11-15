@@ -34,7 +34,7 @@ class App extends Component {
   loginUser = userName => {
     //after the form validation, this function will set the user and team in state,
     //as well as fetching the user and team info and storing it in state
-    console.log("loginUser Ran", userName);
+
     const userInfo = store.users.find(user => user.userName === userName);
     const teamCode = userInfo.teams[0].teamCode;
     const teamInfo = store.teams.find(team => team.teamCode === teamCode);
@@ -42,11 +42,17 @@ class App extends Component {
   };
 
   loginTeam = teamName => {
-    console.log("updateTeam Ran", teamName);
     this.setState({ team: teamName });
   };
 
+  changeTeam = teamCode => {
+    console.log("changeteam ran", teamCode);
+    const teamInfo = store.teams.find(team => (team.teamcode = teamCode));
+    console.log(teamInfo, "teaminfo ");
+    this.setState({ teamInfo: teamInfo });
+  };
   render() {
+    console.log(this.state, "this.state in render");
     return (
       <TriviaContext.Provider
         value={{
@@ -67,7 +73,12 @@ class App extends Component {
               );
             }}
           ></Route>
-          <Route path="/teamPick" component={PickTeam}></Route>
+          <Route
+            path="/teamPick"
+            component={props => {
+              return <PickTeam changeTeam={this.changeTeam} />;
+            }}
+          ></Route>
           <Route path="/manage" component={ManageTeam}></Route>
           <Route path="/settings" component={Settings}></Route>
           <Route path="/addEvent" component={CreateEvent}></Route>

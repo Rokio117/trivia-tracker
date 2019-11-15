@@ -12,7 +12,6 @@ class RegisterTeam extends Component {
           <form
             onSubmit={e => {
               e.preventDefault();
-              console.log(e.value);
               this.props.history.push("/home");
             }}
           >

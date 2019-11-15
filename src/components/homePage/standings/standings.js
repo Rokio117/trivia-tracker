@@ -9,8 +9,6 @@ class Standings extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          console.log(value.teamInfo.history, "value.teaminfo.history");
-
           return (
             <section id="standings">
               <h2>Standings</h2>

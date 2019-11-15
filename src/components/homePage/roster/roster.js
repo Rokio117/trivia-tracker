@@ -12,7 +12,7 @@ class Roster extends Component {
             .map(captain => captain.name);
           const members = value.teamInfo.members
             .map(member => member.name)
-            .map(name => <li class="captainList">{name} </li>);
+            .map(name => <li className="captainList">{name} </li>);
           return (
             <section id="roster">
               <h2>Roster</h2>

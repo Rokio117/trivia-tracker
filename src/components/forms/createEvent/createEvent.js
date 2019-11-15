@@ -60,7 +60,6 @@ class CreateEvent extends Component {
           <form
             onSubmit={e => {
               e.preventDefault();
-              console.log(e.target.value);
               this.props.history.push("/home");
             }}
           >

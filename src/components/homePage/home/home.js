@@ -9,7 +9,6 @@ class Home extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          console.log(value);
           return (
             <>
               <NavBar />
