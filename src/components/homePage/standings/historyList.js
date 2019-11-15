@@ -8,5 +8,5 @@ class HistoryList extends Component {
     return <>{this.makeList()}</>;
   }
 }
-
+HistoryList.defaultProps = { events: [] };
 export default HistoryList;

@@ -26,10 +26,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: "Rokio",
-      team: "password",
-      userInfo: STORE.users[0],
-      teamInfo: STORE.teams[0]
+      user: "",
+      team: "",
+      userInfo: "",
+      teamInfo: ""
     };
   }
 

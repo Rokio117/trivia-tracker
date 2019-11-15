@@ -46,6 +46,19 @@ export default {
       password: "password",
       wins: 0,
       role: "Reporter"
+    },
+    {
+      userName: "Deandra",
+      name: "Dee",
+      teams: [
+        {
+          teamName: "Paddy's pub",
+          teamCode: "password2"
+        }
+      ],
+      password: "password",
+      wins: 0,
+      role: "Captain"
     }
   ],
   teams: [
@@ -104,7 +117,7 @@ export default {
         },
         {
           userName: "Deandra",
-          role: "Reporter",
+          role: "Captain",
           name: "Dee"
         },
         {
