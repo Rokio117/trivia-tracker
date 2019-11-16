@@ -150,5 +150,14 @@ export default {
         }
       ]
     }
-  ]
+  ],
+  methods: {
+    registerTeam: teamInfo => {
+      const newTeam = {
+        name: teamInfo.name,
+        teamCode: teamInfo.teamUserName,
+        members: teamInfo.creator
+      };
+    }
+  }
 };
