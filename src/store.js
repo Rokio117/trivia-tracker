@@ -151,13 +151,20 @@ export default {
       ]
     }
   ],
-  methods: {
-    registerTeam: teamInfo => {
-      const newTeam = {
-        name: teamInfo.name,
-        teamCode: teamInfo.teamUserName,
-        members: teamInfo.creator
-      };
-    }
+
+  registerTeam: teamInfo => {
+    const newTeam = {
+      name: teamInfo.name,
+      teamCode: teamInfo.teamUserName,
+      members: [teamInfo.members],
+      wins: teamInfo.wins,
+      firstPlace: teamInfo.firstPlace,
+      secondPlace: teamInfo.secondPlace,
+      thirdPlace: teamInfo.thirdPlace,
+      winnings: teamInfo.winnings,
+      history: []
+    };
+    console.log(this.teams, "this.teams in store");
+    //this.teams.push(newTeam)
   }
 };
