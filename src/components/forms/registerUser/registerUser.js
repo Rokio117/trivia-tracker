@@ -1,32 +1,42 @@
 import React, { Component } from "react";
 import "./registerUser.css";
 import store from "../../../store";
-import { tsImportEqualsDeclaration } from "@babel/types";
+
 class RegisterUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
       signUpUserName: "",
-      uniqueUserName: true,
       signUpName: "",
       signUpPassword: "",
       signUpRepeatPassword: "",
+      teamUserName: "",
       passwordMatch: true,
-      validatedPassword: "",
-      teamUserName: ""
+      uniqueUserName: true
     };
   }
-  validatePassword = (password, repeatPassword, userName) => {
-    const users = store.users.map(user => user.userName);
-
-    if (password !== repeatPassword) {
-      return this.setState({ passwordMatch: false });
+  // validatePassword = (password, repeatPassword, userName) => {
+  //   console.log(password, repeatPassword);
+  //   const users = store.users.map(user => user.userName);
+  //   const match = password === repeatPassword;
+  //   const unique = !store.users.map(user => user.userName).includes(userName);
+  //   if (match) {
+  //     this.setState({ passwordMatch: true });
+  //   }setState
+  //   if (unique) {
+  //     this.setState({ uniqueUserName: true });
+  //   }
+  //   console.log("users", users, "match", match, "unique", unique);
+  // };
+  mustRepeat = match => {
+    if (!match) {
+      return <p className="error">Passwords must match</p>;
     }
-    if (users.includes(userName)) {
-      // turn this into a fetch request to compare users
-      this.setState({ passwordMatch: false });
+  };
+  mustBeUnique = unique => {
+    if (!unique) {
+      return <p className="error">User Name Is Taken</p>;
     }
-    this.setState({ validatePassword: password });
   };
   render() {
     return (
@@ -37,23 +47,33 @@ class RegisterUser extends Component {
         <form
           id="signUp"
           onSubmit={e => {
+            const match =
+              this.state.signUpPassword === this.state.signUpRepeatPassword;
+            const unique = !store.users
+              .map(user => user.userName)
+              .includes(this.state.signUpUserName);
+
             e.preventDefault();
-            this.validatePassword(
-              this.state.signUpPassword,
-              this.state.signUpRepeatPassword,
-              this.state.signUpUserName
-            );
-            if (this.state.passwordMatch && this.state.uniqueUserName) {
+            if (!match) {
+              this.setState({ passwordMatch: false });
+            }
+            if (!unique) {
+              this.setState({ uniqueUserName: false });
+            }
+            if (match && unique) {
+              console.log("validated");
               const newUser = {
                 userName: this.state.signUpUserName,
                 name: this.state.signUpName,
                 teams: [this.state.teamUserName],
-                password: this.state.validatedPassword
+                password: this.state.signUpPassword
               };
               //push new user into the array on store. this will become a post request
               store.users.push(newUser);
+              console.log("users after add new", store.users);
               this.props.loginUser(this.state.signUpUserName);
             }
+            console.log(this.state, "state after validatePassword");
           }}
         >
           <label htmlFor="userName">User Name:</label>
@@ -61,16 +81,22 @@ class RegisterUser extends Component {
             id="userName"
             type="text"
             required
-            onChange={e => this.setState({ teamUserName: e.target.value })}
+            onChange={e => this.setState({ signUpUserName: e.target.value })}
           ></input>
+          {this.mustBeUnique(this.state.uniqueUserName)}
           <label htmlFor="name">Name:</label>
-          <input id="name" type="text" required></input>
+          <input
+            id="name"
+            type="text"
+            required
+            onChange={e => this.setState({ signUpName: e.target.value })}
+          ></input>
           <label htmlFor="password">Password:</label>
           <input
             id="password"
             type="text"
             required
-            onChange={e => this.setState({ signUpName: e.target.value })}
+            onChange={e => this.setState({ signUpPassword: e.target.value })}
           ></input>
           <label htmlFor="repeatPassword">Repeat Password:</label>
           <input
@@ -81,6 +107,7 @@ class RegisterUser extends Component {
               this.setState({ signUpRepeatPassword: e.target.value })
             }
           ></input>
+          {this.mustRepeat(this.state.passwordMatch)}
           <label htmlFor="teamCode">
             Team User Name (if your team is already registered type it's User
             Name here)

@@ -34,18 +34,21 @@ class App extends Component {
   }
 
   loginUser = userName => {
+    console.log("login ran");
     //after the form validation, this function will set the user and team in state,
     //as well as fetching the user and team info and storing it in state
 
     const userInfo = store.users.find(user => user.userName === userName);
     //if the member is already a part of a team
     if (userInfo.teams[0].teamCode) {
+      console.log("on a team");
       const teamCode = userInfo.teams[0].teamCode;
       const teamInfo = store.teams.find(team => team.teamCode === teamCode);
       this.setState({ user: userName, userInfo: userInfo, teamInfo: teamInfo });
     }
     //if the member does not have a team
-    if (!userInfo.teams.length) {
+    if (!userInfo.teams[0].teamCode) {
+      console.log("no team");
       this.setState({ user: userName, userInfo: userInfo });
       this.props.history.push("/noTeam");
     }
