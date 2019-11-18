@@ -38,9 +38,17 @@ class App extends Component {
     //as well as fetching the user and team info and storing it in state
 
     const userInfo = store.users.find(user => user.userName === userName);
-    const teamCode = userInfo.teams[0].teamCode;
-    const teamInfo = store.teams.find(team => team.teamCode === teamCode);
-    this.setState({ user: userName, userInfo: userInfo, teamInfo: teamInfo });
+    //if the member is already a part of a team
+    if (userInfo.teams[0].teamCode) {
+      const teamCode = userInfo.teams[0].teamCode;
+      const teamInfo = store.teams.find(team => team.teamCode === teamCode);
+      this.setState({ user: userName, userInfo: userInfo, teamInfo: teamInfo });
+    }
+    //if the member does not have a team
+    if (!userInfo.teams.length) {
+      this.setState({ user: userName, userInfo: userInfo });
+      this.props.history.push("/noTeam");
+    }
   };
 
   loginTeam = teamName => {
@@ -106,6 +114,7 @@ class App extends Component {
               return <Home logout={this.logout} />;
             }}
           ></Route>
+          <Route path="/noTeam" component={NoTeamPage}></Route>
         </Switch>
       </TriviaContext.Provider>
     );

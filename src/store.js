@@ -13,9 +13,7 @@ export default {
           teamCode: "password2"
         }
       ],
-      password: "password",
-      wins: 0,
-      role: "Captain"
+      password: "password"
     },
     {
       userName: "Jen",
@@ -26,9 +24,7 @@ export default {
           teamCode: "password"
         }
       ],
-      password: "password",
-      wins: 0,
-      role: "Captain"
+      password: "password"
     },
     {
       userName: "Ash",
@@ -43,9 +39,7 @@ export default {
           teamCode: "password2"
         }
       ],
-      password: "password",
-      wins: 0,
-      role: "Reporter"
+      password: "password"
     },
     {
       userName: "Deandra",
@@ -56,9 +50,7 @@ export default {
           teamCode: "password2"
         }
       ],
-      password: "password",
-      wins: 0,
-      role: "Captain"
+      password: "password"
     }
   ],
   teams: [

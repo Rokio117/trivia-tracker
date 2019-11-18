@@ -14,7 +14,7 @@ class NoTeamPage extends Component {
         </p>
         <fieldset>
           <h2>Sign In:</h2>
-          <label htmlFor="teamForm">Team Code: </label>
+          <label htmlFor="teamForm">Team User Name: </label>
           <form id="teamForm">
             <input type="text"></input>
             <button type="submit">Submit</button>
