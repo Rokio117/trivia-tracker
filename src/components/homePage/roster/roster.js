@@ -9,12 +9,22 @@ class Roster extends Component {
       <TriviaContext.Consumer>
         {value => {
           if (value.userInfo && value.teamInfo) {
+            console.log(
+              value.userInfo,
+              "userinfo",
+              value.teamInfo,
+              "teamInfo in roster"
+            );
             const captains = value.teamInfo.members
               .filter(member => member.role === "Captain")
               .map(captain => captain.name);
             const members = value.teamInfo.members
               .map(member => member.name)
-              .map(name => <li className="captainList">{name} </li>);
+              .map((name, i) => (
+                <li className="captainList" key={i++}>
+                  {name}{" "}
+                </li>
+              ));
             return (
               <section id="roster">
                 <h2>Roster</h2>

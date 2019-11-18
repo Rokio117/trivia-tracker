@@ -45,11 +45,11 @@ class PickTeam extends Component {
                     }}
                   >
                     <select
-                      defaultValue={
-                        value.userInfo.teams.find(
-                          team => team.teamCode === value.team
-                        ).name
-                      }
+                      // defaultValue={
+                      //   value.userInfo.teams.find(
+                      //     team => team.teamCode === value.team
+                      //   ).name
+                      // }
                       onChange={e =>
                         this.setState({
                           selectedTeam: value.userInfo.teams.find(

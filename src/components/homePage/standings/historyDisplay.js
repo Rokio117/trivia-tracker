@@ -19,7 +19,7 @@ class HistoryDisplay extends Component {
   };
   display = state => {
     const attendance = this.props.event.roster.map(player => {
-      return <li>{player}</li>;
+      return <li key={player}>{player}</li>;
     });
     if (!this.state.extended) {
       return (

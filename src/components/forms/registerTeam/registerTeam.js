@@ -39,11 +39,13 @@ class RegisterTeam extends Component {
                       const newTeam = {
                         name: this.state.teamName,
                         teamCode: this.state.teamUserName,
-                        members: {
-                          userName: value.userInfo.userName,
-                          role: "Captain",
-                          name: value.userInfo.name
-                        },
+                        members: [
+                          {
+                            userName: value.userInfo.userName,
+                            role: "Captain",
+                            name: value.userInfo.name
+                          }
+                        ],
                         wins: winnings,
                         firstPlace: this.state.firsts,
                         secondPlace: this.state.seconds,
@@ -59,12 +61,7 @@ class RegisterTeam extends Component {
                           teamName: this.state.teamName,
                           teamCode: this.state.teamUserName
                         });
-                      console.log(
-                        store.teams,
-                        store.users.find(
-                          user => user.userName === value.userInfo
-                        ).teams
-                      );
+                      console.log(store);
                       this.props.history.push("/home");
                     }}
                   >
