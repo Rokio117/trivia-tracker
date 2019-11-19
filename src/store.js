@@ -51,6 +51,17 @@ export default {
         }
       ],
       password: "password"
+    },
+    {
+      userName: "Charlie",
+      name: "Charlie",
+      teams: [
+        {
+          teamName: "Paddy's pub",
+          teamCode: "password2"
+        }
+      ],
+      password: "password"
     }
   ],
   teams: [
@@ -116,6 +127,11 @@ export default {
           userName: "Mac",
           role: "Reporter",
           name: "Mac"
+        },
+        {
+          userName: "Charlie",
+          role: "Member",
+          name: "Charlie"
         }
       ],
       wins: 1000,

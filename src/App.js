@@ -16,7 +16,6 @@ import Roster from "./components/homePage/roster/roster";
 import Standings from "./components/homePage/standings/standings";
 import WelcomePage from "./components/welcomePage/welcomePage";
 
-import STORE from "./store";
 import TriviaContext from "./context";
 
 import { Route, Switch } from "react-router-dom";
@@ -44,7 +43,17 @@ class App extends Component {
       console.log("on a team");
       const teamCode = userInfo.teams[0].teamCode;
       const teamInfo = store.teams.find(team => team.teamCode === teamCode);
+      const team = store.teams
+        .filter(team => team.teamCode === teamCode)[0]
+        .members.push({
+          userName: userInfo.userName,
+          role: "Member",
+          name: userInfo.name
+        });
       this.setState({ user: userName, userInfo: userInfo, teamInfo: teamInfo });
+      console.log("team in loginUser", team);
+
+      this.props.history.push("/home");
     }
     //if the member does not have a team
     if (!userInfo.teams[0].teamCode) {
