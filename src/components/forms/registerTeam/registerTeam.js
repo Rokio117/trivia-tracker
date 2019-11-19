@@ -22,7 +22,8 @@ class RegisterTeam extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          if (value.userInfo && value.teamInfo) {
+          console.log("value in register team", value);
+          if (value.userInfo) {
             return (
               <div>
                 <header>
@@ -53,7 +54,7 @@ class RegisterTeam extends Component {
                         winnings: this.state.winnings,
                         history: []
                       };
-
+                      //push new team into DB, then add team to player info
                       store.teams.push(newTeam);
                       store.users
                         .find(user => user.userName === value.userInfo.userName)
@@ -62,7 +63,7 @@ class RegisterTeam extends Component {
                           teamCode: this.state.teamUserName
                         });
                       console.log(store);
-                      this.props.history.push("/home");
+                      this.props.loginUser(value.userInfo.userName);
                     }}
                   >
                     <label htmlFor="teamuserName">Team User Name:</label>

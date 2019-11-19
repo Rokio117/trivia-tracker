@@ -20,7 +20,7 @@ class NavBar extends Component {
       return (
         <>
           <NavLink className="navBarLink" to={"/addEvent"}>
-            Add Event
+            Create Event
           </NavLink>
         </>
       );
@@ -48,7 +48,7 @@ class NavBar extends Component {
               <NavLink className="navBarLink" to={"/home"}>
                 Home
               </NavLink>
-              {this.chooseTeamRender(memberRole)}
+              {this.chooseTeamRender(value.userInfo.teams.length)}
               <NavLink className="navBarLink" to={"/settings"}>
                 Settings
               </NavLink>

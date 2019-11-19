@@ -20,7 +20,7 @@ class NoTeamPage extends Component {
             <button type="submit">Submit</button>
           </form>
         </fieldset>
-        <RegisterTeam />
+        <RegisterTeam loginUser={this.props.loginUser} />
       </div>
     );
   }

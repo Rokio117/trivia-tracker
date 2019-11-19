@@ -152,10 +152,19 @@ class CreateEvent extends Component {
                     const newEvent = {
                       date: this.state.date,
                       location: this.state.location,
-                      outcome: outcome
+                      outcome: outcome,
+                      roster: this.state.attendance,
+                      position: this.state.position,
+                      winnings: this.state.winnings
                     };
                     e.preventDefault();
-                    //this will become a /post
+                    //this will become a /post request
+                    store.teams
+                      .filter(
+                        team => team.teamCode === value.teamInfo.teamCode
+                      )[0]
+                      .history.push(newEvent);
+                    console.log(newEvent);
                     this.props.history.push("/home");
                   }}
                 >
