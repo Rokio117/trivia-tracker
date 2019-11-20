@@ -49,7 +49,7 @@ class HistoryDisplay extends Component {
           <div>Date: {this.props.event.date}</div>
           <div>Location: {this.props.event.location}</div>
           <div>Outcome: {this.props.event.outcome} </div>
-          <div>Position: {this.props.event.outcome}</div>
+          <div>Position: {this.props.event.position}</div>
           <div>Winnings: {this.props.event.winnings}</div>
           <ul>{attendance}</ul>
         </li>

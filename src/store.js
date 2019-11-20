@@ -1,66 +1,28 @@
-export default {
+const store = {
   users: [
     {
       userName: "Rokio",
       name: "Nick",
-      teams: [
-        {
-          teamName: "We'll Win Again Someday",
-          teamCode: "password"
-        },
-        {
-          teamName: "Paddy's Pub",
-          teamCode: "password2"
-        }
-      ],
       password: "password"
     },
     {
       userName: "Jen",
       name: "Jennifer",
-      teams: [
-        {
-          teamName: "We'll Win Again Someday",
-          teamCode: "password"
-        }
-      ],
       password: "password"
     },
     {
       userName: "Ash",
       name: "Ashley",
-      teams: [
-        {
-          teamName: "We'll Win Again Someday",
-          teamCode: "password"
-        },
-        {
-          teamName: "Paddy's Pub",
-          teamCode: "password2"
-        }
-      ],
       password: "password"
     },
     {
       userName: "Deandra",
       name: "Dee",
-      teams: [
-        {
-          teamName: "Paddy's pub",
-          teamCode: "password2"
-        }
-      ],
       password: "password"
     },
     {
       userName: "Charlie",
       name: "Charlie",
-      teams: [
-        {
-          teamName: "Paddy's pub",
-          teamCode: "password2"
-        }
-      ],
       password: "password"
     }
   ],
@@ -71,25 +33,22 @@ export default {
       members: [
         {
           userName: "Rokio",
-          role: "Captain",
-          name: "Nick"
+          role: "Captain"
         },
         {
           userName: "Jen",
-          role: "Captain",
-          name: "Jennifer"
+          role: "Captain"
         },
         {
           userName: "Ash",
-          role: "Reporter",
-          name: "Ashley"
+          role: "Reporter"
         }
       ],
-      wins: 0,
-      firstPlace: 0,
-      secondPlace: 0,
-      thirdPlace: 0,
-      winnings: 0,
+      wins: 6,
+      firstPlace: 3,
+      secondPlace: 2,
+      thirdPlace: 1,
+      winnings: 395,
       history: [
         {
           date: "1/22/19",
@@ -115,23 +74,19 @@ export default {
       members: [
         {
           userName: "Rokio",
-          role: "Captain",
-          name: "Nick"
+          role: "Captain"
         },
         {
           userName: "Deandra",
-          role: "Captain",
-          name: "Dee"
+          role: "Captain"
         },
         {
           userName: "Mac",
-          role: "Reporter",
-          name: "Mac"
+          role: "Reporter"
         },
         {
           userName: "Charlie",
-          role: "Member",
-          name: "Charlie"
+          role: "Member"
         }
       ],
       wins: 1000,
@@ -160,19 +115,67 @@ export default {
     }
   ],
 
-  registerTeam: teamInfo => {
-    const newTeam = {
-      name: teamInfo.name,
-      teamCode: teamInfo.teamUserName,
-      members: [teamInfo.members],
-      wins: teamInfo.wins,
-      firstPlace: teamInfo.firstPlace,
-      secondPlace: teamInfo.secondPlace,
-      thirdPlace: teamInfo.thirdPlace,
-      winnings: teamInfo.winnings,
-      history: []
-    };
+  registerTeam: newTeam => {
     console.log(this.teams, "this.teams in store");
-    //this.teams.push(newTeam)
+    store.teams.push(newTeam);
+  },
+  getUser(userName) {
+    return store.users.find(user => user.userName === userName);
+  },
+  getTeam: teamCode => {
+    return store.teams.find(team => team.teamCode === teamCode);
+  },
+  getTeamsForUser: userName => {
+    return store.teams.filter(team =>
+      team.members.map(member => member.userName).includes(userName)
+    );
+  },
+  getMembersOfTeam: teamCode => {
+    return store.teams.find(team => team.teamCode === teamCode).members;
+  },
+  postUserWithNoTeam: userObject => {
+    store.users.push(userObject);
+  },
+  teamExists: teamCode => {
+    return store.teams.includes(team => team.teamCode === teamCode);
+  },
+  userExists: userName => {
+    return store.users.includes(user => user.userName === userName);
+  },
+  postUserWithTeam: (userObject, teamCode) => {
+    const user = { userName: userObject.userName, role: "Captain" };
+    store.user.push(userObject);
+    store.teams.find(team => team.teamCode === teamCode).push(user);
+  },
+  postNewSettings: (newSettings, userName) => {
+    store.users.find(user => user.userName === userName).name = newSettings;
+  },
+  postNewteam: teamObject => {
+    store.teams.push(teamObject);
+  },
+  addToTeam: (player, teamCode) => {
+    const newMember = {
+      userName: player.userName,
+      role: "Member"
+    };
+    store.teams
+      .find(team => team.teamCode === teamCode)
+      .members.push(newMember);
+  },
+  changeRole: (player, role, teamCode) => {
+    store.teams
+      .find(team => team.teamCode === teamCode)
+      .members.find(member => member.userName === player.userName).role = role;
+  },
+  changeWinnings: (winnings, teamCode) => {
+    store.teams.find(team => team.teamCode === teamCode).winnings = winnings;
+  },
+  changeTeamName: (name, teamCode) => {
+    store.teams.find(team => team.teamCode === teamCode).name = name;
+  },
+  addEvent: (event, teamCode) => {
+    store.teams.find(team => team.teamCode === teamCode).history.push(event);
   }
 };
+
+export default store;

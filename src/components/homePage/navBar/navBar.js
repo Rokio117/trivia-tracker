@@ -39,28 +39,27 @@ class NavBar extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          const memberRole = value.teamInfo.members.find(
-            member => member.userName === value.userInfo.userName
-          ).role;
-          return (
-            <nav id="navParent">
-              <p id="greeting">Hello, {value.userInfo.name}</p>
-              <NavLink className="navBarLink" to={"/home"}>
-                Home
-              </NavLink>
-              {this.chooseTeamRender(value.userInfo.teams.length)}
-              <NavLink className="navBarLink" to={"/settings"}>
-                Settings
-              </NavLink>
-              <NavLink className="navBarLink" to={"/new"}>
-                New team
-              </NavLink>
-              {this.roleRender(memberRole)}
-              <button id="log-out-button" onClick={() => this.props.logout()}>
-                Log out
-              </button>
-            </nav>
-          );
+          if (value.userInfo && value.teamInfo) {
+            const memberRole = value.teamInfo.members.find(
+              member => member.userName === value.userInfo.userName
+            ).role;
+            return (
+              <nav id="navParent">
+                <p id="greeting">Hello, {value.userInfo.name}</p>
+                {this.chooseTeamRender(value.userTeams.length)}
+                <NavLink className="navBarLink" to={"/settings"}>
+                  Settings
+                </NavLink>
+                <NavLink className="navBarLink" to={"/new"}>
+                  New team
+                </NavLink>
+                {this.roleRender(memberRole)}
+                <button id="log-out-button" onClick={() => this.props.logout()}>
+                  Log out
+                </button>
+              </nav>
+            );
+          }
         }}
       </TriviaContext.Consumer>
     );

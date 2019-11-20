@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import "./loginForm.css";
 import STORE from "../../../store";
+import store from "../../../store";
 
 class LoginForm extends Component {
   constructor(props) {
@@ -14,8 +15,9 @@ class LoginForm extends Component {
   }
 
   validateLogin = (userName, password) => {
-    const user = STORE.users.filter(user => user.userName === userName)[0];
-
+    const user = store.getUser(userName);
+    const userTeam = store.getTeamsForUser(userName);
+    console.log("user", user);
     if (!user) {
       this.setState({ loginError: true });
 
@@ -28,7 +30,7 @@ class LoginForm extends Component {
 
     this.setState({ loginError: false });
     this.props.loginUser(userName);
-    this.props.loginTeam(user.teams[0].teamCode);
+    this.props.loginTeam(userTeam.name);
     this.props.history.push("/home");
     return true;
   };

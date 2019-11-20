@@ -27,6 +27,7 @@ class App extends Component {
     this.state = {
       user: "",
       team: "",
+      userTeams: [],
       userInfo: "",
       teamInfo: ""
     };
@@ -37,26 +38,27 @@ class App extends Component {
     //after the form validation, this function will set the user and team in state,
     //as well as fetching the user and team info and storing it in state
 
-    const userInfo = store.users.find(user => user.userName === userName);
+    const userInfo = store.getUser(userName);
+    const userTeams = store.getTeamsForUser(userName);
+    console.log("userTeams", userTeams);
     //if the member is already a part of a team
-    if (userInfo.teams[0].teamCode) {
+    if (userTeams.length) {
       console.log("on a team");
-      const teamCode = userInfo.teams[0].teamCode;
-      const teamInfo = store.teams.find(team => team.teamCode === teamCode);
-      const team = store.teams
-        .filter(team => team.teamCode === teamCode)[0]
-        .members.push({
-          userName: userInfo.userName,
-          role: "Member",
-          name: userInfo.name
-        });
-      this.setState({ user: userName, userInfo: userInfo, teamInfo: teamInfo });
-      console.log("team in loginUser", team);
+      const teamCode = userTeams[0].teamCode;
+      const teamInfo = store.getTeam(teamCode);
+      //add logic for non-duplicates
+
+      this.setState({
+        user: userName,
+        userInfo: userInfo,
+        teamInfo: teamInfo,
+        userTeams: userTeams
+      });
 
       this.props.history.push("/home");
     }
     //if the member does not have a team
-    if (!userInfo.teams[0].teamCode) {
+    if (!userTeams.length) {
       console.log("no team");
       this.setState({ user: userName, userInfo: userInfo });
       this.props.history.push("/noTeam");
@@ -93,6 +95,7 @@ class App extends Component {
         value={{
           userInfo: this.state.userInfo,
           teamInfo: this.state.teamInfo,
+          userTeams: this.state.userTeams,
           user: this.state.user,
           team: this.state.team
         }}
@@ -119,7 +122,12 @@ class App extends Component {
           <Route path="/manage" component={ManageTeam}></Route>
           <Route path="/settings" component={Settings}></Route>
           <Route path="/addEvent" component={CreateEvent}></Route>
-          <Route path="/new" component={RegisterTeam}></Route>
+          <Route
+            path="/new"
+            component={props => {
+              return <RegisterTeam loginUser={this.loginUser} />;
+            }}
+          ></Route>
           <Route
             path="/home"
             component={props => {
