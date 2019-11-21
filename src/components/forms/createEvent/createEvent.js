@@ -81,7 +81,15 @@ class CreateEvent extends Component {
         <>
           <p>Position</p>
 
-          <select>
+          <select
+            onChange={e =>
+              this.setState({
+                position: e.target.value,
+                positionReminder: false
+              })
+            }
+          >
+            <option value="">Choose</option>
             {positions.map(position => {
               return (
                 <option key={position} value={position}>
@@ -90,6 +98,7 @@ class CreateEvent extends Component {
               );
             })}
           </select>
+          {this.positionReminder(this.state.positionReminder)}
         </>
       );
     }
