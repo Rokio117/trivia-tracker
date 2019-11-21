@@ -10,10 +10,13 @@ class CreateEvent extends Component {
       win: false,
       lossToggle: false,
       position: "",
-      winnings: "",
+      winnings: 0,
       attendance: [],
       location: "",
-      date: ""
+      date: "",
+      blankAttendance: true,
+      attendanceReminder: false,
+      positionReminder: false
     };
   }
 
@@ -25,9 +28,13 @@ class CreateEvent extends Component {
           key={person.userName}
           className="personLabel"
         >
-          {person.name}
+          {store.getNameFromUserName(person.userName)}
           <input
             onClick={e => {
+              this.setState({
+                blankAttendance: false,
+                attendanceReminder: false
+              });
               console.log(e.target.value, "e.target.value");
               console.log(this.state.attendance, typeof this.state.attendance);
               this.state.attendance.includes(e.target.value)
@@ -96,7 +103,9 @@ class CreateEvent extends Component {
           <label htmlFor="first" id="positionLabel" className="positionLabel">
             1st:
             <input
-              onClick={e => this.setState({ position: "1st" })}
+              onClick={e =>
+                this.setState({ position: "1st", positionReminder: false })
+              }
               type="radio"
               name="position"
               className="position"
@@ -106,7 +115,9 @@ class CreateEvent extends Component {
           <label htmlFor="second" className="positionLabel">
             2nd:
             <input
-              onClick={e => this.setState({ position: "2nd" })}
+              onClick={e =>
+                this.setState({ position: "2nd", positionReminder: false })
+              }
               type="radio"
               name="position"
               className="position"
@@ -116,13 +127,16 @@ class CreateEvent extends Component {
           <label htmlFor="third" className="positionLabel">
             3rd:
             <input
-              onClick={e => this.setState({ position: "3rd" })}
+              onClick={e =>
+                this.setState({ position: "3rd", positionReminder: false })
+              }
               type="radio"
               name="position"
               className="position"
               id="third"
             ></input>
           </label>
+          {this.positionReminder(this.state.positionReminder)}
           <br></br>
           <label htmlFor="winnings" id="winningsLabel">
             Winnings:
@@ -136,10 +150,21 @@ class CreateEvent extends Component {
       );
     }
   };
+  positionReminder = reminder => {
+    if (reminder) {
+      return <p className="error">Please choose a position</p>;
+    }
+  };
+  attendanceReminder = reminder => {
+    if (reminder) {
+      return <p className="error">Pick a player</p>;
+    }
+  };
   render() {
     return (
       <TriviaContext.Consumer>
         {value => {
+          console.log("value in createEvent", value);
           return (
             <div>
               <header>
@@ -148,24 +173,30 @@ class CreateEvent extends Component {
               <fieldset>
                 <form
                   onSubmit={e => {
-                    const outcome = this.state.win ? "Win" : "Loss";
-                    const newEvent = {
-                      date: this.state.date,
-                      location: this.state.location,
-                      outcome: outcome,
-                      roster: this.state.attendance,
-                      position: this.state.position,
-                      winnings: this.state.winnings
-                    };
                     e.preventDefault();
-                    //this will become a /post request
-                    store.teams
-                      .filter(
-                        team => team.teamCode === value.teamInfo.teamCode
-                      )[0]
-                      .history.push(newEvent);
-                    console.log(newEvent);
-                    this.props.history.push("/home");
+                    console.log(this.state);
+                    if (this.state.blankAttendance) {
+                      this.setState({ attendanceReminder: true });
+                    }
+                    if (!this.state.position) {
+                      this.setState({ positionReminder: true });
+                    }
+                    if (!this.state.blankAttendance && this.state.position) {
+                      const outcome = this.state.win ? "Win" : "Loss";
+                      const newEvent = {
+                        date: this.state.date,
+                        location: this.state.location,
+                        outcome: outcome,
+                        roster: this.state.attendance,
+                        position: this.state.position,
+                        winnings: this.state.winnings || 0
+                      };
+
+                      //this will become a /post request
+                      store.addEvent(newEvent, value.teamInfo.teamCode);
+                      console.log(newEvent);
+                      this.props.history.push("/home");
+                    }
                   }}
                 >
                   <p>Win:</p>
@@ -205,6 +236,7 @@ class CreateEvent extends Component {
                   <br></br>
                   <label htmlFor="attendance">Attendance</label>
                   {this.attendance(value.teamInfo.members)}
+                  {this.attendanceReminder(this.state.attendanceReminder)}
                   <br></br>
                   <label htmlFor="location">Location:</label>
                   <input

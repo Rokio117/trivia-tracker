@@ -26,14 +26,14 @@ class App extends Component {
     super(props);
     this.state = {
       user: "",
-      team: "",
       userTeams: [],
       userInfo: "",
-      teamInfo: ""
+      teamInfo: "",
+      teamMembers: ""
     };
   }
 
-  loginUser = userName => {
+  login = userName => {
     console.log("login ran");
     //after the form validation, this function will set the user and team in state,
     //as well as fetching the user and team info and storing it in state
@@ -46,13 +46,20 @@ class App extends Component {
       console.log("on a team");
       const teamCode = userTeams[0].teamCode;
       const teamInfo = store.getTeam(teamCode);
+
+      const teamMembers = teamInfo.members.map(member =>
+        Object.assign(member, {
+          name: store.getNameFromUserName(member.userName)
+        })
+      );
       //add logic for non-duplicates
 
       this.setState({
         user: userName,
         userInfo: userInfo,
         teamInfo: teamInfo,
-        userTeams: userTeams
+        userTeams: userTeams,
+        teamMembers: teamMembers
       });
 
       this.props.history.push("/home");
@@ -65,13 +72,15 @@ class App extends Component {
     }
   };
 
-  loginTeam = teamName => {
-    this.setState({ team: teamName });
+  loginTeam = teamInfo => {
+    const teamList = [...this.state.userTeams, teamInfo];
+    this.setState({ teamInfo: teamInfo, userTeams: teamList });
+    this.props.history.push("/home");
   };
 
   changeTeam = teamCode => {
     console.log("changeteam ran", teamCode);
-    const teamInfo = store.teams.find(team => team.teamCode === teamCode);
+    const teamInfo = store.getTeam(teamCode);
     console.log(teamInfo, "teaminfo ");
     this.setState({ teamInfo: teamInfo, team: teamCode });
   };
@@ -96,6 +105,7 @@ class App extends Component {
           userInfo: this.state.userInfo,
           teamInfo: this.state.teamInfo,
           userTeams: this.state.userTeams,
+          teamMembers: this.state.teamMembers,
           user: this.state.user,
           team: this.state.team
         }}
@@ -107,7 +117,7 @@ class App extends Component {
             component={props => {
               return (
                 <WelcomePage
-                  loginUser={this.loginUser}
+                  loginUser={this.login}
                   loginTeam={this.loginTeam}
                 />
               );
@@ -119,13 +129,25 @@ class App extends Component {
               return <PickTeam changeTeam={this.changeTeam} />;
             }}
           ></Route>
-          <Route path="/manage" component={ManageTeam}></Route>
+          <Route
+            path="/manage"
+            component={props => {
+              return (
+                <ManageTeam login={this.login} loginTeam={this.loginTeam} />
+              );
+            }}
+          ></Route>
           <Route path="/settings" component={Settings}></Route>
           <Route path="/addEvent" component={CreateEvent}></Route>
           <Route
             path="/new"
             component={props => {
-              return <RegisterTeam loginUser={this.loginUser} />;
+              return (
+                <RegisterTeam
+                  loginUser={this.login}
+                  loginTeam={this.loginTeam}
+                />
+              );
             }}
           ></Route>
           <Route
@@ -137,7 +159,7 @@ class App extends Component {
           <Route
             path="/noTeam"
             component={props => {
-              return <NoTeamPage loginUser={this.loginUser} />;
+              return <NoTeamPage loginUser={this.login} />;
             }}
           ></Route>
         </Switch>

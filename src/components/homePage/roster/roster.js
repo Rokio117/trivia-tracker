@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import TriviaContext from "../../../context";
 import "./roster.css";
+import store from "../../../store";
 class Roster extends Component {
   static defaultProps = {};
   render() {
@@ -17,12 +18,21 @@ class Roster extends Component {
             );
             const captains = value.teamInfo.members
               .filter(member => member.role === "Captain")
-              .map(captain => captain.name);
+              .map(captain => store.getNameFromUserName(captain.userName));
             const members = value.teamInfo.members
-              .map(member => member.name)
-              .map((name, i) => (
-                <li className="captainList" key={i++}>
-                  {name}{" "}
+              .map(member => store.getUserFromUserName(member.userName))
+              .map(user => (
+                <li className="captainList" key={user.userName}>
+                  <div className="rosterLabel">Name: </div>
+                  <div className="rosterName">{user.name}</div>
+
+                  <div className="rosterLabel">Role: </div>
+                  <div className="rosterName">
+                    {store.getRoleOfUser(
+                      user.userName,
+                      value.teamInfo.teamCode
+                    )}
+                  </div>
                 </li>
               ));
             return (

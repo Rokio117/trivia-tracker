@@ -43,8 +43,7 @@ class RegisterTeam extends Component {
                         members: [
                           {
                             userName: value.userInfo.userName,
-                            role: "Captain",
-                            name: value.userInfo.name
+                            role: "Captain"
                           }
                         ],
                         wins: winnings,
@@ -55,15 +54,10 @@ class RegisterTeam extends Component {
                         history: []
                       };
                       //push new team into DB, then add team to player info
-                      store.teams.push(newTeam);
-                      store.users
-                        .find(user => user.userName === value.userInfo.userName)
-                        .teams.push({
-                          teamName: this.state.teamName,
-                          teamCode: this.state.teamUserName
-                        });
+                      store.postNewteam(newTeam);
+
                       console.log(store);
-                      this.props.loginUser(value.userInfo.userName);
+                      this.props.loginTeam(newTeam);
                     }}
                   >
                     <label htmlFor="teamuserName">Team User Name:</label>

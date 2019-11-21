@@ -24,6 +24,11 @@ const store = {
       userName: "Charlie",
       name: "Charlie",
       password: "password"
+    },
+    {
+      userName: "Mac",
+      name: "Mac",
+      password: "password"
     }
   ],
   teams: [
@@ -122,6 +127,9 @@ const store = {
   getUser(userName) {
     return store.users.find(user => user.userName === userName);
   },
+  getNameFromUserName(userName) {
+    return store.users.find(user => user.userName === userName).name;
+  },
   getTeam: teamCode => {
     return store.teams.find(team => team.teamCode === teamCode);
   },
@@ -130,8 +138,16 @@ const store = {
       team.members.map(member => member.userName).includes(userName)
     );
   },
+  getUserFromUserName: userName => {
+    return store.users.find(user => user.userName === userName);
+  },
   getMembersOfTeam: teamCode => {
     return store.teams.find(team => team.teamCode === teamCode).members;
+  },
+  getRoleOfUser: (userName, teamCode) => {
+    return store.teams
+      .find(team => team.teamCode === teamCode)
+      .members.find(member => member.userName === userName).role;
   },
   postUserWithNoTeam: userObject => {
     store.users.push(userObject);
@@ -140,7 +156,10 @@ const store = {
     return store.teams.includes(team => team.teamCode === teamCode);
   },
   userExists: userName => {
-    return store.users.includes(user => user.userName === userName);
+    return store.users.map(user => user.userName).includes(userName);
+
+    //   Object.values(user).includes(userName))
+    // .includes(true);
   },
   postUserWithTeam: (userObject, teamCode) => {
     const user = { userName: userObject.userName, role: "Captain" };
@@ -153,10 +172,10 @@ const store = {
   postNewteam: teamObject => {
     store.teams.push(teamObject);
   },
-  addToTeam: (player, teamCode) => {
+  addToTeam: (player, teamCode, role) => {
     const newMember = {
-      userName: player.userName,
-      role: "Member"
+      userName: player,
+      role: role
     };
     store.teams
       .find(team => team.teamCode === teamCode)
@@ -165,7 +184,7 @@ const store = {
   changeRole: (player, role, teamCode) => {
     store.teams
       .find(team => team.teamCode === teamCode)
-      .members.find(member => member.userName === player.userName).role = role;
+      .members.find(member => member.userName === player).role = role;
   },
   changeWinnings: (winnings, teamCode) => {
     store.teams.find(team => team.teamCode === teamCode).winnings = winnings;
@@ -174,7 +193,26 @@ const store = {
     store.teams.find(team => team.teamCode === teamCode).name = name;
   },
   addEvent: (event, teamCode) => {
-    store.teams.find(team => team.teamCode === teamCode).history.push(event);
+    const winnings =
+      parseInt(store.teams.find(team => team.teamCode === teamCode).winnings) +
+      parseInt(event.winnings);
+    store.teams.find(team => team.teamCode === teamCode).history.unshift(event);
+    console.log("winnings in store.addEvent", winnings, typeof winnings);
+    store.teams.find(team => team.teamCode === teamCode).winnings = winnings;
+
+    if (event.outcome === "Win") {
+      const position = event.position;
+      store.teams.find(team => team.teamCode === teamCode).wins++;
+      if (position === "1st") {
+        store.teams.find(team => team.teamCode === teamCode).firstPlace++;
+      }
+      if (position === "2nd") {
+        store.teams.find(team => team.teamCode === teamCode).secondPlace++;
+      }
+      if (position === "3rd") {
+        store.teams.find(team => team.teamCode === teamCode).thirdPlace++;
+      }
+    }
   }
 };
 

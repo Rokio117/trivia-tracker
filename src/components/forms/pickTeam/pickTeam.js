@@ -19,9 +19,10 @@ class PickTeam extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
+          console.log("value in teamSelect", value);
           if (value.teamInfo && value.userInfo) {
-            const teamList = value.userInfo.teams.map(team => (
-              <option>{team.teamName}</option>
+            const teamList = value.userTeams.map(team => (
+              <option value={team.teamCode}>{team.name}</option>
             ));
             console.log(value.team, "value.team in pickteam");
             return (
@@ -45,20 +46,13 @@ class PickTeam extends Component {
                     }}
                   >
                     <select
-                      // defaultValue={
-                      //   value.userInfo.teams.find(
-                      //     team => team.teamCode === value.team
-                      //   ).name
-                      // }
                       onChange={e =>
                         this.setState({
-                          selectedTeam: value.userInfo.teams.find(
-                            team => team.teamName === e.target.value
-                          ).teamCode
+                          selectedTeam: e.target.value
                         })
                       }
                     >
-                      <option value="none">Pick One</option>
+                      <option defaultValue="none">Pick One</option>
                       {teamList}
                     </select>
                     {this.selectError(this.state.selectError)}

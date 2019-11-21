@@ -30,7 +30,6 @@ class LoginForm extends Component {
 
     this.setState({ loginError: false });
     this.props.loginUser(userName);
-    this.props.loginTeam(userTeam.name);
     this.props.history.push("/home");
     return true;
   };

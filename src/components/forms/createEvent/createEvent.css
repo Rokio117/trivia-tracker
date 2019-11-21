@@ -29,3 +29,6 @@ p {
 .memberSelect {
   display: inline-block;
 }
+.error {
+  color: red;
+}
