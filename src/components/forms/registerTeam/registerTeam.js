@@ -96,7 +96,7 @@ class RegisterTeam extends Component {
                     ></input>
                     <label htmlFor="first">1st Place Wins:</label>
                     <input
-                      type="text"
+                      type="number"
                       id="first"
                       placeholder="0"
                       onChange={e => {
@@ -105,7 +105,7 @@ class RegisterTeam extends Component {
                     ></input>
                     <label htmlFor="second">2nd Place Wins:</label>
                     <input
-                      type="text"
+                      type="number"
                       id="second"
                       placeholder="0"
                       onChange={e => {
@@ -114,7 +114,7 @@ class RegisterTeam extends Component {
                     ></input>
                     <label htmlFor="third">3rd Place Wins:</label>
                     <input
-                      type="text"
+                      type="number"
                       id="third"
                       placeholder="0"
                       onChange={e => {
