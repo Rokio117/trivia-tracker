@@ -18,11 +18,19 @@ class RegisterTeam extends Component {
       thirds: 0
     };
   }
+  buttonChoice = team => {
+    if (team) {
+      return (
+        <button type="button" onClick={() => this.props.history.push("/home")}>
+          Cancel
+        </button>
+      );
+    }
+  };
   render() {
     return (
       <TriviaContext.Consumer>
         {value => {
-          console.log("value in register team", value);
           if (value.userInfo) {
             return (
               <div>
@@ -34,9 +42,9 @@ class RegisterTeam extends Component {
                     onSubmit={e => {
                       e.preventDefault();
                       const winnings =
-                        this.state.firsts +
-                        this.state.seconds +
-                        this.state.thirds;
+                        parseInt(this.state.firsts) +
+                        parseInt(this.state.seconds) +
+                        parseInt(this.state.thirds);
                       const newTeam = {
                         name: this.state.teamName,
                         teamCode: this.state.teamUserName,
@@ -56,7 +64,6 @@ class RegisterTeam extends Component {
                       //push new team into DB, then add team to player info
                       store.postNewteam(newTeam);
 
-                      console.log(store);
                       this.props.loginTeam(newTeam);
                     }}
                   >
@@ -82,7 +89,6 @@ class RegisterTeam extends Component {
                     <input
                       type="text"
                       id="winnings"
-                      defaultValue="0"
                       placeholder="0"
                       onChange={e => {
                         this.setState({ winnings: e.target.value });
@@ -92,7 +98,6 @@ class RegisterTeam extends Component {
                     <input
                       type="text"
                       id="first"
-                      defaultValue="0"
                       placeholder="0"
                       onChange={e => {
                         this.setState({ firsts: e.target.value });
@@ -102,7 +107,6 @@ class RegisterTeam extends Component {
                     <input
                       type="text"
                       id="second"
-                      defaultValue="0"
                       placeholder="0"
                       onChange={e => {
                         this.setState({ seconds: e.target.value });
@@ -112,19 +116,13 @@ class RegisterTeam extends Component {
                     <input
                       type="text"
                       id="third"
-                      defaultValue="0"
                       placeholder="0"
                       onChange={e => {
                         this.setState({ thirds: e.target.value });
                       }}
                     ></input>
                     <button type="submit">Submit</button>
-                    <button
-                      type="button"
-                      onClick={() => this.props.history.push("/home")}
-                    >
-                      Cancel
-                    </button>
+                    {this.buttonChoice(value.teamInfo)}
                   </form>
                 </fieldset>
               </div>

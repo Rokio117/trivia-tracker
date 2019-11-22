@@ -8,7 +8,6 @@ class HistoryDisplay extends Component {
 
   changeExtended = currentExtend => {
     const oppositeExtend = currentExtend ? false : true;
-    console.log(currentExtend, "current", oppositeExtend, "opposite");
     this.setState({ extended: oppositeExtend });
   };
   arrow = currentExtended => {

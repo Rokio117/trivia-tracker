@@ -35,8 +35,6 @@ class CreateEvent extends Component {
                 blankAttendance: false,
                 attendanceReminder: false
               });
-              console.log(e.target.value, "e.target.value");
-              console.log(this.state.attendance, typeof this.state.attendance);
               this.state.attendance.includes(e.target.value)
                 ? this.setState({
                     attendance: this.state.attendance.filter(
@@ -173,7 +171,6 @@ class CreateEvent extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          console.log("value in createEvent", value);
           return (
             <div>
               <header>
@@ -183,7 +180,6 @@ class CreateEvent extends Component {
                 <form
                   onSubmit={e => {
                     e.preventDefault();
-                    console.log(this.state);
                     if (this.state.blankAttendance) {
                       this.setState({ attendanceReminder: true });
                     }
@@ -203,7 +199,6 @@ class CreateEvent extends Component {
 
                       //this will become a /post request
                       store.addEvent(newEvent, value.teamInfo.teamCode);
-                      console.log(newEvent);
                       this.props.history.push("/home");
                     }
                   }}

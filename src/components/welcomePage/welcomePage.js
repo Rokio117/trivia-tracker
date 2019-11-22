@@ -17,6 +17,7 @@ class WelcomePage extends Component {
           loginTeam={this.props.loginTeam}
         />
         <RegisterUser
+          login={this.props.login}
           loginUser={this.props.loginUser}
           loginTeam={this.props.loginTeam}
         />

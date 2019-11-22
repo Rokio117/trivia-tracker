@@ -29,29 +29,24 @@ class App extends Component {
       userTeams: [],
       userInfo: "",
       teamInfo: "",
-      teamMembers: ""
+      teamMembers: "",
+      loggedIn: false
     };
   }
 
   login = userName => {
-    console.log("login ran");
     //after the form validation, this function will set the user and team in state,
     //as well as fetching the user and team info and storing it in state
 
     const userInfo = store.getUser(userName);
     const userTeams = store.getTeamsForUser(userName);
-    console.log("userTeams", userTeams);
+
     //if the member is already a part of a team
     if (userTeams.length) {
-      console.log("on a team");
       const teamCode = userTeams[0].teamCode;
       const teamInfo = store.getTeam(teamCode);
 
-      const teamMembers = teamInfo.members.map(member =>
-        Object.assign(member, {
-          name: store.getNameFromUserName(member.userName)
-        })
-      );
+      const teamMembers = store.getNamedMembersOfTeam(teamInfo.members);
       //add logic for non-duplicates
 
       this.setState({
@@ -66,26 +61,36 @@ class App extends Component {
     }
     //if the member does not have a team
     if (!userTeams.length) {
-      console.log("no team");
       this.setState({ user: userName, userInfo: userInfo });
       this.props.history.push("/noTeam");
     }
   };
 
   loginTeam = teamInfo => {
-    const teamList = [...this.state.userTeams, teamInfo];
-    this.setState({ teamInfo: teamInfo, userTeams: teamList });
+    const teamMembers = teamInfo.members.map(member =>
+      Object.assign(member, {
+        name: store.getNameFromUserName(member.userName)
+      })
+    );
+    if (!this.state.userTeams.includes(teamInfo)) {
+      const teamList = [...this.state.userTeams, teamInfo];
+      this.setState({
+        teamInfo: teamInfo,
+        userTeams: teamList,
+        teamMembers: teamMembers
+      });
+      this.props.history.push("/");
+    } else this.setState({ teamInfo: teamInfo, teamMembers: teamMembers });
+
     this.props.history.push("/home");
   };
 
   changeTeam = teamCode => {
-    console.log("changeteam ran", teamCode);
     const teamInfo = store.getTeam(teamCode);
-    console.log(teamInfo, "teaminfo ");
+
     this.setState({ teamInfo: teamInfo, team: teamCode });
   };
   logout = () => {
-    console.log("logout ran");
     if (window.confirm("Are you sure?")) {
       this.setState({
         user: "",
@@ -119,6 +124,7 @@ class App extends Component {
                 <WelcomePage
                   loginUser={this.login}
                   loginTeam={this.loginTeam}
+                  login={this.login}
                 />
               );
             }}
@@ -126,7 +132,12 @@ class App extends Component {
           <Route
             path="/teamPick"
             component={props => {
-              return <PickTeam changeTeam={this.changeTeam} />;
+              return (
+                <PickTeam
+                  changeTeam={this.changeTeam}
+                  loginTeam={this.loginTeam}
+                />
+              );
             }}
           ></Route>
           <Route
@@ -159,7 +170,9 @@ class App extends Component {
           <Route
             path="/noTeam"
             component={props => {
-              return <NoTeamPage loginUser={this.login} />;
+              return (
+                <NoTeamPage loginUser={this.login} loginTeam={this.loginTeam} />
+              );
             }}
           ></Route>
         </Switch>

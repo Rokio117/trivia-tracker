@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import "./pickTeam.css";
 import TriviaContext from "../../../context";
+import store from "../../../store";
 class PickTeam extends Component {
   constructor(props) {
     super(props);
@@ -19,12 +20,10 @@ class PickTeam extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          console.log("value in teamSelect", value);
           if (value.teamInfo && value.userInfo) {
             const teamList = value.userTeams.map(team => (
               <option value={team.teamCode}>{team.name}</option>
             ));
-            console.log(value.team, "value.team in pickteam");
             return (
               <div>
                 <header>
@@ -33,15 +32,13 @@ class PickTeam extends Component {
                 <fieldset>
                   <form
                     onSubmit={e => {
-                      console.log(this.state.selectedTeam, "selected team");
-                      console.log(this.state.selectedTeam === "none");
                       e.preventDefault();
                       if (this.state.selectedTeam === "none") {
                         this.setState({ selectError: true });
                       }
                       if (this.state.selectedTeam !== "none") {
-                        this.props.changeTeam(this.state.selectedTeam);
-                        this.props.history.push("/home");
+                        const teamInfo = store.getTeam(this.state.selectedTeam);
+                        this.props.loginTeam(teamInfo);
                       }
                     }}
                   >

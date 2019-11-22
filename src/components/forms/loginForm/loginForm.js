@@ -17,7 +17,6 @@ class LoginForm extends Component {
   validateLogin = (userName, password) => {
     const user = store.getUser(userName);
     const userTeam = store.getTeamsForUser(userName);
-    console.log("user", user);
     if (!user) {
       this.setState({ loginError: true });
 
@@ -36,7 +35,7 @@ class LoginForm extends Component {
 
   loginError = error => {
     if (error) {
-      return <p id="errorMessage">Wrong User Name or Password</p>;
+      return <p className="error">Wrong User Name or Password</p>;
     }
   };
 
@@ -59,7 +58,7 @@ class LoginForm extends Component {
             id="logName"
             required
             onChange={e => {
-              this.setState({ loginName: e.target.value });
+              this.setState({ loginName: e.target.value, loginError: false });
             }}
           ></input>
           <label htmlFor="logPassword">Password</label>

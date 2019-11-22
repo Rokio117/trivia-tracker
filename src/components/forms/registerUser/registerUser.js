@@ -16,19 +16,7 @@ class RegisterUser extends Component {
       noTeamFound: false
     };
   }
-  // validatePassword = (password, repeatPassword, userName) => {
-  //   console.log(password, repeatPassword);
-  //   const users = store.users.map(user => user.userName);
-  //   const match = password === repeatPassword;
-  //   const unique = !store.users.map(user => user.userName).includes(userName);
-  //   if (match) {
-  //     this.setState({ passwordMatch: true });
-  //   }setState
-  //   if (unique) {
-  //     this.setState({ uniqueUserName: true });
-  //   }
-  //   console.log("users", users, "match", match, "unique", unique);
-  // };
+
   mustRepeat = match => {
     if (!match) {
       return <p className="error">Passwords must match</p>;
@@ -67,7 +55,6 @@ class RegisterUser extends Component {
                 .includes(this.state.teamUserName);
             }
             const validTeam = teamChanged && realTeam;
-            console.log(realTeam, "realteam");
             e.preventDefault();
             if (!match) {
               this.setState({ passwordMatch: false });
@@ -75,24 +62,24 @@ class RegisterUser extends Component {
             if (!unique) {
               this.setState({ uniqueUserName: false });
             }
-            if (!realTeam) {
+            if (teamChanged && !realTeam) {
               this.setState({ noTeamFound: true });
             }
             if (match && unique && (validTeam || teamChanged === false)) {
-              console.log("validated");
-              const teams = [{ teamCode: this.state.teamUserName }];
               const newUser = {
                 userName: this.state.signUpUserName,
                 name: this.state.signUpName,
-                teams: teams,
                 password: this.state.signUpPassword
               };
               //push new user into the array on store. this will become a post request
-              store.users.push(newUser);
-              console.log("users after add new", store.users);
+              if (validTeam) {
+                store.postUserWithTeam(newUser, this.state.teamUserName);
+                this.props.login(newUser.userName);
+              }
+              store.postUserWithNoTeam(newUser);
+
               this.props.loginUser(this.state.signUpUserName);
             }
-            console.log(this.state, "state after validatePassword");
           }}
         >
           <label htmlFor="userName">User Name:</label>
@@ -100,7 +87,12 @@ class RegisterUser extends Component {
             id="userName"
             type="text"
             required
-            onChange={e => this.setState({ signUpUserName: e.target.value })}
+            onChange={e =>
+              this.setState({
+                signUpUserName: e.target.value,
+                uniqueUserName: true
+              })
+            }
           ></input>
           {this.mustBeUnique(this.state.uniqueUserName)}
           <label htmlFor="name">Name:</label>
@@ -115,7 +107,12 @@ class RegisterUser extends Component {
             id="password"
             type="text"
             required
-            onChange={e => this.setState({ signUpPassword: e.target.value })}
+            onChange={e =>
+              this.setState({
+                signUpPassword: e.target.value,
+                passwordMatch: true
+              })
+            }
           ></input>
           <label htmlFor="repeatPassword">Repeat Password:</label>
           <input
@@ -123,7 +120,10 @@ class RegisterUser extends Component {
             type="text"
             required
             onChange={e =>
-              this.setState({ signUpRepeatPassword: e.target.value })
+              this.setState({
+                signUpRepeatPassword: e.target.value,
+                passwordMatch: true
+              })
             }
           ></input>
           {this.mustRepeat(this.state.passwordMatch)}
@@ -135,7 +135,12 @@ class RegisterUser extends Component {
             defaultValue=""
             id="teamCode"
             type="text"
-            onChange={e => this.setState({ teamUserName: e.target.value })}
+            onChange={e =>
+              this.setState({
+                teamUserName: e.target.value,
+                noTeamFound: false
+              })
+            }
           ></input>
           {this.noTeamFound(this.state.noTeamFound)}
           <button type="submit">Submit</button>

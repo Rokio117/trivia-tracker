@@ -10,12 +10,6 @@ class Roster extends Component {
       <TriviaContext.Consumer>
         {value => {
           if (value.userInfo && value.teamInfo) {
-            console.log(
-              value.userInfo,
-              "userinfo",
-              value.teamInfo,
-              "teamInfo in roster"
-            );
             const captains = value.teamInfo.members
               .filter(member => member.role === "Captain")
               .map(captain => store.getNameFromUserName(captain.userName));

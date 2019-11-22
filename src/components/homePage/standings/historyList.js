@@ -5,8 +5,6 @@ class HistoryList extends Component {
   makeList = () =>
     this.props.events.map(event => <HistoryDisplay event={event} />);
   render() {
-    console.log(this.props.events, "props.events in HistoryList");
-
     return <>{this.makeList()}</>;
   }
 }

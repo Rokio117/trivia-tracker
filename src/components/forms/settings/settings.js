@@ -24,7 +24,10 @@ class Settings extends Component {
                 <form
                   onSubmit={e => {
                     e.preventDefault();
-                    store.changePlayerName(this.state.newName);
+                    store.changePlayerName(
+                      this.state.newName,
+                      value.userInfo.userName
+                    );
                     this.props.history.push("/home");
                   }}
                 >

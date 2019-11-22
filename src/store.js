@@ -149,11 +149,18 @@ const store = {
       .find(team => team.teamCode === teamCode)
       .members.find(member => member.userName === userName).role;
   },
+  getNamedMembersOfTeam: members => {
+    return members.map(member =>
+      Object.assign(member, {
+        name: store.getNameFromUserName(member.userName)
+      })
+    );
+  },
   postUserWithNoTeam: userObject => {
     store.users.push(userObject);
   },
   teamExists: teamCode => {
-    return store.teams.includes(team => team.teamCode === teamCode);
+    return store.teams.map(team => team.teamCode === teamCode).includes(true);
   },
   userExists: userName => {
     return store.users.map(user => user.userName).includes(userName);
@@ -162,9 +169,9 @@ const store = {
     // .includes(true);
   },
   postUserWithTeam: (userObject, teamCode) => {
-    const user = { userName: userObject.userName, role: "Captain" };
-    store.user.push(userObject);
-    store.teams.find(team => team.teamCode === teamCode).push(user);
+    const user = { userName: userObject.userName, role: "Member" };
+    store.users.push(userObject);
+    store.teams.find(team => team.teamCode === teamCode).members.push(user);
   },
   postNewSettings: (newSettings, userName) => {
     store.users.find(user => user.userName === userName).name = newSettings;

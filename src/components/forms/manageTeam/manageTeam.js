@@ -51,6 +51,8 @@ class ManageTeam extends Component {
     }
   };
   noUser = error => {
+    //this should be the smart part that returns the error string or object
+    //move checking functionality outside of on submit
     if (error) {
       return <p className="error">User Name doesn't exist</p>;
     }
@@ -78,24 +80,15 @@ class ManageTeam extends Component {
                 <form
                   onSubmit={e => {
                     e.preventDefault();
+                    //pass into a validate fields function that can validate other fields within it
+                    //no function should be bigger thatn your whole screen
                     const userToChanged = this.state.addPlayer ? true : false;
                     const newMember = this.state.addPlayer;
                     const realMember = store.userExists(newMember);
                     const team = value.teamInfo.teamCode;
-                    const newMemberRank = this.state.newMemberRank;
                     let userNotFound = false;
                     let noNewRank = false;
                     let noChangeRank = false;
-                    console.log(userToChanged, "userToChanged");
-
-                    const changeObject = {
-                      addPlayerId: this.state.addPlayer,
-                      addPlayerRank: this.state.newMemberRank,
-                      userToChange: this.state.userToChange,
-                      noNewRank: this.state.newRank,
-                      winnings: this.state.winnings,
-                      newName: this.state.newName
-                    };
 
                     if (this.state.addPlayer && !realMember) {
                       //if a player has been selected, but not found
@@ -142,10 +135,6 @@ class ManageTeam extends Component {
                         );
                       }
                       if (this.state.userToChange && this.state.newRank) {
-                        console.log(
-                          this.state.userToChange,
-                          this.state.newRank
-                        );
                         store.changeRole(
                           this.state.userToChange,
                           this.state.newRank,
@@ -153,13 +142,12 @@ class ManageTeam extends Component {
                         );
                       }
                       if (this.state.winnings) {
-                        console.log(this.state.winnings);
                         store.changeWinnings(this.state.winnings, team);
                       }
                       if (this.state.newName) {
                         store.changeTeamName(this.state.newName, team);
                       }
-                      this.props.login(value.userInfo.userName);
+                      this.props.loginTeam(value.teamInfo);
                     }
                   }}
                 >
