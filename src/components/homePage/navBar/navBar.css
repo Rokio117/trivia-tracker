@@ -15,3 +15,6 @@
 #greeting {
   margin: 0px;
 }
+.navBarLink {
+  text-decoration: none;
+}
