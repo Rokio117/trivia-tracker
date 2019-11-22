@@ -192,6 +192,9 @@ const store = {
   changeTeamName: (name, teamCode) => {
     store.teams.find(team => team.teamCode === teamCode).name = name;
   },
+  changePlayerName: (name, userName) => {
+    store.users.find(user => user.userName === userName).name = name;
+  },
   addEvent: (event, teamCode) => {
     const winnings =
       parseInt(store.teams.find(team => team.teamCode === teamCode).winnings) +
