@@ -19,3 +19,6 @@ label {
 .error {
   color: red;
 }
+#changeName {
+  display: inline-block;
+}

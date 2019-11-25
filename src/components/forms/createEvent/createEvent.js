@@ -77,7 +77,7 @@ class CreateEvent extends Component {
       });
       return (
         <>
-          <p>Position</p>
+          <label>Position</label>
 
           <select
             onChange={e =>
@@ -106,7 +106,7 @@ class CreateEvent extends Component {
     if (state.win) {
       return (
         <>
-          <p>Position:</p>
+          <label>Position:</label>
           <label htmlFor="first" id="positionLabel" className="positionLabel">
             1st:
             <input
@@ -144,6 +144,7 @@ class CreateEvent extends Component {
             ></input>
           </label>
           {this.positionReminder(this.state.positionReminder)}
+
           <br></br>
           <label htmlFor="winnings" id="winningsLabel">
             Winnings:
@@ -176,33 +177,36 @@ class CreateEvent extends Component {
               <header>
                 <h1>Create Event</h1>
               </header>
-              <fieldset>
-                <form
-                  onSubmit={e => {
-                    e.preventDefault();
-                    if (this.state.blankAttendance) {
-                      this.setState({ attendanceReminder: true });
-                    }
-                    if (!this.state.position) {
-                      this.setState({ positionReminder: true });
-                    }
-                    if (!this.state.blankAttendance && this.state.position) {
-                      const outcome = this.state.win ? "Win" : "Loss";
-                      const newEvent = {
-                        date: this.state.date,
-                        location: this.state.location,
-                        outcome: outcome,
-                        roster: this.state.attendance,
-                        position: this.state.position,
-                        winnings: this.state.winnings || 0
-                      };
 
-                      //this will become a /post request
-                      store.addEvent(newEvent, value.teamInfo.teamCode);
-                      this.props.history.push("/home");
-                    }
-                  }}
-                >
+              <form
+                id="createEventForm"
+                onSubmit={e => {
+                  e.preventDefault();
+                  if (this.state.blankAttendance) {
+                    this.setState({ attendanceReminder: true });
+                  }
+                  if (!this.state.position) {
+                    this.setState({ positionReminder: true });
+                  }
+                  if (!this.state.blankAttendance && this.state.position) {
+                    const outcome = this.state.win ? "Win" : "Loss";
+                    const newEvent = {
+                      date: this.state.date,
+                      location: this.state.location,
+                      outcome: outcome,
+                      roster: this.state.attendance,
+                      position: this.state.position,
+                      winnings: this.state.winnings || 0
+                    };
+
+                    //this will become a /post request
+                    store.addEvent(newEvent, value.teamInfo.teamCode);
+                    this.props.history.push("/home");
+                  }
+                }}
+              >
+                <fieldset>
+                  <legend>Outcome</legend>
                   <p>Win:</p>
                   <label htmlFor="win" id="winLabel">
                     Yes
@@ -237,11 +241,18 @@ class CreateEvent extends Component {
                   <br></br>
                   {this.lossToggle(this.state.lossToggle)}
                   {this.renderPositionWinnings(this.state)}
-                  <br></br>
-                  <label htmlFor="attendance">Attendance</label>
+                </fieldset>
+
+                <br></br>
+                <fieldset>
+                  <legend htmlFor="attendance">Attendance</legend>
                   {this.attendance(value.teamInfo.members)}
                   {this.attendanceReminder(this.state.attendanceReminder)}
-                  <br></br>
+                </fieldset>
+
+                <br></br>
+                <fieldset>
+                  <legend>Details</legend>
                   <label htmlFor="location">Location:</label>
                   <input
                     type="text"
@@ -263,8 +274,8 @@ class CreateEvent extends Component {
                   >
                     Cancel
                   </button>
-                </form>
-              </fieldset>
+                </fieldset>
+              </form>
             </div>
           );
         }}

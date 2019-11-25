@@ -147,7 +147,12 @@ class App extends Component {
               );
             }}
           ></Route>
-          <Route path="/settings" component={Settings}></Route>
+          <Route
+            path="/settings"
+            component={props => {
+              return <Settings login={this.login} />;
+            }}
+          ></Route>
           <Route path="/addEvent" component={CreateEvent}></Route>
           <Route
             path="/new"

@@ -199,8 +199,12 @@ const store = {
   changeTeamName: (name, teamCode) => {
     store.teams.find(team => team.teamCode === teamCode).name = name;
   },
-  changePlayerName: (name, userName) => {
-    store.users.find(user => user.userName === userName).name = name;
+  changeUserName: (newUserName, userName) => {
+    console.log("newUsername", newUserName, "currentUsername", userName);
+    store.users.find(user => user.userName === userName).userName = newUserName;
+  },
+  changePlayerName: (newName, userName) => {
+    store.users.find(user => user.userName === userName).name = newName;
   },
   addEvent: (event, teamCode) => {
     const winnings =
