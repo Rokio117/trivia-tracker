@@ -2,22 +2,21 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 import CreateEvent from "../src/components/forms/createEvent/createEvent";
-import LoginForm from "./components/forms/loginForm/loginForm";
-import ManageTeam from "./components/forms/manageTeam/manageTeam";
+
+//import ManageTeam from "./components/forms/manageTeam/manageTeam";
 import PickTeam from "./components/forms/pickTeam/pickTeam";
 import RegisterTeam from "./components/forms/registerTeam/registerTeam";
-import RegisterUser from "./components/forms/registerUser/registerUser";
+
 import Settings from "./components/forms/settings/settings";
 
 import Home from "./components/homePage/home/home";
-import NavBar from "./components/homePage/navBar/navBar";
+
 import NoTeamPage from "./components/homePage/noTeamPage/noTeamPage";
-import Roster from "./components/homePage/roster/roster";
-import Standings from "./components/homePage/standings/standings";
+
 import WelcomePage from "./components/welcomePage/welcomePage";
 
 import TriviaContext from "./context";
-
+import ManageTeam from "../src/components/forms/manageTeam/manageTeamRefactor";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import store from "./store";
