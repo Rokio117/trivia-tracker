@@ -22,8 +22,7 @@ class Settings extends Component {
           onSubmit={e => {
             e.preventDefault();
             store.changeUserName(newUserName, userName);
-
-            this.props.login(userName);
+            this.props.login(newUserName);
           }}
         >
           <legend htmlFor="name">Change User Name:</legend>

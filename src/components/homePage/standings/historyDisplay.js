@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./history.css";
+import TriviaContext from "../../../context";
 class HistoryDisplay extends Component {
   constructor(props) {
     super(props);
@@ -16,9 +17,12 @@ class HistoryDisplay extends Component {
     }
     return "↓";
   };
-  display = state => {
+  display = (state, members) => {
     const attendance = this.props.event.roster.map(player => {
-      return <li key={player}>{player}</li>;
+      const playerName = members.find(member => member.userName === player)
+        .name;
+      console.log("PlayerName in history display", playerName);
+      return <li key={player}>{playerName}</li>;
     });
     if (!this.state.extended) {
       return (
@@ -56,7 +60,13 @@ class HistoryDisplay extends Component {
     }
   };
   render() {
-    return <>{this.display(this.state.extended)}</>;
+    return (
+      <TriviaContext.Consumer>
+        {value => {
+          return <>{this.display(this.state.extended, value.teamMembers)}</>;
+        }}
+      </TriviaContext.Consumer>
+    );
   }
 }
 export default HistoryDisplay;

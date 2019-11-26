@@ -39,7 +39,7 @@ class App extends Component {
 
     const userInfo = store.getUser(userName);
     const userTeams = store.getTeamsForUser(userName);
-
+    console.log(userInfo, "userInfo", userTeams, "userTeams");
     //if the member is already a part of a team
     if (userTeams.length) {
       const teamCode = userTeams[0].teamCode;
