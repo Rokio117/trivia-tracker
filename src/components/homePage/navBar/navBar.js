@@ -39,7 +39,7 @@ class NavBar extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          if (value.userInfo && value.teamInfo) {
+          if (value.userInfo && value.teamInfo.members) {
             const memberRole = value.teamInfo.members.find(
               member => member.userName === value.userInfo.userName
             ).role;

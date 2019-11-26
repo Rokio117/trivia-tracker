@@ -43,13 +43,14 @@ class PickTeam extends Component {
                     }}
                   >
                     <select
+                      required
                       onChange={e =>
                         this.setState({
                           selectedTeam: e.target.value
                         })
                       }
                     >
-                      <option defaultValue="none">Pick One</option>
+                      <option value=""></option>
                       {teamList}
                     </select>
                     {this.selectError(this.state.selectError)}

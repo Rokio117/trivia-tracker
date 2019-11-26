@@ -172,112 +172,118 @@ class CreateEvent extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          return (
-            <div>
-              <header>
-                <h1>Create Event</h1>
-              </header>
+          if (value.teamInfo.members) {
+            return (
+              <div>
+                <header>
+                  <h1>Create Event</h1>
+                </header>
 
-              <form
-                id="createEventForm"
-                onSubmit={e => {
-                  e.preventDefault();
-                  if (this.state.blankAttendance) {
-                    this.setState({ attendanceReminder: true });
-                  }
-                  if (!this.state.position) {
-                    this.setState({ positionReminder: true });
-                  }
-                  if (!this.state.blankAttendance && this.state.position) {
-                    const outcome = this.state.win ? "Win" : "Loss";
-                    const newEvent = {
-                      date: this.state.date,
-                      location: this.state.location,
-                      outcome: outcome,
-                      roster: this.state.attendance,
-                      position: this.state.position,
-                      winnings: this.state.winnings || 0
-                    };
+                <form
+                  id="createEventForm"
+                  onSubmit={e => {
+                    e.preventDefault();
+                    if (this.state.blankAttendance) {
+                      this.setState({ attendanceReminder: true });
+                    }
+                    if (!this.state.position) {
+                      this.setState({ positionReminder: true });
+                    }
+                    if (!this.state.blankAttendance && this.state.position) {
+                      const outcome = this.state.win ? "Win" : "Loss";
+                      const newEvent = {
+                        date: this.state.date,
+                        location: this.state.location,
+                        outcome: outcome,
+                        roster: this.state.attendance,
+                        position: this.state.position,
+                        winnings: this.state.winnings || 0
+                      };
 
-                    //this will become a /post request
-                    store.addEvent(newEvent, value.teamInfo.teamCode);
-                    this.props.history.push("/home");
-                  }
-                }}
-              >
-                <fieldset>
-                  <legend>Outcome</legend>
-                  <p>Win:</p>
-                  <label htmlFor="win" id="winLabel">
-                    Yes
-                    <input
-                      type="radio"
-                      name="winLoss"
-                      value="Yes"
-                      id="win"
-                      required
-                      onClick={() =>
-                        this.setState({ win: true, lossToggle: false })
-                      }
-                    ></input>
-                  </label>
-                  <label htmlFor="loss" id="lossLabel">
-                    No
-                    <input
-                      type="radio"
-                      name="winLoss"
-                      value="No"
-                      id="loss"
-                      onClick={() =>
-                        this.setState({
-                          win: false,
-                          position: "",
-                          winnings: "",
-                          lossToggle: true
-                        })
-                      }
-                    ></input>
-                  </label>
+                      //this will become a /post request
+                      store.addEvent(newEvent, value.teamInfo.teamCode);
+                      this.props.history.push("/home");
+                    }
+                  }}
+                >
+                  <fieldset>
+                    <legend>Outcome</legend>
+                    <p>Win:</p>
+                    <label htmlFor="win" id="winLabel">
+                      Yes
+                      <input
+                        type="radio"
+                        name="winLoss"
+                        value="Yes"
+                        id="win"
+                        required
+                        onClick={() =>
+                          this.setState({ win: true, lossToggle: false })
+                        }
+                      ></input>
+                    </label>
+                    <label htmlFor="loss" id="lossLabel">
+                      No
+                      <input
+                        type="radio"
+                        name="winLoss"
+                        value="No"
+                        id="loss"
+                        onClick={() =>
+                          this.setState({
+                            win: false,
+                            position: "",
+                            winnings: "",
+                            lossToggle: true
+                          })
+                        }
+                      ></input>
+                    </label>
+                    <br></br>
+                    {this.lossToggle(this.state.lossToggle)}
+                    {this.renderPositionWinnings(this.state)}
+                  </fieldset>
+
                   <br></br>
-                  {this.lossToggle(this.state.lossToggle)}
-                  {this.renderPositionWinnings(this.state)}
-                </fieldset>
+                  <fieldset>
+                    <legend htmlFor="attendance">Attendance</legend>
+                    {this.attendance(value.teamInfo.members)}
+                    {this.attendanceReminder(this.state.attendanceReminder)}
+                  </fieldset>
 
-                <br></br>
-                <fieldset>
-                  <legend htmlFor="attendance">Attendance</legend>
-                  {this.attendance(value.teamInfo.members)}
-                  {this.attendanceReminder(this.state.attendanceReminder)}
-                </fieldset>
-
-                <br></br>
-                <fieldset>
-                  <legend>Details</legend>
-                  <label htmlFor="location">Location:</label>
-                  <input
-                    type="text"
-                    id="location"
-                    required
-                    onChange={e => this.setState({ location: e.target.value })}
-                  ></input>
-                  <label htmlFor="date">Date:</label>
-                  <input
-                    required
-                    type="date"
-                    id="date"
-                    onChange={e => this.setState({ date: e.target.value })}
-                  ></input>
-                  <button type="submit">Submit</button>
-                  <button
-                    type="button"
-                    onClick={() => this.props.history.push("/home")}
-                  >
-                    Cancel
-                  </button>
-                </fieldset>
-              </form>
-            </div>
-          );
+                  <br></br>
+                  <fieldset>
+                    <legend>Details</legend>
+                    <label htmlFor="location">Location:</label>
+                    <input
+                      type="text"
+                      id="location"
+                      required
+                      onChange={e =>
+                        this.setState({ location: e.target.value })
+                      }
+                    ></input>
+                    <label htmlFor="date">Date:</label>
+                    <input
+                      required
+                      type="date"
+                      max="2025-12-31"
+                      min="2010-12-31"
+                      id="date"
+                      onChange={e => this.setState({ date: e.target.value })}
+                    ></input>
+                    <button type="submit">Submit</button>
+                    <button
+                      type="button"
+                      onClick={() => this.props.history.push("/home")}
+                    >
+                      Cancel
+                    </button>
+                  </fieldset>
+                </form>
+              </div>
+            );
+          }
         }}
       </TriviaContext.Consumer>
     );

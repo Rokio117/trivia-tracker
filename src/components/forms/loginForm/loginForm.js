@@ -41,7 +41,7 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div>
+      <div id="loginForm">
         <label htmlFor="login" className="formLabel">
           Already Signed up? Login
         </label>

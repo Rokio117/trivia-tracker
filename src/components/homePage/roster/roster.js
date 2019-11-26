@@ -9,10 +9,10 @@ class Roster extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          if (value.userInfo && value.teamInfo) {
-            const captains = value.teamInfo.members
-              .filter(member => member.role === "Captain")
-              .map(captain => store.getNameFromUserName(captain.userName));
+          if (value.userInfo && value.teamInfo.members) {
+            // const captains = value.teamInfo.members
+            //   .filter(member => member.role === "Captain")
+            //   .map(captain => store.getNameFromUserName(captain.userName));
             const members = value.teamInfo.members
               .map(member => store.getUserFromUserName(member.userName))
               .map(user => (
@@ -32,7 +32,7 @@ class Roster extends Component {
             return (
               <section id="roster">
                 <h2>Roster</h2>
-                <p id="captain">Captain(s): {captains}</p>
+                {/* <p id="captain">Captain(s): {captains}</p> */}
                 <label htmlFor="members">Members:</label>
                 <ul id="members">{members}</ul>
               </section>

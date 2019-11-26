@@ -53,7 +53,8 @@ class App extends Component {
         userInfo: userInfo,
         teamInfo: teamInfo,
         userTeams: userTeams,
-        teamMembers: teamMembers
+        teamMembers: teamMembers,
+        loggedIn: true
       });
 
       this.props.history.push("/home");
@@ -95,8 +96,15 @@ class App extends Component {
         user: "",
         team: "",
         userInfo: "",
-        teamInfo: ""
+        teamInfo: "",
+        loggedIn: false
       });
+      this.props.history.push("/");
+    }
+  };
+
+  autoLogOut = loggedIn => {
+    if (!loggedIn) {
       this.props.history.push("/");
     }
   };
@@ -180,6 +188,7 @@ class App extends Component {
             }}
           ></Route>
         </Switch>
+        {() => this.autoLogOut(this.state.loggedIn)}
       </TriviaContext.Provider>
     );
   }

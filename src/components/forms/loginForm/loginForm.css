@@ -22,3 +22,9 @@ label {
 #changeName {
   display: inline-block;
 }
+#loginForm {
+  border: 2px solid black;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+}

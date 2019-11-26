@@ -9,16 +9,18 @@ class Home extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          return (
-            <>
-              <NavBar logout={this.props.logout} />
-              <header>
-                <h1>{value.teamInfo.name}</h1>
-              </header>
-              <Standings />
-              <Roster />
-            </>
-          );
+          if (value) {
+            return (
+              <>
+                <NavBar logout={this.props.logout} />
+                <header>
+                  <h1>{value.teamInfo.name}</h1>
+                </header>
+                <Standings />
+                <Roster />
+              </>
+            );
+          }
         }}
       </TriviaContext.Consumer>
     );
