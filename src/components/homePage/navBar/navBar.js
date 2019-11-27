@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import "./navBar.css";
 import TriviaContext from "../../../context";
+import { withRouter } from "react-router-dom";
 class NavBar extends Component {
   roleRender = role => {
     if (role === "Captain") {
@@ -59,11 +60,11 @@ class NavBar extends Component {
                 </button>
               </nav>
             );
-          }
+          } else this.props.history.push("/");
         }}
       </TriviaContext.Consumer>
     );
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

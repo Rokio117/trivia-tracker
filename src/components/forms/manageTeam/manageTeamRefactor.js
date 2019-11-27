@@ -77,7 +77,7 @@ class ManageTeam extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          if (value.teamMembers)
+          if (value.teamMembers) {
             return (
               <div>
                 <header>
@@ -200,6 +200,7 @@ class ManageTeam extends Component {
                 </button>
               </div>
             );
+          } else this.props.history.push("/");
         }}
       </TriviaContext.Consumer>
     );

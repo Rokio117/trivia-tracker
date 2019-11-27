@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import TriviaContext from "../../../context";
 import "./roster.css";
 import store from "../../../store";
+import { withRouter } from "react-router-dom";
 class Roster extends Component {
   static defaultProps = {};
   render() {
@@ -37,19 +38,11 @@ class Roster extends Component {
                 <ul id="members">{members}</ul>
               </section>
             );
-          }
-          return (
-            <section id="roster">
-              <h2>Roster</h2>
-              <p id="captain">Captain(s): none</p>
-              <label htmlFor="members">Members: none</label>
-              <ul id="members"></ul>
-            </section>
-          );
+          } else this.props.history.push("/");
         }}
       </TriviaContext.Consumer>
     );
   }
 }
 
-export default Roster;
+export default withRouter(Roster);

@@ -20,7 +20,7 @@ class Home extends Component {
                 <Roster />
               </>
             );
-          }
+          } else this.props.history.push("/");
         }}
       </TriviaContext.Consumer>
     );

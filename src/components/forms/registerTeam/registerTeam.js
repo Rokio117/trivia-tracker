@@ -133,7 +133,7 @@ class RegisterTeam extends Component {
                 </fieldset>
               </div>
             );
-          }
+          } else this.props.history.push("/");
         }}
       </TriviaContext.Consumer>
     );
