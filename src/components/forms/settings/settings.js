@@ -11,26 +11,46 @@ class Settings extends Component {
       newName: "",
       newUserName: "",
       changeName: false,
-      changeUserName: false
+      changeUserName: false,
+      duplicateUserName: false
     };
   }
 
+  validateUserName = userName => {
+    if (store.userExists(userName)) {
+      this.setState({ duplicateUserName: true });
+    }
+    return store.userExists(userName);
+  };
+  duplicateUserName = duplicate => {
+    if (duplicate) {
+      return <p className="error">That User Name is Taken</p>;
+    }
+  };
   changeUserNameForm = (state, newUserName, userName) => {
     if (state) {
       return (
         <form
           onSubmit={e => {
             e.preventDefault();
-            store.changeUserName(newUserName, userName);
-            this.props.login(newUserName);
+            if (!this.validateUserName(newUserName)) {
+              store.changeUserName(newUserName, userName);
+              this.props.login(newUserName);
+            }
           }}
         >
           <legend htmlFor="name">Change User Name:</legend>
           <input
             type="text"
             id="name"
-            onChange={e => this.setState({ newUserName: e.target.value })}
+            onChange={e =>
+              this.setState({
+                newUserName: e.target.value,
+                duplicateUserName: false
+              })
+            }
           ></input>
+          {this.duplicateUserName(this.state.duplicateUserName)}
           <button type="submit">Submit</button>
           <button
             id="changeName"
@@ -55,7 +75,7 @@ class Settings extends Component {
           onSubmit={e => {
             e.preventDefault();
             store.changePlayerName(this.state.newName, userName);
-            this.props.history.push("/home");
+            this.props.login(userName);
           }}
         >
           <legend htmlFor="name">Change Name:</legend>
@@ -96,7 +116,7 @@ class Settings extends Component {
                     type="button"
                     onClick={e =>
                       this.setState({
-                        changeUserName: !this.state.changeName
+                        changeUserName: !this.state.changeUserName
                       })
                     }
                   >

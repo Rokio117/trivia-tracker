@@ -94,7 +94,7 @@ const store = {
           date: "1/22/19",
           location: "Paddy's Pub",
           outcome: "Loss",
-          roster: ["Rokio"],
+          roster: ["Rokio", "Ash"],
           position: "4th",
           winnings: 20
         },
@@ -102,7 +102,7 @@ const store = {
           date: "1/23/19",
           location: "Paddy's Pub",
           outcome: "Win",
-          roster: ["Rokio"],
+          roster: ["Rokio", "Ash", "Jen"],
           position: "1st",
           winnings: 30
         }
@@ -373,14 +373,42 @@ const store = {
     store.teams.find(team => team.teamCode === teamCode).name = name;
   },
   changeUserName: (newUserName, userName) => {
-    console.log("newUsername", newUserName, "currentUsername", userName);
     store.users.find(user => user.userName === userName).userName = newUserName;
-    store.teams.filter(
-      team =>
-        (team.members.find(
-          member => member.userName === userName
-        ).userName = newUserName)
-    );
+
+    store.teams
+      .filter(team => team.members.find(member => member.userName === userName))
+      .forEach(
+        team =>
+          (team.members.find(
+            member => member.userName === userName
+          ).userName = newUserName)
+      );
+
+    store.teams
+      .filter(team =>
+        team.members.find(member => member.userName === newUserName)
+      )
+      .forEach(team =>
+        team.history.forEach(event => {
+          const index = event.roster.indexOf(userName);
+          event.roster.splice(index, 1, newUserName);
+        })
+      );
+    // const index = event.roster.indexOf(userName);
+    //       event.splice(index, 1, newUserName);
+
+    // .forEach(team =>
+    //   team.history.forEach(event =>
+    //     event.roster.forEach(member => member.replace(userName, newUserName))
+    //   )
+    // );
+
+    // store.teams.filter(
+    //   team =>
+    //     (team.members.find(
+    //       member => member.userName === userName
+    //     ).userName = newUserName)
+    // );
   },
   changePlayerName: (newName, userName) => {
     store.users.find(user => user.userName === userName).name = newName;

@@ -20,6 +20,9 @@ import ManageTeam from "../src/components/forms/manageTeam/manageTeamRefactor";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import store from "./store";
+
+export const APP_STATE_KEY = "appState";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +37,7 @@ class App extends Component {
   }
 
   login = userName => {
+    console.log("logged in");
     //after the form validation, this function will set the user and team in state,
     //as well as fetching the user and team info and storing it in state
 
@@ -48,14 +52,18 @@ class App extends Component {
       const teamMembers = store.getNamedMembersOfTeam(teamInfo.members);
       //add logic for non-duplicates
 
-      this.setState({
+      const appState = {
         user: userName,
         userInfo: userInfo,
         teamInfo: teamInfo,
         userTeams: userTeams,
         teamMembers: teamMembers,
         loggedIn: true
-      });
+      };
+
+      this.setState(appState);
+      //revisit persist for server side
+      //localStorage.setItem(APP_STATE_KEY, JSON.stringify(appState));
 
       this.props.history.push("/home");
     }
@@ -99,12 +107,6 @@ class App extends Component {
         teamInfo: "",
         loggedIn: false
       });
-      this.props.history.push("/");
-    }
-  };
-
-  autoLogOut = loggedIn => {
-    if (!loggedIn) {
       this.props.history.push("/");
     }
   };

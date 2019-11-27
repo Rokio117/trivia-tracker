@@ -27,6 +27,11 @@ class RegisterTeam extends Component {
       );
     }
   };
+  validateTeamCode = teamCode => {
+    if (store.teamExists(teamCode)) {
+      throw new Error("TeamCode in use");
+    }
+  };
   render() {
     return (
       <TriviaContext.Consumer>
@@ -41,6 +46,7 @@ class RegisterTeam extends Component {
                   <form
                     onSubmit={e => {
                       e.preventDefault();
+                      this.validateTeamCode(this.state.teamName);
                       const winnings =
                         parseInt(this.state.firsts) +
                         parseInt(this.state.seconds) +
