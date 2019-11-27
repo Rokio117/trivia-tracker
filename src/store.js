@@ -236,7 +236,7 @@ const store = {
       members: [
         {
           userName: "Demo",
-          role: "Captain"
+          role: "Guest"
         },
         {
           userName: "Harry",
