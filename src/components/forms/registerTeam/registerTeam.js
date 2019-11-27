@@ -15,7 +15,8 @@ class RegisterTeam extends Component {
       winnings: 0,
       firsts: 0,
       seconds: 0,
-      thirds: 0
+      thirds: 0,
+      nameTaken: false
     };
   }
   buttonChoice = team => {
@@ -27,9 +28,9 @@ class RegisterTeam extends Component {
       );
     }
   };
-  validateTeamCode = teamCode => {
-    if (store.teamExists(teamCode)) {
-      throw new Error("TeamCode in use");
+  takenName = teamNameTaken => {
+    if (teamNameTaken) {
+      return <p className="error">That name is taken</p>;
     }
   };
   render() {
@@ -46,31 +47,34 @@ class RegisterTeam extends Component {
                   <form
                     onSubmit={e => {
                       e.preventDefault();
-                      this.validateTeamCode(this.state.teamName);
-                      const winnings =
-                        parseInt(this.state.firsts) +
-                        parseInt(this.state.seconds) +
-                        parseInt(this.state.thirds);
-                      const newTeam = {
-                        name: this.state.teamName,
-                        teamCode: this.state.teamUserName,
-                        members: [
-                          {
-                            userName: value.userInfo.userName,
-                            role: "Captain"
-                          }
-                        ],
-                        wins: winnings,
-                        firstPlace: this.state.firsts,
-                        secondPlace: this.state.seconds,
-                        thirdPlace: this.state.thirds,
-                        winnings: this.state.winnings,
-                        history: []
-                      };
-                      //push new team into DB, then add team to player info
-                      store.postNewteam(newTeam);
+                      if (store.teamExists(this.state.teamUserName)) {
+                        this.setState({ nameTaken: true });
+                      } else {
+                        const winnings =
+                          parseInt(this.state.firsts) +
+                          parseInt(this.state.seconds) +
+                          parseInt(this.state.thirds);
+                        const newTeam = {
+                          name: this.state.teamName,
+                          teamCode: this.state.teamUserName,
+                          members: [
+                            {
+                              userName: value.userInfo.userName,
+                              role: "Captain"
+                            }
+                          ],
+                          wins: winnings,
+                          firstPlace: this.state.firsts,
+                          secondPlace: this.state.seconds,
+                          thirdPlace: this.state.thirds,
+                          winnings: this.state.winnings,
+                          history: []
+                        };
+                        //push new team into DB, then add team to player info
+                        store.postNewteam(newTeam);
 
-                      this.props.loginTeam(newTeam);
+                        this.props.loginTeam(newTeam);
+                      }
                     }}
                   >
                     <label htmlFor="teamuserName">Team User Name:</label>
@@ -79,9 +83,13 @@ class RegisterTeam extends Component {
                       id="teamUserName"
                       required
                       onChange={e => {
-                        this.setState({ teamUserName: e.target.value });
+                        this.setState({
+                          teamUserName: e.target.value,
+                          nameTaken: false
+                        });
                       }}
                     ></input>
+                    {this.takenName(this.state.nameTaken)}
                     <label htmlFor="teamName">Team Name:</label>
                     <input
                       type="text"

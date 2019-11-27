@@ -147,7 +147,9 @@ class Settings extends Component {
                     value.userInfo.userName
                   )}
                 </div>
+                <div>{`Team User Name: ${value.teamInfo.teamCode}`}</div>
               </section>
+
               <button
                 type="button"
                 onClick={e => this.props.history.push("/home")}
