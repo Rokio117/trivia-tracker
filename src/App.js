@@ -36,42 +36,47 @@ class App extends Component {
     };
   }
 
-  login = userName => {
+  login = (userName, password) => {
     console.log("logged in");
     //after the form validation, this function will set the user and team in state,
     //as well as fetching the user and team info and storing it in state
 
-    const userInfo = store.getUser(userName);
-    const userTeams = store.getTeamsForUser(userName);
-    console.log(userInfo, "userInfo", userTeams, "userTeams");
-    //if the member is already a part of a team
-    if (userTeams.length) {
-      const teamCode = userTeams[0].teamCode;
-      const teamInfo = store.getTeam(teamCode);
+    store.getUser(userName).then(userInfo => {
+      store.getTeamsForUser(userName).then(userTeams => {
+        //if the member is already a part of a team
+        if (userTeams.length) {
+          const teamInfo = userTeams[0];
 
-      const teamMembers = store.getNamedMembersOfTeam(teamInfo.members);
-      //add logic for non-duplicates
+          store
+            .getMembersOfTeam(teamInfo.teamcode)
+            .then(memberUserNameAndNickNames => {
+              console.log(teamInfo, "teaminfo in login");
+              console.log(memberUserNameAndNickNames, "members in login");
+              const appState = {
+                user: userName,
+                userInfo: userInfo,
+                teamInfo: teamInfo,
+                userTeams: userTeams,
+                teamMembers: memberUserNameAndNickNames,
+                loggedIn: true
+              };
+              return appState;
 
-      const appState = {
-        user: userName,
-        userInfo: userInfo,
-        teamInfo: teamInfo,
-        userTeams: userTeams,
-        teamMembers: teamMembers,
-        loggedIn: true
-      };
-
-      this.setState(appState);
-      //revisit persist for server side
-      //localStorage.setItem(APP_STATE_KEY, JSON.stringify(appState));
-
-      this.props.history.push("/home");
-    }
-    //if the member does not have a team
-    if (!userTeams.length) {
-      this.setState({ user: userName, userInfo: userInfo });
-      this.props.history.push("/noTeam");
-    }
+              //revisit persist for server side
+              //localStorage.setItem(APP_STATE_KEY, JSON.stringify(appState));
+            })
+            .then(appState => {
+              this.setState(appState);
+              this.props.history.push("/home");
+            });
+        }
+        //if the member does not have a team
+        if (!userTeams.length) {
+          this.setState({ user: userName, userInfo: userInfo });
+          this.props.history.push("/noTeam");
+        }
+      });
+    });
   };
 
   loginTeam = teamInfo => {

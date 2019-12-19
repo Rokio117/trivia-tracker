@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import "./loginForm.css";
 import STORE from "../../../store";
 import store from "../../../store";
+import { tokenFunctions } from "../../../tokenService";
 
 class LoginForm extends Component {
   constructor(props) {
@@ -15,22 +16,27 @@ class LoginForm extends Component {
   }
 
   validateLogin = (userName, password) => {
-    const user = store.getUser(userName);
-    const userTeam = store.getTeamsForUser(userName);
-    if (!user) {
-      this.setState({ loginError: true });
+    tokenFunctions.saveAuthToken(
+      tokenFunctions.makeBasicAuthToken(userName, password)
+    );
+    store.getUser(userName).then(response => {
+      console.log(response, "response in store.getUser");
 
-      return false;
-    } else if (user.password !== password) {
-      this.setState({ loginError: true });
+      if (response.error) {
+        this.setState({ loginError: true });
 
-      return false;
-    }
+        return false;
+      } else if (response[0].password !== password) {
+        this.setState({ loginError: true });
 
-    this.setState({ loginError: false });
-    this.props.loginUser(userName);
-    this.props.history.push("/home");
-    return true;
+        return false;
+      }
+
+      this.setState({ loginError: false });
+      this.props.loginUser(userName);
+      this.props.history.push("/home");
+      return true;
+    });
   };
 
   loginError = error => {

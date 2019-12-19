@@ -1,3 +1,5 @@
+import config from "./config";
+
 const store = {
   users: [
     {
@@ -292,13 +294,17 @@ const store = {
       ]
     }
   ],
-
+  //add in "authorization" headers to all protected endpoints
   registerTeam: newTeam => {
     console.log(this.teams, "this.teams in store");
     store.teams.push(newTeam);
   },
+
   getUser(userName) {
-    return store.users.find(user => user.userName === userName);
+    //return store.users.find(user => user.userName === userName);
+    return fetch(`${config.API_ENDPOINT}/users/${userName}`).then(res => {
+      return res.json();
+    });
   },
   getNameFromUserName(userName) {
     return store.users.find(user => user.userName === userName).name;
@@ -306,28 +312,39 @@ const store = {
   getTeam: teamCode => {
     return store.teams.find(team => team.teamCode === teamCode);
   },
-  getTeamsForUser: userName => {
-    return store.teams.filter(team =>
-      team.members.map(member => member.userName).includes(userName)
-    );
+  getTeamsForUser(userName) {
+    return fetch(`${config.API_ENDPOINT}/users/${userName}/teams`).then(res => {
+      return res.json();
+    });
+    // return store.teams.filter(team =>
+    //   team.members.map(member => member.userName).includes(userName)
+    // );
   },
   getUserFromUserName: userName => {
     return store.users.find(user => user.userName === userName);
   },
-  getMembersOfTeam: teamCode => {
-    return store.teams.find(team => team.teamCode === teamCode).members;
+  getMembersOfTeam(teamCode) {
+    //return store.teams.find(team => team.teamCode === teamCode).members;
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/members`).then(
+      res => {
+        return res.json();
+      }
+    );
   },
   getRoleOfUser: (userName, teamCode) => {
     return store.teams
       .find(team => team.teamCode === teamCode)
       .members.find(member => member.userName === userName).role;
   },
-  getNamedMembersOfTeam: members => {
-    return members.map(member =>
-      Object.assign(member, {
-        name: store.getNameFromUserName(member.userName)
-      })
-    );
+  getNamedMembersOfTeam(teamCode) {
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/names`).then(res => {
+      return res.json();
+    });
+    // return members.map(member =>
+    //   Object.assign(member, {
+    //     name: store.getNameFromUserName(member.userName)
+    //   })
+    // );
   },
   postUserWithNoTeam: userObject => {
     store.users.push(userObject);

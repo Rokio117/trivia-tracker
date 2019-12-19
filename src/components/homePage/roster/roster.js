@@ -14,22 +14,15 @@ class Roster extends Component {
             // const captains = value.teamInfo.members
             //   .filter(member => member.role === "Captain")
             //   .map(captain => store.getNameFromUserName(captain.userName));
-            const members = value.teamInfo.members
-              .map(member => store.getUserFromUserName(member.userName))
-              .map(user => (
-                <li className="captainList" key={user.userName}>
-                  <div className="rosterLabel">Name: </div>
-                  <div className="rosterName">{user.name}</div>
+            const members = value.teamMembers.map(member => (
+              <li className="captainList" key={member.username}>
+                <div className="rosterLabel">Name: </div>
+                <div className="rosterName">{member.nickname}</div>
 
-                  <div className="rosterLabel">Role: </div>
-                  <div className="rosterName">
-                    {store.getRoleOfUser(
-                      user.userName,
-                      value.teamInfo.teamCode
-                    )}
-                  </div>
-                </li>
-              ));
+                <div className="rosterLabel">Role: </div>
+                <div className="rosterName">{member.role}</div>
+              </li>
+            ));
             return (
               <section id="roster">
                 <h2>Roster</h2>
