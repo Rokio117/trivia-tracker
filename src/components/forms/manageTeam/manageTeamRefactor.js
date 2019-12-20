@@ -87,16 +87,18 @@ class ManageTeam extends Component {
                 <form
                   onSubmit={e => {
                     e.preventDefault();
-                    if (!this.validateUser(this.state.addPlayer)) {
-                      this.setState({ userNotFound: true });
-                    } else {
-                      store.addToTeam(
-                        this.state.addPlayer,
-                        value.teamInfo.teamCode,
-                        this.state.newMemberRank
-                      );
-                      this.props.history.push("/home");
-                    }
+                    store.getUser(this.state.addPlayer).then(response => {
+                      if (response.error) {
+                        this.setState({ userNotFound: true });
+                      } else {
+                        store.addToTeam(
+                          this.state.addPlayer,
+                          value.teamInfo.teamCode,
+                          this.state.newMemberRank
+                        );
+                        this.props.history.push("/home");
+                      }
+                    });
                   }}
                 >
                   <fieldset>

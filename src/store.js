@@ -309,8 +309,10 @@ const store = {
   getNameFromusername(username) {
     return store.users.find(user => user.username === username).name;
   },
-  getTeam: teamCode => {
-    return store.teams.find(team => team.teamCode === teamCode);
+  getTeam(teamCode) {
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/team`).then(res => {
+      return res.json();
+    });
   },
   getTeamsForUser(username) {
     return fetch(`${config.API_ENDPOINT}/users/${username}/teams`).then(res => {
@@ -353,10 +355,15 @@ const store = {
     return store.teams.map(team => team.teamCode === teamCode).includes(true);
   },
   userExists: username => {
-    return store.users.map(user => user.username).includes(username);
-
-    //   Object.values(user).includes(username))
-    // .includes(true);
+    return fetch(`${config.API_ENDPOINT}/users/${username}/exists`).then(
+      response => {
+        let exists;
+        if (response.length) {
+          exists = true;
+        } else exists = false;
+        return exists;
+      }
+    );
   },
   postUserWithTeam: (userObject, teamCode) => {
     const user = { username: userObject.username, role: "Member" };
@@ -389,46 +396,21 @@ const store = {
   changeTeamName: (name, teamCode) => {
     store.teams.find(team => team.teamCode === teamCode).name = name;
   },
-  changeusername: (newusername, username) => {
-    store.users.find(user => user.username === username).username = newusername;
-
-    store.teams
-      .filter(team => team.members.find(member => member.username === username))
-      .forEach(
-        team =>
-          (team.members.find(
-            member => member.username === username
-          ).username = newusername)
-      );
-
-    store.teams
-      .filter(team =>
-        team.members.find(member => member.username === newusername)
-      )
-      .forEach(team =>
-        team.history.forEach(event => {
-          const index = event.roster.indexOf(username);
-          event.roster.splice(index, 1, newusername);
-        })
-      );
-    // const index = event.roster.indexOf(username);
-    //       event.splice(index, 1, newusername);
-
-    // .forEach(team =>
-    //   team.history.forEach(event =>
-    //     event.roster.forEach(member => member.replace(username, newusername))
-    //   )
-    // );
-
-    // store.teams.filter(
-    //   team =>
-    //     (team.members.find(
-    //       member => member.username === username
-    //     ).username = newusername)
-    // );
+  changeusername(newusername, username) {
+    return fetch(`${config.API_ENDPOINT}/users/${username}`, {
+      method: "PATCH",
+      body: JSON.stringify({ newusername: newusername })
+    }).then(res => {
+      return res.json();
+    });
   },
-  changePlayerName: (newName, username) => {
-    store.users.find(user => user.username === username).name = newName;
+  changePlayerName(newName, username) {
+    return fetch(`${config.API_ENDPOINT}/users/${username}/name`, {
+      method: "PATCH",
+      body: JSON.stringify({ nickname: newName })
+    }).then(res => {
+      return res.json();
+    });
   },
   addEvent: (event, teamCode) => {
     const winnings =

@@ -47,34 +47,38 @@ class RegisterTeam extends Component {
                   <form
                     onSubmit={e => {
                       e.preventDefault();
-                      if (store.teamExists(this.state.teamusername)) {
-                        this.setState({ nameTaken: true });
-                      } else {
-                        const winnings =
-                          parseInt(this.state.firsts) +
-                          parseInt(this.state.seconds) +
-                          parseInt(this.state.thirds);
-                        const newTeam = {
-                          name: this.state.teamName,
-                          teamCode: this.state.teamusername,
-                          members: [
-                            {
-                              username: value.userInfo.username,
-                              role: "Captain"
-                            }
-                          ],
-                          wins: winnings,
-                          firstPlace: this.state.firsts,
-                          secondPlace: this.state.seconds,
-                          thirdPlace: this.state.thirds,
-                          winnings: this.state.winnings,
-                          history: []
-                        };
-                        //push new team into DB, then add team to player info
-                        store.postNewteam(newTeam);
 
-                        this.props.loginTeam(newTeam);
-                      }
+                      store.getTeam(this.state.teamusername).then(response => {
+                        console.log(response, "response after store.getTeam");
+                        if (!response.error) {
+                          this.setState({ nameTaken: true });
+                        } else {
+                          const winnings =
+                            parseInt(this.state.firsts) +
+                            parseInt(this.state.seconds) +
+                            parseInt(this.state.thirds);
+                          const newTeam = {
+                            name: this.state.teamName,
+                            teamCode: this.state.teamusername,
+                            members: [
+                              {
+                                username: value.userInfo.username,
+                                role: "Captain"
+                              }
+                            ],
+                            wins: winnings,
+                            firstPlace: this.state.firsts,
+                            secondPlace: this.state.seconds,
+                            thirdPlace: this.state.thirds,
+                            winnings: this.state.winnings,
+                            history: []
+                          };
+                          //push new team into DB, then add team to player info
+                          store.postNewteam(newTeam);
+
+                          this.props.loginTeam(newTeam);
+                        }
+                      });
                     }}
                   >
                     <label htmlFor="teamusername">Team User Name:</label>

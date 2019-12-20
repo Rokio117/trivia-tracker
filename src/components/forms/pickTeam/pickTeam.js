@@ -40,7 +40,8 @@ class PickTeam extends Component {
                         //const teamInfo = store.getTeam(this.state.selectedTeam);
                         const teamInfo = value.userTeams.filter(
                           team => team.teamcode === this.state.selectedTeam
-                        );
+                        )[0];
+                        console.log(teamInfo, "teamInfo be");
                         this.props.loginTeam(teamInfo);
                       }
                     }}

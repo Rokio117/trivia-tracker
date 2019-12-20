@@ -17,10 +17,20 @@ class Settings extends Component {
   }
 
   validateusername = username => {
-    if (store.userExists(username)) {
-      this.setState({ duplicateusername: true });
-    }
-    return store.userExists(username);
+    store
+      .getUser(username)
+      .then(response => {
+        let outcome;
+        if (response.username) {
+          this.setState({ duplicateusername: true });
+          outcome = false;
+        } else outcome = true;
+        return outcome;
+      })
+      .then(outcome => {
+        console.log(outcome);
+        return outcome;
+      });
   };
   duplicateusername = duplicate => {
     if (duplicate) {
@@ -33,10 +43,29 @@ class Settings extends Component {
         <form
           onSubmit={e => {
             e.preventDefault();
-            if (!this.validateusername(newusername)) {
-              store.changeusername(newusername, username);
-              this.props.login(newusername);
-            }
+            store
+              .userExists(newusername)
+              .then(res => {
+                console.log(res, "res after getUser(newusername)");
+                let outcome;
+                if (!res) {
+                  outcome = "notDuplicate";
+                } else outcome = "duplicate";
+                return outcome;
+              })
+              .then(outcome => {
+                console.log(outcome, "outcome");
+                if (outcome === "duplicate") {
+                  this.setState({ duplicateusername: true });
+                }
+              })
+              .then(() => {
+                store.changeusername(newusername, username).then(response => {
+                  if (response.ok) {
+                    this.props.login(newusername);
+                  }
+                });
+              });
           }}
         >
           <legend htmlFor="name">Change User Name:</legend>
@@ -104,7 +133,8 @@ class Settings extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          console.log("value.userIinfo in settings", value);
+          console.log("value.userIinfo in settings", value.userInfo.username);
+
           return (
             <div>
               <header>
@@ -112,7 +142,7 @@ class Settings extends Component {
               </header>
               <section>
                 <div id="changeusername">
-                  {`User Name: ${value.userInfo[0].username}`}
+                  {`User Name: ${value.userInfo.username}`}
                   <button
                     type="button"
                     onClick={e =>
@@ -126,13 +156,13 @@ class Settings extends Component {
                   {this.changeusernameForm(
                     this.state.changeusername,
                     this.state.newusername,
-                    value.userInfo[0].username
+                    value.userInfo.username
                   )}
                 </div>
 
                 <br></br>
                 <div id="changeNameSettings">
-                  {`Name: ${value.userInfo[0].nickname}`}
+                  {`Name: ${value.userInfo.nickname}`}
                   <button
                     type="button"
                     onClick={e =>
@@ -145,7 +175,7 @@ class Settings extends Component {
                   </button>
                   {this.changeNameForm(
                     this.state.changeName,
-                    value.userInfo[0].username
+                    value.userInfo.username
                   )}
                 </div>
                 <div>{`Team User Name: ${value.teamInfo.teamcode}`}</div>

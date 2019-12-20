@@ -82,7 +82,7 @@ class App extends Component {
     const teamMembers = teamInfo.members;
     //teamMembers is supposed to be list of username,role,and nickname
     //for each team member
-    console.log(teamMembers, "teamMembers in loginTeam");
+
     if (!this.state.userTeams.includes(teamInfo)) {
       const teamList = [...this.state.userTeams, teamInfo];
       this.setState({
