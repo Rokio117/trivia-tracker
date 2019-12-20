@@ -9,33 +9,33 @@ class Settings extends Component {
     super(props);
     this.state = {
       newName: "",
-      newUserName: "",
+      newusername: "",
       changeName: false,
-      changeUserName: false,
-      duplicateUserName: false
+      changeusername: false,
+      duplicateusername: false
     };
   }
 
-  validateUserName = userName => {
-    if (store.userExists(userName)) {
-      this.setState({ duplicateUserName: true });
+  validateusername = username => {
+    if (store.userExists(username)) {
+      this.setState({ duplicateusername: true });
     }
-    return store.userExists(userName);
+    return store.userExists(username);
   };
-  duplicateUserName = duplicate => {
+  duplicateusername = duplicate => {
     if (duplicate) {
       return <p className="error">That User Name is Taken</p>;
     }
   };
-  changeUserNameForm = (state, newUserName, userName) => {
+  changeusernameForm = (state, newusername, username) => {
     if (state) {
       return (
         <form
           onSubmit={e => {
             e.preventDefault();
-            if (!this.validateUserName(newUserName)) {
-              store.changeUserName(newUserName, userName);
-              this.props.login(newUserName);
+            if (!this.validateusername(newusername)) {
+              store.changeusername(newusername, username);
+              this.props.login(newusername);
             }
           }}
         >
@@ -45,19 +45,19 @@ class Settings extends Component {
             id="name"
             onChange={e =>
               this.setState({
-                newUserName: e.target.value,
-                duplicateUserName: false
+                newusername: e.target.value,
+                duplicateusername: false
               })
             }
           ></input>
-          {this.duplicateUserName(this.state.duplicateUserName)}
+          {this.duplicateusername(this.state.duplicateusername)}
           <button type="submit">Submit</button>
           <button
             id="changeName"
             type="button"
             onClick={e =>
               this.setState({
-                changeUserName: false
+                changeusername: false
               })
             }
           >
@@ -68,14 +68,14 @@ class Settings extends Component {
     }
   };
 
-  changeNameForm = (state, userName) => {
+  changeNameForm = (state, username) => {
     if (state) {
       return (
         <form
           onSubmit={e => {
             e.preventDefault();
-            store.changePlayerName(this.state.newName, userName);
-            this.props.login(userName);
+            store.changePlayerName(this.state.newName, username);
+            this.props.login(username);
           }}
         >
           <legend htmlFor="name">Change Name:</legend>
@@ -104,34 +104,35 @@ class Settings extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
+          console.log("value.userIinfo in settings", value);
           return (
             <div>
               <header>
                 <h1>Settings</h1>
               </header>
               <section>
-                <div id="changeUserName">
-                  {`User Name: ${value.userInfo.userName}`}
+                <div id="changeusername">
+                  {`User Name: ${value.userInfo[0].username}`}
                   <button
                     type="button"
                     onClick={e =>
                       this.setState({
-                        changeUserName: !this.state.changeUserName
+                        changeusername: !this.state.changeusername
                       })
                     }
                   >
                     Change
                   </button>
-                  {this.changeUserNameForm(
-                    this.state.changeUserName,
-                    this.state.newUserName,
-                    value.userInfo.userName
+                  {this.changeusernameForm(
+                    this.state.changeusername,
+                    this.state.newusername,
+                    value.userInfo[0].username
                   )}
                 </div>
 
                 <br></br>
                 <div id="changeNameSettings">
-                  {`Name: ${value.userInfo.name}`}
+                  {`Name: ${value.userInfo[0].nickname}`}
                   <button
                     type="button"
                     onClick={e =>
@@ -144,10 +145,10 @@ class Settings extends Component {
                   </button>
                   {this.changeNameForm(
                     this.state.changeName,
-                    value.userInfo.userName
+                    value.userInfo[0].username
                   )}
                 </div>
-                <div>{`Team User Name: ${value.teamInfo.teamCode}`}</div>
+                <div>{`Team User Name: ${value.teamInfo.teamcode}`}</div>
               </section>
 
               <button

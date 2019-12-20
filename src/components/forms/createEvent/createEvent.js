@@ -22,13 +22,14 @@ class CreateEvent extends Component {
 
   attendance = people => {
     return people.map(person => (
-      <div key={person.userName}>
+      <div key={person.username}>
         <label
-          htmlFor={person.userName}
-          key={person.userName}
+          htmlFor={person.username}
+          key={person.username}
           className="personLabel"
         >
-          {store.getNameFromUserName(person.userName)}
+          {person.username}
+
           <input
             onClick={e => {
               this.setState({
@@ -38,7 +39,7 @@ class CreateEvent extends Component {
               this.state.attendance.includes(e.target.value)
                 ? this.setState({
                     attendance: this.state.attendance.filter(
-                      person => person.userName === e.target.value
+                      person => person.username === e.target.value
                     )
                   })
                 : this.setState({
@@ -46,9 +47,9 @@ class CreateEvent extends Component {
                   });
             }}
             type="checkbox"
-            key={person.userName}
-            value={person.userName}
-            id={person.userName}
+            key={person.username}
+            value={person.username}
+            id={person.username}
             className="memberSelect"
           ></input>
         </label>
@@ -247,7 +248,7 @@ class CreateEvent extends Component {
                   <br></br>
                   <fieldset>
                     <legend htmlFor="attendance">Attendance</legend>
-                    {this.attendance(value.teamInfo.members)}
+                    {this.attendance(value.teamMembers)}
                     {this.attendanceReminder(this.state.attendanceReminder)}
                   </fieldset>
 

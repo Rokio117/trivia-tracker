@@ -13,7 +13,7 @@ class Roster extends Component {
           if (value.userInfo && value.teamInfo.members) {
             // const captains = value.teamInfo.members
             //   .filter(member => member.role === "Captain")
-            //   .map(captain => store.getNameFromUserName(captain.userName));
+            //   .map(captain => store.getNameFromusername(captain.username));
             const members = value.teamMembers.map(member => (
               <li className="captainList" key={member.username}>
                 <div className="rosterLabel">Name: </div>

@@ -43,7 +43,7 @@ class NoTeamPage extends Component {
                       this.setState({ noTeamFound: true });
                     } else {
                       store.addToTeam(
-                        value.userInfo.userName,
+                        value.userInfo.username,
                         this.state.teamCode,
                         "Member"
                       );

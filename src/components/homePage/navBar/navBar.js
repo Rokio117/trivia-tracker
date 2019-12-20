@@ -41,12 +41,14 @@ class NavBar extends Component {
       <TriviaContext.Consumer>
         {value => {
           if (value.userInfo && value.teamInfo.members) {
+            console.log(value.userInfo, "value.userINfo");
+            console.log(value.teamInfo.members, "value.teaminfo.members");
             const memberRole = value.teamInfo.members.find(
-              member => member.userName === value.userInfo.userName
+              member => member.username === value.userInfo.username
             ).role;
             return (
               <nav id="navParent">
-                <p id="greeting">Hello, {value.userInfo.name}</p>
+                <p id="greeting">Hello, {value.userInfo.nickname}</p>
                 {this.chooseTeamRender(value.userTeams.length)}
                 <NavLink className="navBarLink" to={"/settings"}>
                   Settings

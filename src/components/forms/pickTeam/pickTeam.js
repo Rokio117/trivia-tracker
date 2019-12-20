@@ -22,7 +22,7 @@ class PickTeam extends Component {
         {value => {
           if (value.teamInfo && value.userInfo) {
             const teamList = value.userTeams.map(team => (
-              <option value={team.teamCode}>{team.name}</option>
+              <option value={team.teamcode}>{team.teamname}</option>
             ));
             return (
               <div>
@@ -37,7 +37,10 @@ class PickTeam extends Component {
                         this.setState({ selectError: true });
                       }
                       if (this.state.selectedTeam !== "none") {
-                        const teamInfo = store.getTeam(this.state.selectedTeam);
+                        //const teamInfo = store.getTeam(this.state.selectedTeam);
+                        const teamInfo = value.userTeams.filter(
+                          team => team.teamcode === this.state.selectedTeam
+                        );
                         this.props.loginTeam(teamInfo);
                       }
                     }}

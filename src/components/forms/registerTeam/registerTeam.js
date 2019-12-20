@@ -8,9 +8,9 @@ class RegisterTeam extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNameError: false,
+      usernameError: false,
       teamNameError: false,
-      teamUserName: "",
+      teamusername: "",
       teamName: "",
       winnings: 0,
       firsts: 0,
@@ -47,7 +47,7 @@ class RegisterTeam extends Component {
                   <form
                     onSubmit={e => {
                       e.preventDefault();
-                      if (store.teamExists(this.state.teamUserName)) {
+                      if (store.teamExists(this.state.teamusername)) {
                         this.setState({ nameTaken: true });
                       } else {
                         const winnings =
@@ -56,10 +56,10 @@ class RegisterTeam extends Component {
                           parseInt(this.state.thirds);
                         const newTeam = {
                           name: this.state.teamName,
-                          teamCode: this.state.teamUserName,
+                          teamCode: this.state.teamusername,
                           members: [
                             {
-                              userName: value.userInfo.userName,
+                              username: value.userInfo.username,
                               role: "Captain"
                             }
                           ],
@@ -77,14 +77,14 @@ class RegisterTeam extends Component {
                       }
                     }}
                   >
-                    <label htmlFor="teamuserName">Team User Name:</label>
+                    <label htmlFor="teamusername">Team User Name:</label>
                     <input
                       type="text"
-                      id="teamUserName"
+                      id="teamusername"
                       required
                       onChange={e => {
                         this.setState({
-                          teamUserName: e.target.value,
+                          teamusername: e.target.value,
                           nameTaken: false
                         });
                       }}

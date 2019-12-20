@@ -24,7 +24,7 @@ class ManageTeam extends Component {
     const noCaptains = members.filter(member => member.role !== "Captain");
     if (noCaptains.length) {
       const options = noCaptains.map(member => {
-        return <option value={member.userName}>{member.name}</option>;
+        return <option value={member.username}>{member.nickname}</option>;
       });
       return (
         <form>
@@ -186,7 +186,7 @@ class ManageTeam extends Component {
                       required
                       id="teamName"
                       type="text"
-                      placeholder={value.teamInfo.name}
+                      placeholder={value.teamInfo.teamname}
                       onChange={e => this.setState({ newName: e.target.value })}
                     ></input>
                     <button type="submit">Submit</button>

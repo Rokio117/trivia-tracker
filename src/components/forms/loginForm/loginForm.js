@@ -15,11 +15,11 @@ class LoginForm extends Component {
     };
   }
 
-  validateLogin = (userName, password) => {
+  validateLogin = (username, password) => {
     tokenFunctions.saveAuthToken(
-      tokenFunctions.makeBasicAuthToken(userName, password)
+      tokenFunctions.makeBasicAuthToken(username, password)
     );
-    store.getUser(userName).then(response => {
+    store.getUser(username).then(response => {
       console.log(response, "response in store.getUser");
 
       if (response.error) {
@@ -33,7 +33,7 @@ class LoginForm extends Component {
       }
 
       this.setState({ loginError: false });
-      this.props.loginUser(userName);
+      this.props.loginUser(username);
       this.props.history.push("/home");
       return true;
     });

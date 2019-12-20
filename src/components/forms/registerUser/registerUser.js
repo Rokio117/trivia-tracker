@@ -6,13 +6,13 @@ class RegisterUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signUpUserName: "",
+      signUpusername: "",
       signUpName: "",
       signUpPassword: "",
       signUpRepeatPassword: "",
-      teamUserName: "",
+      teamusername: "",
       passwordMatch: true,
-      uniqueUserName: true,
+      uniqueusername: true,
       noTeamFound: false
     };
   }
@@ -41,18 +41,18 @@ class RegisterUser extends Component {
         <form
           id="signUp"
           onSubmit={e => {
-            const teamChanged = this.state.teamUserName !== "";
+            const teamChanged = this.state.teamusername !== "";
             const match =
               this.state.signUpPassword === this.state.signUpRepeatPassword;
             const unique = !store.users
-              .map(user => user.userName)
-              .includes(this.state.signUpUserName);
+              .map(user => user.username)
+              .includes(this.state.signUpusername);
             let realTeam;
 
             if (teamChanged) {
               realTeam = store.teams
                 .map(team => team.teamCode)
-                .includes(this.state.teamUserName);
+                .includes(this.state.teamusername);
             }
             const validTeam = teamChanged && realTeam;
             e.preventDefault();
@@ -60,41 +60,41 @@ class RegisterUser extends Component {
               this.setState({ passwordMatch: false });
             }
             if (!unique) {
-              this.setState({ uniqueUserName: false });
+              this.setState({ uniqueusername: false });
             }
             if (teamChanged && !realTeam) {
               this.setState({ noTeamFound: true });
             }
             if (match && unique && (validTeam || teamChanged === false)) {
               const newUser = {
-                userName: this.state.signUpUserName,
+                username: this.state.signUpusername,
                 name: this.state.signUpName,
                 password: this.state.signUpPassword
               };
               //push new user into the array on store. this will become a post request
               if (validTeam) {
-                store.postUserWithTeam(newUser, this.state.teamUserName);
-                this.props.login(newUser.userName);
+                store.postUserWithTeam(newUser, this.state.teamusername);
+                this.props.login(newUser.username);
               }
               store.postUserWithNoTeam(newUser);
 
-              this.props.loginUser(this.state.signUpUserName);
+              this.props.loginUser(this.state.signUpusername);
             }
           }}
         >
-          <label htmlFor="userName">User Name:</label>
+          <label htmlFor="username">User Name:</label>
           <input
-            id="userName"
+            id="username"
             type="text"
             required
             onChange={e =>
               this.setState({
-                signUpUserName: e.target.value,
-                uniqueUserName: true
+                signUpusername: e.target.value,
+                uniqueusername: true
               })
             }
           ></input>
-          {this.mustBeUnique(this.state.uniqueUserName)}
+          {this.mustBeUnique(this.state.uniqueusername)}
           <label htmlFor="name">Name:</label>
           <input
             id="name"
@@ -137,7 +137,7 @@ class RegisterUser extends Component {
             type="text"
             onChange={e =>
               this.setState({
-                teamUserName: e.target.value,
+                teamusername: e.target.value,
                 noTeamFound: false
               })
             }

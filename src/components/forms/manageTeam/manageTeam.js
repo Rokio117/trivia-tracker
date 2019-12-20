@@ -21,10 +21,14 @@ class ManageTeam extends Component {
   }
 
   changeRole = members => {
+    //where is members coming from?
+    //value.teamMembers
+
     const noCaptains = members.filter(member => member.role !== "Captain");
+
     if (noCaptains.length) {
       const options = noCaptains.map(member => {
-        return <option value={member.userName}>{member.name}</option>;
+        return <option value={member.username}>{member.nickname}</option>;
       });
       return (
         <>

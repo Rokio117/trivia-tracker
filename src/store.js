@@ -3,67 +3,67 @@ import config from "./config";
 const store = {
   users: [
     {
-      userName: "Rokio",
+      username: "Rokio",
       name: "Nick",
       password: "password"
     },
     {
-      userName: "Jen",
+      username: "Jen",
       name: "Jennifer",
       password: "password"
     },
     {
-      userName: "Ash",
+      username: "Ash",
       name: "Ashley",
       password: "password"
     },
     {
-      userName: "Deandra",
+      username: "Deandra",
       name: "Dee",
       password: "password"
     },
     {
-      userName: "Charlie",
+      username: "Charlie",
       name: "Charlie",
       password: "password"
     },
     {
-      userName: "Mac",
+      username: "Mac",
       name: "Mac",
       password: "password"
     },
     {
-      userName: "Demo",
+      username: "Demo",
       name: "Demo",
       password: "password"
     },
     {
-      userName: "Demo2",
+      username: "Demo2",
       name: "Demo Lovato",
       password: "password"
     },
     {
-      userName: "Demo3",
+      username: "Demo3",
       name: "Demo Moore",
       password: "password"
     },
     {
-      userName: "Demo4",
+      username: "Demo4",
       name: "Demenem",
       password: "password"
     },
     {
-      userName: "Harry",
+      username: "Harry",
       name: "Harry",
       password: "password"
     },
     {
-      userName: "Ron",
+      username: "Ron",
       name: "Ron",
       password: "password"
     },
     {
-      userName: "Hermione",
+      username: "Hermione",
       name: "Hermione",
       password: "password"
     }
@@ -74,15 +74,15 @@ const store = {
       teamCode: "password",
       members: [
         {
-          userName: "Rokio",
+          username: "Rokio",
           role: "Captain"
         },
         {
-          userName: "Jen",
+          username: "Jen",
           role: "Captain"
         },
         {
-          userName: "Ash",
+          username: "Ash",
           role: "Reporter"
         }
       ],
@@ -115,19 +115,19 @@ const store = {
       teamCode: "password2",
       members: [
         {
-          userName: "Rokio",
+          username: "Rokio",
           role: "Captain"
         },
         {
-          userName: "Deandra",
+          username: "Deandra",
           role: "Captain"
         },
         {
-          userName: "Mac",
+          username: "Mac",
           role: "Reporter"
         },
         {
-          userName: "Charlie",
+          username: "Charlie",
           role: "Member"
         }
       ],
@@ -160,19 +160,19 @@ const store = {
       teamCode: "Demo",
       members: [
         {
-          userName: "Demo",
+          username: "Demo",
           role: "Captain"
         },
         {
-          userName: "Demo2",
+          username: "Demo2",
           role: "Reporter"
         },
         {
-          userName: "Demo3",
+          username: "Demo3",
           role: "Member"
         },
         {
-          userName: "Demo4",
+          username: "Demo4",
           role: "Guest"
         }
       ],
@@ -237,19 +237,19 @@ const store = {
       teamCode: "Potter",
       members: [
         {
-          userName: "Demo",
+          username: "Demo",
           role: "Guest"
         },
         {
-          userName: "Harry",
+          username: "Harry",
           role: "Reporter"
         },
         {
-          userName: "Ron",
+          username: "Ron",
           role: "Guest"
         },
         {
-          userName: "Hermione",
+          username: "Hermione",
           role: "Captain"
         }
       ],
@@ -300,28 +300,28 @@ const store = {
     store.teams.push(newTeam);
   },
 
-  getUser(userName) {
-    //return store.users.find(user => user.userName === userName);
-    return fetch(`${config.API_ENDPOINT}/users/${userName}`).then(res => {
+  getUser(username) {
+    //return store.users.find(user => user.username === username);
+    return fetch(`${config.API_ENDPOINT}/users/${username}`).then(res => {
       return res.json();
     });
   },
-  getNameFromUserName(userName) {
-    return store.users.find(user => user.userName === userName).name;
+  getNameFromusername(username) {
+    return store.users.find(user => user.username === username).name;
   },
   getTeam: teamCode => {
     return store.teams.find(team => team.teamCode === teamCode);
   },
-  getTeamsForUser(userName) {
-    return fetch(`${config.API_ENDPOINT}/users/${userName}/teams`).then(res => {
+  getTeamsForUser(username) {
+    return fetch(`${config.API_ENDPOINT}/users/${username}/teams`).then(res => {
       return res.json();
     });
     // return store.teams.filter(team =>
-    //   team.members.map(member => member.userName).includes(userName)
+    //   team.members.map(member => member.username).includes(username)
     // );
   },
-  getUserFromUserName: userName => {
-    return store.users.find(user => user.userName === userName);
+  getUserFromusername: username => {
+    return store.users.find(user => user.username === username);
   },
   getMembersOfTeam(teamCode) {
     //return store.teams.find(team => team.teamCode === teamCode).members;
@@ -331,10 +331,10 @@ const store = {
       }
     );
   },
-  getRoleOfUser: (userName, teamCode) => {
+  getRoleOfUser: (username, teamCode) => {
     return store.teams
       .find(team => team.teamCode === teamCode)
-      .members.find(member => member.userName === userName).role;
+      .members.find(member => member.username === username).role;
   },
   getNamedMembersOfTeam(teamCode) {
     return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/names`).then(res => {
@@ -342,7 +342,7 @@ const store = {
     });
     // return members.map(member =>
     //   Object.assign(member, {
-    //     name: store.getNameFromUserName(member.userName)
+    //     name: store.getNameFromusername(member.username)
     //   })
     // );
   },
@@ -352,26 +352,26 @@ const store = {
   teamExists: teamCode => {
     return store.teams.map(team => team.teamCode === teamCode).includes(true);
   },
-  userExists: userName => {
-    return store.users.map(user => user.userName).includes(userName);
+  userExists: username => {
+    return store.users.map(user => user.username).includes(username);
 
-    //   Object.values(user).includes(userName))
+    //   Object.values(user).includes(username))
     // .includes(true);
   },
   postUserWithTeam: (userObject, teamCode) => {
-    const user = { userName: userObject.userName, role: "Member" };
+    const user = { username: userObject.username, role: "Member" };
     store.users.push(userObject);
     store.teams.find(team => team.teamCode === teamCode).members.push(user);
   },
-  postNewSettings: (newSettings, userName) => {
-    store.users.find(user => user.userName === userName).name = newSettings;
+  postNewSettings: (newSettings, username) => {
+    store.users.find(user => user.username === username).name = newSettings;
   },
   postNewteam: teamObject => {
     store.teams.push(teamObject);
   },
   addToTeam: (player, teamCode, role) => {
     const newMember = {
-      userName: player,
+      username: player,
       role: role
     };
     store.teams
@@ -381,7 +381,7 @@ const store = {
   changeRole: (player, role, teamCode) => {
     store.teams
       .find(team => team.teamCode === teamCode)
-      .members.find(member => member.userName === player).role = role;
+      .members.find(member => member.username === player).role = role;
   },
   changeWinnings: (winnings, teamCode) => {
     store.teams.find(team => team.teamCode === teamCode).winnings = winnings;
@@ -389,46 +389,46 @@ const store = {
   changeTeamName: (name, teamCode) => {
     store.teams.find(team => team.teamCode === teamCode).name = name;
   },
-  changeUserName: (newUserName, userName) => {
-    store.users.find(user => user.userName === userName).userName = newUserName;
+  changeusername: (newusername, username) => {
+    store.users.find(user => user.username === username).username = newusername;
 
     store.teams
-      .filter(team => team.members.find(member => member.userName === userName))
+      .filter(team => team.members.find(member => member.username === username))
       .forEach(
         team =>
           (team.members.find(
-            member => member.userName === userName
-          ).userName = newUserName)
+            member => member.username === username
+          ).username = newusername)
       );
 
     store.teams
       .filter(team =>
-        team.members.find(member => member.userName === newUserName)
+        team.members.find(member => member.username === newusername)
       )
       .forEach(team =>
         team.history.forEach(event => {
-          const index = event.roster.indexOf(userName);
-          event.roster.splice(index, 1, newUserName);
+          const index = event.roster.indexOf(username);
+          event.roster.splice(index, 1, newusername);
         })
       );
-    // const index = event.roster.indexOf(userName);
-    //       event.splice(index, 1, newUserName);
+    // const index = event.roster.indexOf(username);
+    //       event.splice(index, 1, newusername);
 
     // .forEach(team =>
     //   team.history.forEach(event =>
-    //     event.roster.forEach(member => member.replace(userName, newUserName))
+    //     event.roster.forEach(member => member.replace(username, newusername))
     //   )
     // );
 
     // store.teams.filter(
     //   team =>
     //     (team.members.find(
-    //       member => member.userName === userName
-    //     ).userName = newUserName)
+    //       member => member.username === username
+    //     ).username = newusername)
     // );
   },
-  changePlayerName: (newName, userName) => {
-    store.users.find(user => user.userName === userName).name = newName;
+  changePlayerName: (newName, username) => {
+    store.users.find(user => user.username === username).name = newName;
   },
   addEvent: (event, teamCode) => {
     const winnings =
