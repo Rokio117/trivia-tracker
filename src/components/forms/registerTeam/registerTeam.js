@@ -48,37 +48,58 @@ class RegisterTeam extends Component {
                     onSubmit={e => {
                       e.preventDefault();
 
-                      store.getTeam(this.state.teamusername).then(response => {
-                        console.log(response, "response after store.getTeam");
-                        if (!response.error) {
-                          this.setState({ nameTaken: true });
-                        } else {
-                          const winnings =
-                            parseInt(this.state.firsts) +
-                            parseInt(this.state.seconds) +
-                            parseInt(this.state.thirds);
-                          const newTeam = {
-                            name: this.state.teamName,
-                            teamCode: this.state.teamusername,
-                            members: [
-                              {
-                                username: value.userInfo.username,
-                                role: "Captain"
-                              }
-                            ],
-                            wins: winnings,
-                            firstPlace: this.state.firsts,
-                            secondPlace: this.state.seconds,
-                            thirdPlace: this.state.thirds,
-                            winnings: this.state.winnings,
-                            history: []
-                          };
-                          //push new team into DB, then add team to player info
-                          store.postNewteam(newTeam);
-
-                          this.props.loginTeam(newTeam);
-                        }
-                      });
+                      store
+                        .teamExists(this.state.teamusername)
+                        .then(response => {
+                          console.log(response, "response after store.getTeam");
+                          if (response.length) {
+                            this.setState({ nameTaken: true });
+                          } else {
+                            const winnings =
+                              parseInt(this.state.firsts) +
+                              parseInt(this.state.seconds) +
+                              parseInt(this.state.thirds);
+                            const newTeam = {
+                              teamname: this.state.teamName,
+                              teamcode: this.state.teamusername,
+                              members: [
+                                {
+                                  username: value.userInfo.username,
+                                  role: "Captain"
+                                }
+                              ],
+                              wins: winnings,
+                              firstplace: parseInt(this.state.firsts),
+                              secondplace: parseInt(this.state.seconds),
+                              thirdplace: parseInt(this.state.thirds),
+                              winnings: parseInt(this.state.winnings),
+                              history: []
+                            };
+                            //push new team into DB, then add team to player info
+                            store.postNewteam(newTeam).then(newTeamResponse => {
+                              console.log(
+                                newTeamResponse,
+                                "response after postNewteam"
+                              );
+                              store
+                                .addToTeam(
+                                  value.userInfo.username,
+                                  newTeamResponse[0].teamcode,
+                                  "Captain"
+                                )
+                                .then(response => {
+                                  console.log(
+                                    response,
+                                    "response after addToTeam"
+                                  );
+                                  return this.props.loginUser(
+                                    value.userInfo.username,
+                                    newTeamResponse[0].teamcode
+                                  );
+                                });
+                            });
+                          }
+                        });
                     }}
                   >
                     <label htmlFor="teamusername">Team User Name:</label>

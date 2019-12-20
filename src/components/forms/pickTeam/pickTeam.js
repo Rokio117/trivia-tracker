@@ -16,6 +16,8 @@ class PickTeam extends Component {
       return <p>Please select a team</p>;
     }
   };
+
+  componentDidMount() {}
   render() {
     return (
       <TriviaContext.Consumer>
@@ -69,7 +71,14 @@ class PickTeam extends Component {
                 </fieldset>
               </div>
             );
-          } else this.props.history.push("/");
+          } else {
+            //logic to get windowstorage and whatnot
+            let storage = sessionStorage.getItem("user");
+            console.log(storage, "storage in pickTeam if statement");
+            if (storage) {
+              this.props.loginUser(storage, undefined, "/teamPick");
+            } else return this.props.history.push("/");
+          }
         }}
       </TriviaContext.Consumer>
     );

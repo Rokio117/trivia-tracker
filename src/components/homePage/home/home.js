@@ -14,7 +14,7 @@ class Home extends Component {
               <>
                 <NavBar logout={this.props.logout} />
                 <header>
-                  <h1>{value.teamInfo.name}</h1>
+                  <h1>{value.teamInfo.teamname}</h1>
                 </header>
                 <Standings />
                 <Roster />

@@ -43,29 +43,20 @@ class Settings extends Component {
         <form
           onSubmit={e => {
             e.preventDefault();
-            store
-              .userExists(newusername)
-              .then(res => {
-                console.log(res, "res after getUser(newusername)");
-                let outcome;
-                if (!res) {
-                  outcome = "notDuplicate";
-                } else outcome = "duplicate";
-                return outcome;
-              })
-              .then(outcome => {
-                console.log(outcome, "outcome");
-                if (outcome === "duplicate") {
-                  this.setState({ duplicateusername: true });
-                }
-              })
-              .then(() => {
-                store.changeusername(newusername, username).then(response => {
-                  if (response.ok) {
-                    this.props.login(newusername);
-                  }
-                });
-              });
+            store.userExists(newusername).then(userExists => {
+              console.log(userExists, "userExists");
+              if (userExists.length) {
+                this.setState({ duplicateusername: true });
+              } else
+                return store
+                  .changeusername(newusername, username)
+                  .then(response => {
+                    console.log(response, "response after changeusername");
+                    if (response[0].username) {
+                      this.props.login(newusername);
+                    }
+                  });
+            });
           }}
         >
           <legend htmlFor="name">Change User Name:</legend>
@@ -103,8 +94,9 @@ class Settings extends Component {
         <form
           onSubmit={e => {
             e.preventDefault();
-            store.changePlayerName(this.state.newName, username);
-            this.props.login(username);
+            store.changePlayerName(this.state.newName, username).then(res => {
+              return this.props.login(username);
+            });
           }}
         >
           <legend htmlFor="name">Change Name:</legend>

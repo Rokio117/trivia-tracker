@@ -29,15 +29,16 @@ class App extends Component {
     this.state = {
       user: "",
       userTeams: [],
-      userInfo: "",
-      teamInfo: "",
-      teamMembers: "",
+      userInfo: {},
+      teamInfo: {},
+      teamMembers: [],
       loggedIn: false
     };
   }
 
-  login = (username, password) => {
+  login = (username, teamCode, endpoint) => {
     console.log("logged in");
+    console.log(teamCode, "teamcode after login");
     //after the form validation, this function will set the user and team in state,
     //as well as fetching the user and team info and storing it in state
 
@@ -47,9 +48,16 @@ class App extends Component {
         .then(userTeams => {
           //if the member is already a part of a team
           let appState = {};
-          if (userTeams.length) {
-            const teamInfo = userTeams[0];
 
+          if (userTeams.length) {
+            let teamInfo = userTeams[0];
+            if (teamCode) {
+              const teamIndex = userTeams.findIndex(team => {
+                return team.teamcode === teamCode;
+              });
+              teamInfo = userTeams[teamIndex];
+            }
+            console.log(teamInfo, "teamInfo in login after if statements");
             appState = {
               user: username,
               userInfo: userInfo[0],
@@ -70,8 +78,14 @@ class App extends Component {
           return appState;
         })
         .then(appState => {
+          let location;
+          if (endpoint) {
+            location = endpoint;
+          } else location = "/home";
+          console.log(location, "location on sign in");
           this.setState(appState);
-          this.props.history.push("/home");
+          sessionStorage.setItem("user", username);
+          this.props.history.push(location);
         });
       //if the member does not have a team
     });
@@ -110,6 +124,7 @@ class App extends Component {
         teamInfo: "",
         loggedIn: false
       });
+      sessionStorage.clear();
       this.props.history.push("/");
     }
   };
@@ -148,6 +163,7 @@ class App extends Component {
                 <PickTeam
                   changeTeam={this.changeTeam}
                   loginTeam={this.loginTeam}
+                  loginUser={this.login}
                 />
               );
             }}
@@ -193,7 +209,6 @@ class App extends Component {
             }}
           ></Route>
         </Switch>
-        {() => this.autoLogOut(this.state.loggedIn)}
       </TriviaContext.Provider>
     );
   }

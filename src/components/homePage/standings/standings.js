@@ -14,13 +14,13 @@ class Standings extends Component {
               <h2>Standings</h2>
               <p id="wins">{`Total Wins(top 3) ${value.teamInfo.wins}`}</p>
               <p id="firstPlace" className="place">
-                1st: {value.teamInfo.firstPlace}
+                1st: {value.teamInfo.firstplace}
               </p>
               <p id="secondPlace" className="place">
-                2nd: {value.teamInfo.secondPlace}
+                2nd: {value.teamInfo.secondplace}
               </p>
               <p id="thirdPlace" className="place">
-                3rd: {value.teamInfo.thirdPlace}
+                3rd: {value.teamInfo.thirdplace}
               </p>
               <p id="winnings">{`Winnings: $${value.teamInfo.winnings}`}</p>
               <label htmlFor="history">History</label>

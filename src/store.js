@@ -352,16 +352,16 @@ const store = {
     store.users.push(userObject);
   },
   teamExists: teamCode => {
-    return store.teams.map(team => team.teamCode === teamCode).includes(true);
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/exists`).then(
+      res => {
+        return res.json();
+      }
+    );
   },
   userExists: username => {
     return fetch(`${config.API_ENDPOINT}/users/${username}/exists`).then(
-      response => {
-        let exists;
-        if (response.length) {
-          exists = true;
-        } else exists = false;
-        return exists;
+      res => {
+        return res.json();
       }
     );
   },
@@ -373,17 +373,40 @@ const store = {
   postNewSettings: (newSettings, username) => {
     store.users.find(user => user.username === username).name = newSettings;
   },
-  postNewteam: teamObject => {
-    store.teams.push(teamObject);
+  postNewteam(teamObject) {
+    console.log(teamObject, "teamObject in postNewteam");
+    return fetch(`${config.API_ENDPOINT}/teams/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        teamname: teamObject.teamname,
+        teamcode: teamObject.teamcode,
+        wins: teamObject.wins,
+        firstplace: teamObject.firstplace,
+        secondplace: teamObject.secondplace,
+        thirdplace: teamObject.thirdplace,
+        winnings: teamObject.winnings
+      })
+    }).then(res => {
+      return res.json();
+    });
+    //store.teams.push(teamObject);
   },
-  addToTeam: (player, teamCode, role) => {
-    const newMember = {
-      username: player,
-      role: role
-    };
-    store.teams
-      .find(team => team.teamCode === teamCode)
-      .members.push(newMember);
+  addToTeam: (playerUserName, teamCode, role) => {
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/members`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        username: playerUserName,
+        role: role
+      })
+    }).then(res => {
+      res.json();
+    });
   },
   changeRole: (player, role, teamCode) => {
     store.teams
@@ -397,16 +420,30 @@ const store = {
     store.teams.find(team => team.teamCode === teamCode).name = name;
   },
   changeusername(newusername, username) {
+    console.log(
+      newusername,
+      "newusername",
+      username,
+      "username",
+      " in changeusername"
+    );
     return fetch(`${config.API_ENDPOINT}/users/${username}`, {
       method: "PATCH",
+      headers: {
+        "content-type": "application/json"
+      },
       body: JSON.stringify({ newusername: newusername })
     }).then(res => {
       return res.json();
     });
   },
   changePlayerName(newName, username) {
+    console.log(newName, "newname", username, "username in change player name");
     return fetch(`${config.API_ENDPOINT}/users/${username}/name`, {
       method: "PATCH",
+      headers: {
+        "content-type": "application/json"
+      },
       body: JSON.stringify({ nickname: newName })
     }).then(res => {
       return res.json();
