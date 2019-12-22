@@ -348,17 +348,29 @@ const store = {
     //   })
     // );
   },
-  postUserWithNoTeam: userObject => {
-    store.users.push(userObject);
+  postUserWithNoTeam(userObject) {
+    return fetch(`${config.API_ENDPOINT}/users/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        username: userObject.username,
+        nickname: userObject.nickname,
+        password: userObject.password
+      })
+    }).then(res => {
+      return res.json();
+    });
   },
-  teamExists: teamCode => {
+  teamExists(teamCode) {
     return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/exists`).then(
       res => {
         return res.json();
       }
     );
   },
-  userExists: username => {
+  userExists(username) {
     return fetch(`${config.API_ENDPOINT}/users/${username}/exists`).then(
       res => {
         return res.json();
@@ -366,9 +378,19 @@ const store = {
     );
   },
   postUserWithTeam: (userObject, teamCode) => {
-    const user = { username: userObject.username, role: "Member" };
-    store.users.push(userObject);
-    store.teams.find(team => team.teamCode === teamCode).members.push(user);
+    return fetch(`${config.API_ENDPOINT}/users/${userObject.username}/teams`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        nickname: userObject.nickname,
+        password: userObject.password,
+        teamcode: teamCode
+      })
+    }).then(res => {
+      return res.json;
+    });
   },
   postNewSettings: (newSettings, username) => {
     store.users.find(user => user.username === username).name = newSettings;

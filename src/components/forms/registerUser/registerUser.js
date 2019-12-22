@@ -44,42 +44,68 @@ class RegisterUser extends Component {
             const teamChanged = this.state.teamusername !== "";
             const match =
               this.state.signUpPassword === this.state.signUpRepeatPassword;
-            const unique = !store.users
-              .map(user => user.username)
-              .includes(this.state.signUpusername);
-            let realTeam;
-
-            if (teamChanged) {
-              realTeam = store.teams
-                .map(team => team.teamCode)
-                .includes(this.state.teamusername);
-            }
-            const validTeam = teamChanged && realTeam;
-            e.preventDefault();
-            if (!match) {
-              this.setState({ passwordMatch: false });
-            }
-            if (!unique) {
-              this.setState({ uniqueusername: false });
-            }
-            if (teamChanged && !realTeam) {
-              this.setState({ noTeamFound: true });
-            }
-            if (match && unique && (validTeam || teamChanged === false)) {
-              const newUser = {
-                username: this.state.signUpusername,
-                name: this.state.signUpName,
-                password: this.state.signUpPassword
-              };
-              //push new user into the array on store. this will become a post request
-              if (validTeam) {
-                store.postUserWithTeam(newUser, this.state.teamusername);
-                this.props.login(newUser.username);
+            // this will be/:user_name/exists
+            store.userExists(this.state.signUpusername).then(userId => {
+              //if user exists userid will have length 1, otherwise no length
+              let uniqueTeam = true;
+              if (userId.length) {
+                uniqueTeam = false;
               }
-              store.postUserWithNoTeam(newUser);
 
-              this.props.loginUser(this.state.signUpusername);
-            }
+              if (teamChanged) {
+                //2 is team real
+                // realTeam = store.teams
+                //   .map(team => team.teamCode)
+                //   .includes(this.state.teamusername);
+                store.teamExists(this.state.teamusername).then(teamId => {
+                  let realTeam = true;
+                  if (teamId.length) {
+                    realTeam = false;
+                  }
+                  const validTeam = teamChanged && realTeam;
+                  e.preventDefault();
+                  if (!match) {
+                    this.setState({ passwordMatch: false });
+                  }
+                  if (!uniqueTeam) {
+                    this.setState({ uniqueusername: false });
+                  }
+                  if (teamChanged && !realTeam) {
+                    this.setState({ noTeamFound: true });
+                  }
+                  if (
+                    match &&
+                    uniqueTeam &&
+                    (validTeam || teamChanged === false)
+                  ) {
+                    const newUser = {
+                      username: this.state.signUpusername,
+                      nickname: this.state.signUpName,
+                      password: this.state.signUpPassword
+                    };
+
+                    if (validTeam) {
+                      // this will be /:user_name/teams
+                      store
+                        .postUserWithTeam(newUser, this.state.teamusername)
+                        .then(response => {
+                          console.log(response, "response of postUserWithTeam");
+                          this.props.login(newUser.username);
+                        });
+                    }
+                    //this will be /api/teams/
+                    store.postUserWithNoTeam(newUser).then(response => {
+                      console.log(
+                        response,
+                        "response after postUserWithNoteam"
+                      );
+                      this.props.loginUser(this.state.signUpusername);
+                    });
+                  }
+                });
+              }
+              //if team wasn't changed below
+            });
           }}
         >
           <label htmlFor="username">User Name:</label>

@@ -37,12 +37,17 @@ class App extends Component {
   }
 
   handlePageReload = endpoint => {
-    console.log("handlePagereload ran");
     const sessionInfo = JSON.parse(sessionStorage.getItem("state"));
+    console.log(
+      sessionInfo,
+      this.state.loggedIn,
+      "sessionInfo and loggedIn in handlePagereload"
+    );
     if (!this.state.loggedIn) {
       if (sessionInfo) {
+        console.log("inner if ran");
         this.setState(sessionInfo);
-      } else this.props.history.push(endpoint);
+      }
     }
   };
 
@@ -203,7 +208,12 @@ class App extends Component {
               );
             }}
           ></Route>
-          <Route path="/addEvent" component={CreateEvent}></Route>
+          <Route
+            path="/addEvent"
+            component={props => {
+              return <CreateEvent handlePageReload={this.handlePageReload} />;
+            }}
+          ></Route>
           <Route
             path="/new"
             component={props => {
