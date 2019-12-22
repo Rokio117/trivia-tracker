@@ -62,7 +62,7 @@ class NavBar extends Component {
                 </button>
               </nav>
             );
-          } // else this.props.history.push("/");//keep an eye on this
+          }
         }}
       </TriviaContext.Consumer>
     );

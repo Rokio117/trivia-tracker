@@ -13,9 +13,6 @@ class NoTeamPage extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.handlePageReload("/noTeam");
-  }
   noTeamFound = error => {
     if (error) {
       return <p className="error">Team not found</p>;

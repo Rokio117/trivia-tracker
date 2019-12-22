@@ -206,7 +206,7 @@ class ManageTeam extends Component {
                 </button>
               </div>
             );
-          } else this.props.history.push("/");
+          }
         }}
       </TriviaContext.Consumer>
     );

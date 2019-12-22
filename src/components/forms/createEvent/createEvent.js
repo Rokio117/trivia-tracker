@@ -288,7 +288,7 @@ class CreateEvent extends Component {
                 </form>
               </div>
             );
-          } else this.props.history.push("/");
+          }
         }}
       </TriviaContext.Consumer>
     );

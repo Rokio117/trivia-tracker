@@ -31,7 +31,7 @@ class Roster extends Component {
                 <ul id="members">{members}</ul>
               </section>
             );
-          } else this.props.history.push("/");
+          }
         }}
       </TriviaContext.Consumer>
     );

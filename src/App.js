@@ -37,6 +37,7 @@ class App extends Component {
   }
 
   handlePageReload = endpoint => {
+    console.log("handlePagereload ran");
     const sessionInfo = JSON.parse(sessionStorage.getItem("state"));
     if (!this.state.loggedIn) {
       if (sessionInfo) {
@@ -230,11 +231,7 @@ class App extends Component {
             path="/noTeam"
             component={props => {
               return (
-                <NoTeamPage
-                  loginUser={this.login}
-                  loginTeam={this.loginTeam}
-                  handlePageReload={this.handlePageReload}
-                />
+                <NoTeamPage loginUser={this.login} loginTeam={this.loginTeam} />
               );
             }}
           ></Route>
