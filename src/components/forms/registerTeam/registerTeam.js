@@ -37,6 +37,10 @@ class RegisterTeam extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
+          console.log(
+            value.teamInfo,
+            "value.teaminfo in render of noTeam page"
+          );
           if (value.userInfo) {
             return (
               <div>
@@ -161,7 +165,7 @@ class RegisterTeam extends Component {
                       }}
                     ></input>
                     <button type="submit">Submit</button>
-                    {this.buttonChoice(value.teamInfo)}
+                    {this.buttonChoice(Object.keys(value.teamInfo).length)}
                   </form>
                 </fieldset>
               </div>

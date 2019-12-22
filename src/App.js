@@ -63,8 +63,8 @@ class App extends Component {
         .then(userTeams => {
           //if the member is already a part of a team
           let appState = {};
-
-          if (userTeams.length) {
+          console.log(userTeams.length, "userTeams.length in login");
+          if (userTeams.length > 0) {
             let teamInfo = userTeams[0];
             if (teamCode) {
               const teamIndex = userTeams.findIndex(team => {
@@ -85,9 +85,12 @@ class App extends Component {
             //revisit persist for server side
             //localStorage.setItem(APP_STATE_KEY, JSON.stringify(appState));
           }
-          if (!userTeams.length) {
-            appState = { user: username, userInfo: userInfo };
-            this.props.history.push("/noTeam");
+          if (userTeams.length === 0) {
+            appState = {
+              user: username,
+              userInfo: userInfo[0],
+              loggedIn: true
+            };
           }
           console.log(appState, "appState after if operators");
           return appState;
@@ -96,6 +99,9 @@ class App extends Component {
           let location;
           if (endpoint) {
             location = endpoint;
+          }
+          if (!appState.teamInfo) {
+            location = "/noTeam";
           } else location = "/home";
           console.log(location, "location on sign in");
           this.setState(appState);
@@ -164,11 +170,7 @@ class App extends Component {
             path="/"
             component={props => {
               return (
-                <WelcomePage
-                  loginUser={this.login}
-                  loginTeam={this.loginTeam}
-                  login={this.login}
-                />
+                <WelcomePage loginTeam={this.loginTeam} login={this.login} />
               );
             }}
           ></Route>

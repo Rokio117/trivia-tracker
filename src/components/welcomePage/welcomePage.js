@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LoginForm from "../forms/loginForm/loginForm";
 import RegisterUser from "../forms/registerUser/registerUser";
+import RegisterUserRefactor from "../forms/registerUser/registerUserRefactor";
 class WelcomePage extends Component {
   render() {
     return (
@@ -13,12 +14,11 @@ class WelcomePage extends Component {
           so you can look back at your past roster for each game.
         </p>
         <LoginForm
-          loginUser={this.props.loginUser}
+          loginUser={this.props.login}
           loginTeam={this.props.loginTeam}
         />
-        <RegisterUser
+        <RegisterUserRefactor
           login={this.props.login}
-          loginUser={this.props.loginUser}
           loginTeam={this.props.loginTeam}
         />
       </div>
