@@ -27,7 +27,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: "",
+      user: undefined,
       userTeams: [],
       userInfo: {},
       teamInfo: {},
@@ -35,6 +35,15 @@ class App extends Component {
       loggedIn: false
     };
   }
+
+  handlePageReload = endpoint => {
+    const sessionInfo = JSON.parse(sessionStorage.getItem("state"));
+    if (!this.state.loggedIn) {
+      if (sessionInfo) {
+        this.setState(sessionInfo);
+      } else this.props.history.push(endpoint);
+    }
+  };
 
   login = (username, teamCode, endpoint) => {
     console.log("logged in");
@@ -84,7 +93,8 @@ class App extends Component {
           } else location = "/home";
           console.log(location, "location on sign in");
           this.setState(appState);
-          sessionStorage.setItem("user", username);
+
+          sessionStorage.setItem("state", JSON.stringify(appState));
           this.props.history.push(location);
         });
       //if the member does not have a team
@@ -161,9 +171,10 @@ class App extends Component {
             component={props => {
               return (
                 <PickTeam
+                  loggedIn={this.state.loggedIn}
                   changeTeam={this.changeTeam}
                   loginTeam={this.loginTeam}
-                  loginUser={this.login}
+                  handlePageReload={this.handlePageReload}
                 />
               );
             }}
@@ -172,14 +183,23 @@ class App extends Component {
             path="/manage"
             component={props => {
               return (
-                <ManageTeam login={this.login} loginTeam={this.loginTeam} />
+                <ManageTeam
+                  login={this.login}
+                  loginTeam={this.loginTeam}
+                  handlePageReload={this.handlePageReload}
+                />
               );
             }}
           ></Route>
           <Route
             path="/settings"
             component={props => {
-              return <Settings login={this.login} />;
+              return (
+                <Settings
+                  login={this.login}
+                  handlePageReload={this.handlePageReload}
+                />
+              );
             }}
           ></Route>
           <Route path="/addEvent" component={CreateEvent}></Route>
@@ -190,6 +210,7 @@ class App extends Component {
                 <RegisterTeam
                   loginUser={this.login}
                   loginTeam={this.loginTeam}
+                  handlePageReload={this.handlePageReload}
                 />
               );
             }}
@@ -197,14 +218,23 @@ class App extends Component {
           <Route
             path="/home"
             component={props => {
-              return <Home logout={this.logout} />;
+              return (
+                <Home
+                  logout={this.logout}
+                  handlePageReload={this.handlePageReload}
+                />
+              );
             }}
           ></Route>
           <Route
             path="/noTeam"
             component={props => {
               return (
-                <NoTeamPage loginUser={this.login} loginTeam={this.loginTeam} />
+                <NoTeamPage
+                  loginUser={this.login}
+                  loginTeam={this.loginTeam}
+                  handlePageReload={this.handlePageReload}
+                />
               );
             }}
           ></Route>

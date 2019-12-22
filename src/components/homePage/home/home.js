@@ -5,6 +5,9 @@ import Standings from "../standings/standings";
 import Roster from "../roster/roster";
 import TriviaContext from "../../../context";
 class Home extends Component {
+  componentDidMount() {
+    this.props.handlePageReload("/home");
+  }
   render() {
     return (
       <TriviaContext.Consumer>

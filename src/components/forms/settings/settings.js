@@ -16,6 +16,10 @@ class Settings extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.handlePageReload("/settings");
+  }
+
   validateusername = username => {
     store
       .getUser(username)

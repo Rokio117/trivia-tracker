@@ -20,6 +20,10 @@ class ManageTeam extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.handlePageReload("/manage");
+  }
+
   changeRole = members => {
     const noCaptains = members.filter(member => member.role !== "Captain");
     if (noCaptains.length) {

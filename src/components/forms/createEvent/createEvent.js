@@ -20,6 +20,10 @@ class CreateEvent extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.handlePageReload("/addEvent");
+  }
+
   attendance = people => {
     return people.map(person => (
       <div key={person.username}>
