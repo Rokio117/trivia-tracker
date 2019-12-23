@@ -96,13 +96,13 @@ class App extends Component {
           return appState;
         })
         .then(appState => {
-          let location;
+          let location = "/home";
           if (endpoint) {
             location = endpoint;
           }
           if (!appState.teamInfo) {
             location = "/noTeam";
-          } else location = "/home";
+          }
           console.log(location, "location on sign in");
           this.setState(appState);
 

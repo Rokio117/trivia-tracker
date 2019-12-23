@@ -430,13 +430,23 @@ const store = {
       return res.json();
     });
   },
-  changeRole: (player, role, teamCode) => {
-    store.teams
-      .find(team => team.teamCode === teamCode)
-      .members.find(member => member.username === player).role = role;
+  changeRole(username, role, teamCode) {
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/${username}/role`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ role: role })
+    }).then(res => {
+      return res.json();
+    });
   },
-  changeWinnings: (winnings, teamCode) => {
-    store.teams.find(team => team.teamCode === teamCode).winnings = winnings;
+  changeWinnings(winnings, teamCode) {
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/winnings`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ winnings: winnings })
+    }).then(res => {
+      return res.json();
+    });
   },
   changeTeamName(name, teamCode) {
     return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/team`, {

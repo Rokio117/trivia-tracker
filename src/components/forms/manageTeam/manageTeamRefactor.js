@@ -18,7 +18,8 @@ class ManageTeam extends Component {
       noNewRank: false,
       noChangeRank: false,
       serverErrorMessage: "",
-      addPlayorError: false
+      addPlayorError: false,
+      playerCurrentRank: ""
     };
   }
 
@@ -26,21 +27,50 @@ class ManageTeam extends Component {
     this.props.handlePageReload("/manage");
   }
 
-  changeRole = members => {
-    const noCaptains = members.filter(member => member.role !== "Captain");
+  changeRole = value => {
+    console.log(value, "value in changerole");
+    const noCaptains = value.teamMembers.filter(
+      member => member.role !== "Captain"
+    );
     if (noCaptains.length) {
       const options = noCaptains.map(member => {
         return <option value={member.username}>{member.nickname}</option>;
       });
       return (
-        <form>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            store
+              .changeRole(
+                this.state.userToChange,
+                this.state.newRank,
+                value.teamInfo.teamcode
+              )
+              .then(res => {
+                this.props.login(
+                  value.userInfo.username,
+                  value.teamInfo.teamcode,
+                  "/manage"
+                );
+              });
+          }}
+        >
           <fieldset>
             <legend htmlFor="changeRole">Change Role</legend>
             <label for="teammateSelect">Player:</label>
             <select
               required
               id="teammateSelect"
-              onChange={e => this.setState({ userToChange: e.target.value })}
+              onChange={e => {
+                const userCurrentRank = value.teamInfo.members.find(member => {
+                  return member.username === e.target.value;
+                }).role;
+
+                this.setState({
+                  userToChange: e.target.value,
+                  playerCurrentRank: userCurrentRank
+                });
+              }}
             >
               <option value="" className="playerOption"></option>
               {options}
@@ -51,7 +81,9 @@ class ManageTeam extends Component {
               id="roleChange"
               onChange={e => this.setState({ newRank: e.target.value })}
             >
-              <option value=""></option>
+              <option value="" disabled selected>
+                {this.state.playerCurrentRank}
+              </option>
               <option value="Captain">Captain</option>
               <option value="Reporter">Reporter</option>
               <option value="Member">Member</option>
@@ -98,7 +130,12 @@ class ManageTeam extends Component {
                             addPlayorError: true,
                             serverErrorMessage: response.error
                           });
-                        } else this.props.history.push("/home");
+                        } else
+                          this.props.login(
+                            value.userInfo.username,
+                            value.teamInfo.teamcode,
+                            "/manage"
+                          );
                       });
                   }}
                 >
@@ -139,16 +176,23 @@ class ManageTeam extends Component {
                     <button type="submit">Submit</button>
                   </fieldset>
                 </form>
-                {this.changeRole(value.teamMembers)}
+                {this.changeRole(value)}
 
                 <form
                   onSubmit={e => {
                     e.preventDefault();
-                    store.changeWinnings(
-                      this.state.winnings,
-                      value.teamInfo.teamCode
-                    );
-                    this.props.history.push("/home");
+                    store
+                      .changeWinnings(
+                        parseInt(this.state.winnings),
+                        value.teamInfo.teamcode
+                      )
+                      .then(response => {
+                        this.props.login(
+                          value.userInfo.username,
+                          value.teamInfo.teamcode,
+                          "/manage"
+                        );
+                      });
                   }}
                 >
                   <fieldset>
