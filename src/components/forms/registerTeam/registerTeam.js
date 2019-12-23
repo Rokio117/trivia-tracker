@@ -130,7 +130,7 @@ class RegisterTeam extends Component {
                     ></input>
                     <label htmlFor="winnings">Winnings</label>
                     <input
-                      type="text"
+                      type="number"
                       id="winnings"
                       placeholder="0"
                       onChange={e => {

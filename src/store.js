@@ -416,7 +416,7 @@ const store = {
     });
     //store.teams.push(teamObject);
   },
-  addToTeam: (playerUserName, teamCode, role) => {
+  addToTeam(playerUserName, teamCode, role) {
     return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/members`, {
       method: "POST",
       headers: {
@@ -427,7 +427,7 @@ const store = {
         role: role
       })
     }).then(res => {
-      res.json();
+      return res.json();
     });
   },
   changeRole: (player, role, teamCode) => {
@@ -438,8 +438,14 @@ const store = {
   changeWinnings: (winnings, teamCode) => {
     store.teams.find(team => team.teamCode === teamCode).winnings = winnings;
   },
-  changeTeamName: (name, teamCode) => {
-    store.teams.find(team => team.teamCode === teamCode).name = name;
+  changeTeamName(name, teamCode) {
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/team`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ newname: name })
+    }).then(res => {
+      return res.json();
+    });
   },
   changeusername(newusername, username) {
     console.log(

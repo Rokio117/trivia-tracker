@@ -16,7 +16,9 @@ class ManageTeam extends Component {
       userNotFound: false,
       duplicateUser: false,
       noNewRank: false,
-      noChangeRank: false
+      noChangeRank: false,
+      serverErrorMessage: "",
+      addPlayorError: false
     };
   }
 
@@ -61,20 +63,11 @@ class ManageTeam extends Component {
       );
     }
   };
-  noUser = error => {
-    //this should be the smart part that returns the error string or object
-    //move checking functionality outside of on submit
-    if (error) {
-      return <p className="error">User Name doesn't exist</p>;
+
+  addUserErrorDisplay = addPlayorError => {
+    if (addPlayorError) {
+      return <p className="error">{this.state.serverErrorMessage}</p>;
     }
-  };
-  alreadyOnTeam = duplicate => {
-    if (duplicate) {
-      return <p className="error">User is already on team</p>;
-    }
-  };
-  validateUser = user => {
-    return store.userExists(user);
   };
 
   render() {
@@ -90,19 +83,23 @@ class ManageTeam extends Component {
 
                 <form
                   onSubmit={e => {
+                    //add player to team
                     e.preventDefault();
-                    store.getUser(this.state.addPlayer).then(response => {
-                      if (response.error) {
-                        this.setState({ userNotFound: true });
-                      } else {
-                        store.addToTeam(
-                          this.state.addPlayer,
-                          value.teamInfo.teamCode,
-                          this.state.newMemberRank
-                        );
-                        this.props.history.push("/home");
-                      }
-                    });
+                    store
+                      .addToTeam(
+                        this.state.addPlayer,
+                        value.teamInfo.teamcode,
+                        "Member"
+                      )
+                      .then(response => {
+                        console.log(response.error, "response.error in .then");
+                        if (response.error) {
+                          this.setState({
+                            addPlayorError: true,
+                            serverErrorMessage: response.error
+                          });
+                        } else this.props.history.push("/home");
+                      });
                   }}
                 >
                   <fieldset>
@@ -115,15 +112,10 @@ class ManageTeam extends Component {
                       type="text"
                       id="addPlayer"
                       onChange={e => {
-                        const duplicate = value.teamMembers
-                          .map(member =>
-                            Object.values(member).includes(e.target.value)
-                          )
-                          .includes(true);
                         this.setState({
                           addPlayer: e.target.value,
                           userNotFound: false,
-                          duplicateUser: duplicate
+                          addPlayorError: false
                         });
                       }}
                     ></input>
@@ -143,8 +135,7 @@ class ManageTeam extends Component {
                       <option value="Member">Member</option>
                       <option value="Guest">Guest</option>
                     </select>
-                    {this.noUser(this.state.userNotFound)}
-                    {this.alreadyOnTeam(this.state.duplicateUser)}
+                    {this.addUserErrorDisplay(this.state.addPlayorError)}
                     <button type="submit">Submit</button>
                   </fieldset>
                 </form>
@@ -179,11 +170,14 @@ class ManageTeam extends Component {
                 <form
                   onSubmit={e => {
                     e.preventDefault();
-                    store.changeTeamName(
-                      this.state.newName,
-                      value.teamInfo.teamCode
-                    );
-                    this.props.history.push("/home");
+                    store
+                      .changeTeamName(
+                        this.state.newName,
+                        value.teamInfo.teamcode
+                      )
+                      .then(response => {
+                        this.props.login(value.user);
+                      });
                   }}
                 >
                   <fieldset>

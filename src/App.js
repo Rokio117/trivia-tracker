@@ -243,7 +243,7 @@ class App extends Component {
             path="/noTeam"
             component={props => {
               return (
-                <NoTeamPage loginUser={this.login} loginTeam={this.loginTeam} />
+                <NoTeamPage login={this.login} loginTeam={this.loginTeam} />
               );
             }}
           ></Route>

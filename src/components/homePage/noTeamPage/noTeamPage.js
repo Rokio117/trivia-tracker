@@ -39,18 +39,24 @@ class NoTeamPage extends Component {
                   id="teamForm"
                   onSubmit={e => {
                     e.preventDefault();
-                    const teamCode = store.getTeam(this.state.teamCode);
-                    if (!store.teamExists(this.state.teamCode)) {
-                      this.setState({ noTeamFound: true });
-                    } else {
-                      store.addToTeam(
-                        value.userInfo.username,
-                        this.state.teamCode,
-                        "Member"
-                      );
-                      this.props.loginTeam(teamCode);
-                      this.props.history.push("home");
-                    }
+                    console.log(
+                      value.user,
+                      "value.userin onsubmit of teamsignup"
+                    );
+                    console.log(this.state.teamCode, "teamCode in on submit");
+                    store
+                      .addToTeam(value.user, this.state.teamCode, "Member")
+                      .then(response => {
+                        console.log(
+                          response,
+                          "response after add to team attempt"
+                        );
+                        if (!response.error) {
+                          this.props.login(value.user);
+                        } else {
+                          this.setState({ noTeamFound: true });
+                        }
+                      });
                   }}
                 >
                   <input
