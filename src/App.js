@@ -213,7 +213,12 @@ class App extends Component {
           <Route
             path="/addEvent"
             component={props => {
-              return <CreateEvent handlePageReload={this.handlePageReload} />;
+              return (
+                <CreateEvent
+                  handlePageReload={this.handlePageReload}
+                  login={this.login}
+                />
+              );
             }}
           ></Route>
           <Route

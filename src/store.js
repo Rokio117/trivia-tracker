@@ -487,27 +487,21 @@ const store = {
       return res.json();
     });
   },
-  addEvent: (event, teamCode) => {
-    const winnings =
-      parseInt(store.teams.find(team => team.teamCode === teamCode).winnings) +
-      parseInt(event.winnings);
-    store.teams.find(team => team.teamCode === teamCode).history.unshift(event);
-    console.log("winnings in store.addEvent", winnings, typeof winnings);
-    store.teams.find(team => team.teamCode === teamCode).winnings = winnings;
-
-    if (event.outcome === "Win") {
-      const position = event.position;
-      store.teams.find(team => team.teamCode === teamCode).wins++;
-      if (position === "1st") {
-        store.teams.find(team => team.teamCode === teamCode).firstPlace++;
-      }
-      if (position === "2nd") {
-        store.teams.find(team => team.teamCode === teamCode).secondPlace++;
-      }
-      if (position === "3rd") {
-        store.teams.find(team => team.teamCode === teamCode).thirdPlace++;
-      }
-    }
+  addEvent(event, teamCode) {
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/event`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        date: event.date,
+        location: event.location,
+        outcome: event.outcome,
+        roster: event.roster,
+        position: event.position,
+        winnings: event.winnings
+      })
+    });
   }
 };
 

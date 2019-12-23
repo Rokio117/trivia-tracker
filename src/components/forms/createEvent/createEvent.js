@@ -202,12 +202,19 @@ class CreateEvent extends Component {
                         outcome: outcome,
                         roster: this.state.attendance,
                         position: this.state.position,
-                        winnings: this.state.winnings || 0
+                        winnings: parseInt(this.state.winnings) || 0
                       };
 
                       //this will become a /post request
-                      store.addEvent(newEvent, value.teamInfo.teamCode);
-                      this.props.history.push("/home");
+                      store
+                        .addEvent(newEvent, value.teamInfo.teamcode)
+                        .then(response => {
+                          console.log(response, "response after add event");
+                          this.props.login(
+                            value.userInfo.username,
+                            value.teamInfo.teamcode
+                          );
+                        });
                     }
                   }}
                 >
