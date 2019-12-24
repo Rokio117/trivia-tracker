@@ -20,7 +20,7 @@ import ManageTeam from "../src/components/forms/manageTeam/manageTeamRefactor";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import store from "./store";
-
+import { tokenFunctions } from "./tokenService";
 export const APP_STATE_KEY = "appState";
 
 class App extends Component {
@@ -146,6 +146,7 @@ class App extends Component {
         teamInfo: "",
         loggedIn: false
       });
+      tokenFunctions.clearAuthToken();
       sessionStorage.clear();
       this.props.history.push("/");
     }
