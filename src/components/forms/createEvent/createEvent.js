@@ -188,13 +188,16 @@ class CreateEvent extends Component {
                   id="createEventForm"
                   onSubmit={e => {
                     e.preventDefault();
-                    if (this.state.blankAttendance) {
+                    if (this.state.attendance.length === 0) {
                       this.setState({ attendanceReminder: true });
                     }
                     if (!this.state.position) {
                       this.setState({ positionReminder: true });
                     }
-                    if (!this.state.blankAttendance && this.state.position) {
+                    if (
+                      this.state.attendance.length !== 0 &&
+                      this.state.position
+                    ) {
                       const outcome = this.state.win ? "Win" : "Loss";
                       const newEvent = {
                         date: this.state.date,

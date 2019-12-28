@@ -21,6 +21,7 @@ import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import store from "./store";
 import { tokenFunctions } from "./tokenService";
+import Error from "./components/errorBoundary";
 export const APP_STATE_KEY = "appState";
 
 class App extends Component {
@@ -152,8 +153,13 @@ class App extends Component {
     }
   };
 
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
   render() {
     console.log(this.state, "this.state in render");
+
     return (
       <TriviaContext.Provider
         value={{

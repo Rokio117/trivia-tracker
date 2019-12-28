@@ -50,8 +50,8 @@ class HistoryDisplay extends Component {
           >
             {this.arrow(this.state.extended)}
           </button>
-          <div>Date: {this.props.event.date}</div>
-          <div>Location: {this.props.event.location}</div>
+          <div>Date: {this.props.event.eventdate}</div>
+          <div>Location: {this.props.event.locationname}</div>
           <div>Outcome: {this.props.event.outcome} </div>
           <div>Position: {this.props.event.position}</div>
           <div>{`Winnings: $${this.props.event.winnings}`}</div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./registerUser.css";
 import store from "../../../store";
-
+import { tokenFunctions } from "../../../tokenService";
 class RegisterUser extends Component {
   constructor(props) {
     super(props);
@@ -89,12 +89,24 @@ class RegisterUser extends Component {
                       store
                         .postUserWithTeam(newUser, this.state.teamusername)
                         .then(response => {
+                          tokenFunctions.saveAuthToken(
+                            tokenFunctions.makeBasicAuthToken(
+                              newUser.username,
+                              newUser.password
+                            )
+                          );
                           console.log(response, "response of postUserWithTeam");
                           this.props.login(newUser.username);
                         });
                     }
                     //this will be /api/teams/
                     store.postUserWithNoTeam(newUser).then(response => {
+                      tokenFunctions.saveAuthToken(
+                        tokenFunctions.makeBasicAuthToken(
+                          newUser.username,
+                          newUser.password
+                        )
+                      );
                       console.log(
                         response,
                         "response after postUserWithNoteam"

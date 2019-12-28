@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./registerUser.css";
 import store from "../../../store";
-
+import { tokenFunctions } from "../../../tokenService";
 class RegisterUserRefactor extends Component {
   constructor(props) {
     super(props);
@@ -63,6 +63,12 @@ class RegisterUserRefactor extends Component {
                         store
                           .postUserWithTeam(newUser, this.state.teamusername)
                           .then(response => {
+                            tokenFunctions.saveAuthToken(
+                              tokenFunctions.makeBasicAuthToken(
+                                newUser.username,
+                                newUser.password
+                              )
+                            );
                             console.log(
                               response,
                               "response after store.post user with team"
@@ -73,6 +79,12 @@ class RegisterUserRefactor extends Component {
                     });
                   } else {
                     store.postUserWithNoTeam(newUser).then(response => {
+                      tokenFunctions.saveAuthToken(
+                        tokenFunctions.makeBasicAuthToken(
+                          newUser.username,
+                          newUser.password
+                        )
+                      );
                       console.log(
                         response,
                         "response after post user with no team"
