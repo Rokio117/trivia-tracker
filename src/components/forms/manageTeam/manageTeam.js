@@ -71,6 +71,9 @@ class ManageTeam extends Component {
       return <p className="error">Select a rank</p>;
     }
   };
+  componentDidMount() {
+    throw new Error("handle this error");
+  }
   render() {
     return (
       <TriviaContext.Consumer>
@@ -78,7 +81,6 @@ class ManageTeam extends Component {
           return (
             <div>
               <header>
-                <h2>{undefined.map()}</h2>
                 <h1>Manage Team</h1>
               </header>
               <fieldset>
