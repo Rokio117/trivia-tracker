@@ -161,17 +161,17 @@ class App extends Component {
     console.log(this.state, "this.state in render");
 
     return (
-      <Error>
-        <TriviaContext.Provider
-          value={{
-            userInfo: this.state.userInfo,
-            teamInfo: this.state.teamInfo,
-            userTeams: this.state.userTeams,
-            teamMembers: this.state.teamMembers,
-            user: this.state.user,
-            team: this.state.team
-          }}
-        >
+      <TriviaContext.Provider
+        value={{
+          userInfo: this.state.userInfo,
+          teamInfo: this.state.teamInfo,
+          userTeams: this.state.userTeams,
+          teamMembers: this.state.teamMembers,
+          user: this.state.user,
+          team: this.state.team
+        }}
+      >
+        <Error>
           <Switch>
             <Route
               exact
@@ -261,8 +261,8 @@ class App extends Component {
               }}
             ></Route>
           </Switch>
-        </TriviaContext.Provider>
-      </Error>
+        </Error>
+      </TriviaContext.Provider>
     );
   }
 }
