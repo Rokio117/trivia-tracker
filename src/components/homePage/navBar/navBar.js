@@ -60,13 +60,6 @@ class NavBar extends Component {
                 <button id="log-out-button" onClick={() => this.props.logout()}>
                   Log out
                 </button>
-                <button
-                  onClick={() => {
-                    throw new Error("Handle The Error");
-                  }}
-                >
-                  Throw error();
-                </button>
               </nav>
             );
           }

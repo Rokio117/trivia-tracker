@@ -78,6 +78,13 @@ class ManageTeam extends Component {
           return (
             <div>
               <header>
+                <h2>
+                  {() => {
+                    const newThrow = undefined;
+                    let thrower = newThrow.map(throwerror => throwerror);
+                    return thrower;
+                  }}
+                </h2>
                 <h1>Manage Team</h1>
               </header>
               <fieldset>
