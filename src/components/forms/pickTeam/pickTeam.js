@@ -18,7 +18,8 @@ class PickTeam extends Component {
   };
 
   componentDidMount() {
-    this.props.handlePageReload("/teamPick");
+    throw new Error("Handle the error");
+    //this.props.handlePageReload("/teamPick");
   }
   render() {
     return (

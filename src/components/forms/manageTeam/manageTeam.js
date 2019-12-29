@@ -71,9 +71,7 @@ class ManageTeam extends Component {
       return <p className="error">Select a rank</p>;
     }
   };
-  componentDidMount() {
-    throw new Error("handle this error");
-  }
+
   render() {
     return (
       <TriviaContext.Consumer>
