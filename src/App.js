@@ -171,7 +171,7 @@ class App extends Component {
           team: this.state.team
         }}
       >
-        <Error>
+        <Error login={this.login}>
           <Switch>
             <Route
               exact

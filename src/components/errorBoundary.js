@@ -24,7 +24,7 @@ class Error extends Component {
                       sessionStorage.getItem("state")
                     );
                     if (sessionInfo) {
-                      this.login(sessionInfo.user);
+                      this.props.login(sessionInfo.user);
                     } else this.props.history.push("/");
                   }}
                 >
