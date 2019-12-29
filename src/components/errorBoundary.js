@@ -24,8 +24,12 @@ class Error extends Component {
                       sessionStorage.getItem("state")
                     );
                     if (sessionInfo) {
+                      this.setState({ hasError: false });
                       this.props.login(sessionInfo.user);
-                    } else this.props.history.push("/");
+                    } else {
+                      this.setState({ hasError: false });
+                      this.props.history.push("/");
+                    }
                   }}
                 >
                   Got It
