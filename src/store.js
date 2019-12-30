@@ -4,10 +4,17 @@ const store = {
   //add in "authorization" headers to all protected endpoints
 
   getUser(username) {
-    //return store.users.find(user => user.username === username);
-    return fetch(`${config.API_ENDPOINT}/users/${username}`).then(res => {
-      return res.json();
-    });
+    return fetch(`${config.API_ENDPOINT}/users/${username}`)
+      .then(res => {
+        console.log("res.ok");
+        return res.json();
+      })
+      .catch(error => {
+        const errorMessage = {
+          message: "An error occurred. Please try again later"
+        };
+        return errorMessage;
+      });
   },
 
   getTeam(teamCode) {
