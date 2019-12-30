@@ -32,7 +32,7 @@ class CreateEvent extends Component {
           key={person.username}
           className="personLabel"
         >
-          {person.username}
+          {person.nickname}
 
           <input
             onClick={e => {

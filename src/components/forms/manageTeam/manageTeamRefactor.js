@@ -28,7 +28,6 @@ class ManageTeam extends Component {
   }
 
   changeRole = value => {
-    console.log(value, "value in changerole");
     const noCaptains = value.teamMembers.filter(
       member => member.role !== "Captain"
     );
@@ -69,14 +68,23 @@ class ManageTeam extends Component {
               required
               id="teammateSelect"
               onChange={e => {
-                const userCurrentRank = value.teamInfo.members.find(member => {
-                  return member.username === e.target.value;
-                }).role;
+                if (e.target.value) {
+                  const userCurrentRank = value.teamInfo.members.find(
+                    member => {
+                      return member.username === e.target.value;
+                    }
+                  ).role;
 
-                this.setState({
-                  userToChange: e.target.value,
-                  playerCurrentRank: userCurrentRank
-                });
+                  this.setState({
+                    userToChange: e.target.value,
+                    playerCurrentRank: userCurrentRank
+                  });
+                } else {
+                  this.setState({
+                    userToChange: "",
+                    playerCurrentRank: ""
+                  });
+                }
               }}
             >
               <option value="" className="playerOption"></option>
@@ -128,10 +136,9 @@ class ManageTeam extends Component {
                       .addToTeam(
                         this.state.addPlayer,
                         value.teamInfo.teamcode,
-                        "Member"
+                        this.state.newMemberRank
                       )
                       .then(response => {
-                        console.log(response.error, "response.error in .then");
                         if (response.error) {
                           this.setState({
                             addPlayorError: true,

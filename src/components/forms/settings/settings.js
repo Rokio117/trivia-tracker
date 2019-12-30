@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import "./settings.css";
 import TriviaContext from "../../../context";
 import store from "../../../store";
-
+import { tokenFunctions } from "../../../tokenService";
 class Settings extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +40,7 @@ class Settings extends Component {
       return <p className="error">That User Name is Taken</p>;
     }
   };
-  changeusernameForm = (state, newusername, username) => {
+  changeusernameForm = (state, newusername, username, password) => {
     if (state) {
       return (
         <form
@@ -56,8 +56,14 @@ class Settings extends Component {
                     if (response.error === "Unauthorized request ") {
                       this.props.history.push("/error");
                     } else if (response[0].username) {
-                      this.props.login(newusername);
+                      tokenFunctions.clearAuthToken();
                     }
+                  })
+                  .then(e => {
+                    tokenFunctions.saveAuthToken(
+                      tokenFunctions.makeBasicAuthToken(newusername, password)
+                    );
+                    this.props.login(newusername);
                   });
             });
           }}
@@ -151,7 +157,8 @@ class Settings extends Component {
                   {this.changeusernameForm(
                     this.state.changeusername,
                     this.state.newusername,
-                    value.userInfo.username
+                    value.userInfo.username,
+                    value.userInfo.password
                   )}
                 </div>
 
