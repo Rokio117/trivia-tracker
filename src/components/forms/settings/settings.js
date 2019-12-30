@@ -54,6 +54,9 @@ class Settings extends Component {
                 return store
                   .changeusername(newusername, username)
                   .then(response => {
+                    if (response.error === "Unauthorized request ") {
+                      this.props.history.push("/error");
+                    }
                     if (response[0].username) {
                       this.props.login(newusername);
                     }
@@ -97,8 +100,9 @@ class Settings extends Component {
           onSubmit={e => {
             e.preventDefault();
             store.changePlayerName(this.state.newName, username).then(res => {
-              console.log(res, "response of change player name");
-              return this.props.login(username);
+              if (res.error === "Unauthorized request ") {
+                this.props.history.push("/error");
+              } else return this.props.login(username);
             });
           }}
         >

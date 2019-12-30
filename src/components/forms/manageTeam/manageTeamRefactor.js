@@ -47,6 +47,9 @@ class ManageTeam extends Component {
                 value.teamInfo.teamcode
               )
               .then(res => {
+                if (res.error === "Unauthorized request ") {
+                  this.props.history.push("/error");
+                }
                 this.props.login(
                   value.userInfo.username,
                   value.teamInfo.teamcode,
@@ -187,6 +190,9 @@ class ManageTeam extends Component {
                         value.teamInfo.teamcode
                       )
                       .then(response => {
+                        if (response.error === "Unauthorized request ") {
+                          this.props.history.push("/error");
+                        }
                         this.props.login(
                           value.userInfo.username,
                           value.teamInfo.teamcode,
@@ -220,6 +226,9 @@ class ManageTeam extends Component {
                         value.teamInfo.teamcode
                       )
                       .then(response => {
+                        if (response.error === "Unauthorized request ") {
+                          this.props.history.push("/error");
+                        }
                         this.props.login(value.user);
                       });
                   }}

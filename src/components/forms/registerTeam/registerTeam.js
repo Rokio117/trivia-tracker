@@ -81,10 +81,12 @@ class RegisterTeam extends Component {
                             };
                             //push new team into DB, then add team to player info
                             store.postNewteam(newTeam).then(newTeamResponse => {
-                              console.log(
-                                newTeamResponse,
-                                "response after postNewteam"
-                              );
+                              if (
+                                newTeamResponse.error ===
+                                "Unauthorized request "
+                              ) {
+                                this.props.history.push("/error");
+                              }
                               store
                                 .addToTeam(
                                   value.userInfo.username,
