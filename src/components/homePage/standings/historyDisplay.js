@@ -25,7 +25,7 @@ class HistoryDisplay extends Component {
     });
     if (!this.state.extended) {
       return (
-        <li id="compressedList">
+        <li id="compressedList" key={this.props.event.eventdate}>
           <button
             id="extendButton"
             type="button"
@@ -40,7 +40,7 @@ class HistoryDisplay extends Component {
     }
     if (this.state.extended) {
       return (
-        <li>
+        <li key={this.props.event.eventdate}>
           <button
             id="extendButton"
             type="button"

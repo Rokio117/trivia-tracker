@@ -25,7 +25,9 @@ class PickTeam extends Component {
         {value => {
           if (value.teamInfo && value.userInfo) {
             const teamList = value.userTeams.map(team => (
-              <option value={team.teamcode}>{team.teamname}</option>
+              <option value={team.teamcode} key={team.teamcode}>
+                {team.teamname}
+              </option>
             ));
             return (
               <div>
