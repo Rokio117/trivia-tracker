@@ -14,10 +14,8 @@ class ErrorDisplay extends Component {
             this.setState({ hasError: false });
             const sessionInfo = JSON.parse(sessionStorage.getItem("state"));
             if (sessionInfo) {
-              console.log("had sessionInfo");
               this.props.login(sessionInfo.user);
             } else {
-              console.log("did not have session info");
               this.props.history.push("/");
             }
           }}

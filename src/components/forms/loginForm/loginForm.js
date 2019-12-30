@@ -20,8 +20,6 @@ class LoginForm extends Component {
       tokenFunctions.makeBasicAuthToken(username, password)
     );
     store.getUser(username).then(response => {
-      console.log(response, "response in store.getUser");
-
       if (response.error) {
         this.setState({ loginError: true });
 

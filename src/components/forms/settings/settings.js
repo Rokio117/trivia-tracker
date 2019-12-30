@@ -32,7 +32,6 @@ class Settings extends Component {
         return outcome;
       })
       .then(outcome => {
-        console.log(outcome);
         return outcome;
       });
   };
@@ -131,8 +130,6 @@ class Settings extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          console.log("value.userIinfo in settings", value.userInfo.username);
-
           return (
             <div>
               <header>

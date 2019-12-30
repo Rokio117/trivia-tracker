@@ -28,10 +28,8 @@ class Error extends Component {
                       sessionStorage.getItem("state")
                     );
                     if (sessionInfo) {
-                      console.log("had sessionInfo");
                       this.props.login(sessionInfo.user);
                     } else {
-                      console.log("did not have session info");
                       this.props.history.push("/");
                     }
                   }}

@@ -37,10 +37,6 @@ class RegisterTeam extends Component {
     return (
       <TriviaContext.Consumer>
         {value => {
-          console.log(
-            value.teamInfo,
-            "value.teaminfo in render of noTeam page"
-          );
           if (value.userInfo) {
             return (
               <div>
@@ -55,7 +51,6 @@ class RegisterTeam extends Component {
                       store
                         .teamExists(this.state.teamusername)
                         .then(response => {
-                          console.log(response, "response after store.getTeam");
                           if (response.length) {
                             this.setState({ nameTaken: true });
                           } else {

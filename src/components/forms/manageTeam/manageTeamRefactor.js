@@ -34,7 +34,11 @@ class ManageTeam extends Component {
     );
     if (noCaptains.length) {
       const options = noCaptains.map(member => {
-        return <option value={member.username}>{member.nickname}</option>;
+        return (
+          <option value={member.username} key={member.username}>
+            {member.nickname}
+          </option>
+        );
       });
       return (
         <form
@@ -60,7 +64,7 @@ class ManageTeam extends Component {
         >
           <fieldset>
             <legend htmlFor="changeRole">Change Role</legend>
-            <label for="teammateSelect">Player:</label>
+            <label htmlFor="teammateSelect">Player:</label>
             <select
               required
               id="teammateSelect"
@@ -78,7 +82,7 @@ class ManageTeam extends Component {
               <option value="" className="playerOption"></option>
               {options}
             </select>
-            <label for="roleChange">Role:</label>
+            <label htmlFor="roleChange">Role:</label>
             <select
               required
               id="roleChange"
@@ -146,7 +150,7 @@ class ManageTeam extends Component {
                     <legend htmlFor="addPlayer">
                       Add Player(must use player User Name):
                     </legend>
-                    <label for="addPlayer">User Name:</label>
+                    <label htmlFor="addPlayer">User Name:</label>
                     <input
                       required
                       type="text"
@@ -159,7 +163,7 @@ class ManageTeam extends Component {
                         });
                       }}
                     ></input>
-                    <label for="newRoleChange">Role:</label>
+                    <label htmlFor="newRoleChange">Role:</label>
                     <select
                       required
                       id="newRoleChange"

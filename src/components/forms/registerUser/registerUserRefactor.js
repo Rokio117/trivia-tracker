@@ -45,7 +45,6 @@ class RegisterUserRefactor extends Component {
             if (this.state.signUpPassword !== this.state.signUpRepeatPassword) {
               this.setState({ passwordMatch: false });
             } else {
-              console.log("else statement of registerOnSubmit ran");
               store.userExists(this.state.signUpusername).then(userId => {
                 if (userId.length) {
                   this.setState({ uniqueusername: false });
@@ -69,10 +68,7 @@ class RegisterUserRefactor extends Component {
                                 newUser.password
                               )
                             );
-                            console.log(
-                              response,
-                              "response after store.post user with team"
-                            );
+
                             this.props.login(newUser.username);
                           });
                       }
@@ -85,10 +81,7 @@ class RegisterUserRefactor extends Component {
                           newUser.password
                         )
                       );
-                      console.log(
-                        response,
-                        "response after post user with no team"
-                      );
+
                       this.props.login(newUser.username);
                     });
                   }
