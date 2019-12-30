@@ -56,8 +56,7 @@ class Settings extends Component {
                   .then(response => {
                     if (response.error === "Unauthorized request ") {
                       this.props.history.push("/error");
-                    }
-                    if (response[0].username) {
+                    } else if (response[0].username) {
                       this.props.login(newusername);
                     }
                   });

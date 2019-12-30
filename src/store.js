@@ -189,6 +189,8 @@ const store = {
         position: event.position,
         winnings: event.winnings
       })
+    }).then(res => {
+      return res.json();
     });
   }
 };

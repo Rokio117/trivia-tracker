@@ -86,23 +86,19 @@ class RegisterTeam extends Component {
                                 "Unauthorized request "
                               ) {
                                 this.props.history.push("/error");
-                              }
-                              store
-                                .addToTeam(
-                                  value.userInfo.username,
-                                  newTeamResponse[0].teamcode,
-                                  "Captain"
-                                )
-                                .then(response => {
-                                  console.log(
-                                    response,
-                                    "response after addToTeam"
-                                  );
-                                  return this.props.loginUser(
+                              } else
+                                store
+                                  .addToTeam(
                                     value.userInfo.username,
-                                    newTeamResponse[0].teamcode
-                                  );
-                                });
+                                    newTeamResponse[0].teamcode,
+                                    "Captain"
+                                  )
+                                  .then(response => {
+                                    return this.props.loginUser(
+                                      value.userInfo.username,
+                                      newTeamResponse[0].teamcode
+                                    );
+                                  });
                             });
                           }
                         });

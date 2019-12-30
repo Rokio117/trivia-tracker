@@ -5,7 +5,10 @@ class ErrorDisplay extends Component {
   render() {
     return (
       <>
-        <h2>Oops! Something went wrong</h2>
+        <h2>
+          Oops! Something went wrong. If this problem persists try logging out
+          and back in.
+        </h2>
         <button
           onClick={() => {
             this.setState({ hasError: false });

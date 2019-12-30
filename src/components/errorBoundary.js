@@ -17,7 +17,10 @@ class Error extends Component {
           {value => {
             return (
               <div>
-                <h2>Oops! Somethings went wrong</h2>
+                <h2>
+                  Oops! Somethings went wrong. If this problem persists try
+                  loggin out and back in.
+                </h2>
                 <button
                   onClick={() => {
                     this.setState({ hasError: false });

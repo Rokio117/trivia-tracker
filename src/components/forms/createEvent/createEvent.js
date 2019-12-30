@@ -212,11 +212,14 @@ class CreateEvent extends Component {
                       store
                         .addEvent(newEvent, value.teamInfo.teamcode)
                         .then(response => {
-                          console.log(response, "response after add event");
-                          this.props.login(
-                            value.userInfo.username,
-                            value.teamInfo.teamcode
-                          );
+                          console.log(response, "response after addEvent");
+                          if (response.error === "Unauthorized request ") {
+                            this.props.history.push("/error");
+                          } else
+                            this.props.login(
+                              value.userInfo.username,
+                              value.teamInfo.teamcode
+                            );
                         });
                     }
                   }}

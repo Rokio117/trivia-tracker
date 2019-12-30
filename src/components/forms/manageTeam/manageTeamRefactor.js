@@ -49,12 +49,12 @@ class ManageTeam extends Component {
               .then(res => {
                 if (res.error === "Unauthorized request ") {
                   this.props.history.push("/error");
-                }
-                this.props.login(
-                  value.userInfo.username,
-                  value.teamInfo.teamcode,
-                  "/manage"
-                );
+                } else
+                  this.props.login(
+                    value.userInfo.username,
+                    value.teamInfo.teamcode,
+                    "/manage"
+                  );
               });
           }}
         >
@@ -192,12 +192,12 @@ class ManageTeam extends Component {
                       .then(response => {
                         if (response.error === "Unauthorized request ") {
                           this.props.history.push("/error");
-                        }
-                        this.props.login(
-                          value.userInfo.username,
-                          value.teamInfo.teamcode,
-                          "/manage"
-                        );
+                        } else
+                          this.props.login(
+                            value.userInfo.username,
+                            value.teamInfo.teamcode,
+                            "/manage"
+                          );
                       });
                   }}
                 >
@@ -228,8 +228,7 @@ class ManageTeam extends Component {
                       .then(response => {
                         if (response.error === "Unauthorized request ") {
                           this.props.history.push("/error");
-                        }
-                        this.props.login(value.user);
+                        } else this.props.login(value.user);
                       });
                   }}
                 >
