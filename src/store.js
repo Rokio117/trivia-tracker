@@ -64,11 +64,16 @@ const store = {
     );
   },
   userExists(username) {
-    return fetch(`${config.API_ENDPOINT}/users/${username}/exists`).then(
-      res => {
+    return fetch(`${config.API_ENDPOINT}/users/${username}/exists`)
+      .then(res => {
         return res.json();
-      }
-    );
+      })
+      .catch(error => {
+        const errorMessage = {
+          message: "An error occurred. Please try again later"
+        };
+        return errorMessage;
+      });
   },
   postUserWithTeam: (userObject, teamCode) => {
     return fetch(`${config.API_ENDPOINT}/users/${userObject.username}/teams`, {

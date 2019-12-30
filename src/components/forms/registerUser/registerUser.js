@@ -95,7 +95,7 @@ class RegisterUser extends Component {
                               newUser.password
                             )
                           );
-                          console.log(response, "response of postUserWithTeam");
+
                           this.props.login(newUser.username);
                         });
                     }
@@ -107,10 +107,7 @@ class RegisterUser extends Component {
                           newUser.password
                         )
                       );
-                      console.log(
-                        response,
-                        "response after postUserWithNoteam"
-                      );
+
                       this.props.loginUser(this.state.signUpusername);
                     });
                   }

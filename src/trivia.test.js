@@ -31,11 +31,7 @@ describe("Home Components", () => {
   it("Home renders without crashing", () => {
     ReactDOM.render(
       <BrowserRouter>
-        <Home
-          handlePageReload={endpoint => {
-            console.log(endpoint);
-          }}
-        />
+        <Home handlePageReload={endpoint => {}} />
       </BrowserRouter>,
       div
     );
@@ -93,11 +89,7 @@ describe("Form Components", () => {
   it("CreateEvent form renders without crashing", () => {
     ReactDOM.render(
       <BrowserRouter>
-        <CreateEvent
-          handlePageReload={endpoint => {
-            console.log(endpoint);
-          }}
-        />
+        <CreateEvent handlePageReload={endpoint => {}} />
       </BrowserRouter>,
       div
     );
@@ -115,11 +107,7 @@ describe("Form Components", () => {
   it("manageTeam renders without crashing", () => {
     ReactDOM.render(
       <BrowserRouter>
-        <ManageTeam
-          handlePageReload={endpoint => {
-            console.log(endpoint);
-          }}
-        />
+        <ManageTeam handlePageReload={endpoint => {}} />
       </BrowserRouter>,
       div
     );
@@ -128,11 +116,7 @@ describe("Form Components", () => {
   it("pickTeam renders without crashing", () => {
     ReactDOM.render(
       <BrowserRouter>
-        <PickTeam
-          handlePageReload={endpoint => {
-            console.log(endpoint);
-          }}
-        />
+        <PickTeam handlePageReload={endpoint => {}} />
       </BrowserRouter>,
       div
     );
@@ -159,11 +143,7 @@ describe("Form Components", () => {
   it("settings renders without crashing", () => {
     ReactDOM.render(
       <BrowserRouter>
-        <Settings
-          handlePageReload={endpoint => {
-            console.log(endpoint);
-          }}
-        />
+        <Settings handlePageReload={endpoint => {}} />
       </BrowserRouter>,
       div
     );

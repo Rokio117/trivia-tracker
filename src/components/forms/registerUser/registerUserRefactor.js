@@ -15,7 +15,9 @@ class RegisterUserRefactor extends Component {
       passwordMatch: true,
       uniqueusername: true,
       noTeamFound: false,
-      buttonOption: "show"
+      buttonOption: "show",
+      connectionError: "",
+      connectionMessage: ""
     };
   }
 
@@ -34,6 +36,11 @@ class RegisterUserRefactor extends Component {
       return <p className="error">Team Not Found</p>;
     }
   };
+  connectionError = (error, message) => {
+    if (error) {
+      return <p className="error">{message}</p>;
+    }
+  };
   render() {
     return (
       <div id="registerForm">
@@ -48,6 +55,12 @@ class RegisterUserRefactor extends Component {
               this.setState({ passwordMatch: false });
             } else {
               store.userExists(this.state.signUpusername).then(userId => {
+                if (userId.message) {
+                  this.setState({
+                    connectionError: true,
+                    connectionMessage: userId.message
+                  });
+                }
                 if (userId.length) {
                   this.setState({ uniqueusername: false });
                 } else {
@@ -152,6 +165,10 @@ class RegisterUserRefactor extends Component {
           >
             {this.state.buttonOption}
           </button>
+          {this.connectionError(
+            this.state.connectionError,
+            this.state.connectionMessage
+          )}
           <label htmlFor="teamCode">
             Team User Name (if your team is already registered type it's User
             Name here)
