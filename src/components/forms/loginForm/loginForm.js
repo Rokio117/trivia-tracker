@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import "./loginForm.css";
-import STORE from "../../../store";
 import store from "../../../store";
 import { tokenFunctions } from "../../../tokenService";
 

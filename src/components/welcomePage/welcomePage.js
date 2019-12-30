@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import LoginForm from "../forms/loginForm/loginForm";
-import RegisterUser from "../forms/registerUser/registerUser";
 import RegisterUserRefactor from "../forms/registerUser/registerUserRefactor";
 class WelcomePage extends Component {
   render() {

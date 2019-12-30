@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+
 import TriviaContext from "../../../context";
 import "./roster.css";
-import store from "../../../store";
+
 import { withRouter } from "react-router-dom";
 class Roster extends Component {
   static defaultProps = {};

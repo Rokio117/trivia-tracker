@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 import "./standings.css";
 import TriviaContext from "../../../context";
 import HistoryList from "./historyList";
