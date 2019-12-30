@@ -39,18 +39,10 @@ class NoTeamPage extends Component {
                   id="teamForm"
                   onSubmit={e => {
                     e.preventDefault();
-                    console.log(
-                      value.user,
-                      "value.userin onsubmit of teamsignup"
-                    );
-                    console.log(this.state.teamCode, "teamCode in on submit");
+
                     store
                       .addToTeam(value.user, this.state.teamCode, "Member")
                       .then(response => {
-                        console.log(
-                          response,
-                          "response after add to team attempt"
-                        );
                         if (!response.error) {
                           this.props.login(value.user);
                         } else {

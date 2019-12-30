@@ -11,9 +11,6 @@ class Roster extends Component {
       <TriviaContext.Consumer>
         {value => {
           if (value.userInfo && value.teamInfo.members) {
-            // const captains = value.teamInfo.members
-            //   .filter(member => member.role === "Captain")
-            //   .map(captain => store.getNameFromusername(captain.username));
             const members = value.teamMembers.map(member => (
               <li className="captainList" key={member.username}>
                 <div className="rosterLabel">Name: </div>
@@ -26,7 +23,6 @@ class Roster extends Component {
             return (
               <section id="roster">
                 <h2>Roster</h2>
-                {/* <p id="captain">Captain(s): {captains}</p> */}
                 <label htmlFor="members">Members:</label>
                 <ul id="members">{members}</ul>
               </section>

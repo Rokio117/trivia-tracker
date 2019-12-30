@@ -39,22 +39,15 @@ class App extends Component {
 
   handlePageReload = endpoint => {
     const sessionInfo = JSON.parse(sessionStorage.getItem("state"));
-    console.log(
-      sessionInfo,
-      this.state.loggedIn,
-      "sessionInfo and loggedIn in handlePagereload"
-    );
+
     if (!this.state.loggedIn) {
       if (sessionInfo) {
-        console.log("inner if ran");
         this.setState(sessionInfo);
       }
     }
   };
 
   login = (username, teamCode, endpoint) => {
-    console.log("logged in");
-    console.log(teamCode, "teamcode after login");
     //after the form validation, this function will set the user and team in state,
     //as well as fetching the user and team info and storing it in state
 
@@ -64,7 +57,7 @@ class App extends Component {
         .then(userTeams => {
           //if the member is already a part of a team
           let appState = {};
-          console.log(userTeams.length, "userTeams.length in login");
+
           if (userTeams.length > 0) {
             let teamInfo = userTeams[0];
             if (teamCode) {
@@ -73,7 +66,7 @@ class App extends Component {
               });
               teamInfo = userTeams[teamIndex];
             }
-            console.log(teamInfo, "teamInfo in login after if statements");
+
             appState = {
               user: username,
               userInfo: userInfo[0],
@@ -93,7 +86,7 @@ class App extends Component {
               loggedIn: true
             };
           }
-          console.log(appState, "appState after if operators");
+
           return appState;
         })
         .then(appState => {
@@ -104,7 +97,7 @@ class App extends Component {
           if (!appState.teamInfo) {
             location = "/noTeam";
           }
-          console.log(location, "location on sign in");
+
           this.setState(appState);
 
           sessionStorage.setItem("state", JSON.stringify(appState));
@@ -115,7 +108,6 @@ class App extends Component {
   };
 
   loginTeam = teamInfo => {
-    console.log(teamInfo, "teaminfo in loginTeam");
     const teamMembers = teamInfo.members;
     //teamMembers is supposed to be list of username,role,and nickname
     //for each team member

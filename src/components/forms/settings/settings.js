@@ -48,14 +48,13 @@ class Settings extends Component {
           onSubmit={e => {
             e.preventDefault();
             store.userExists(newusername).then(userExists => {
-              console.log(userExists, "userExists");
               if (userExists.length) {
                 this.setState({ duplicateusername: true });
               } else
                 return store
                   .changeusername(newusername, username)
                   .then(response => {
-                    console.log(response, "response after changeusername");
+                    console.log(response, "response of changeusername");
                     if (response[0].username) {
                       this.props.login(newusername);
                     }

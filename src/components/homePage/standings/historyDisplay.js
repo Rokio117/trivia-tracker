@@ -18,8 +18,6 @@ class HistoryDisplay extends Component {
     return "↓";
   };
   display = (state, members) => {
-    console.log("members in historyDisplay", members);
-    console.log("event rosters in display history", this.props.event.roster);
     const attendance = this.props.event.roster.map(player => {
       const playerName = members.find(member => member.username === player)
         .nickname;
