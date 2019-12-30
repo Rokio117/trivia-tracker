@@ -22,7 +22,6 @@ class LoginForm extends Component {
       tokenFunctions.makeBasicAuthToken(username, password)
     );
     store.getUser(username).then(response => {
-      console.log(response, "response after fetch in form");
       if (response.message) {
         this.setState({
           connectionError: true,
@@ -30,15 +29,14 @@ class LoginForm extends Component {
         });
       } else if (response.error) {
         this.setState({ loginError: true });
-        console.log(response.error, "response.error in first if statement");
+
         return false;
       } else if (response[0].password !== password) {
         this.setState({ loginError: true });
-        console.log("else if statement ran");
+
         return false;
       }
       if (response[0].id) {
-        console.log("response.ok if block ran");
         this.setState({ loginError: false });
         this.props.loginUser(username);
         this.props.history.push("/home");

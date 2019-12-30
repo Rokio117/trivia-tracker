@@ -6,7 +6,6 @@ const store = {
   getUser(username) {
     return fetch(`${config.API_ENDPOINT}/users/${username}`)
       .then(res => {
-        console.log("res.ok");
         return res.json();
       })
       .catch(error => {
