@@ -20,14 +20,15 @@ class Error extends Component {
                 <h2>Oops! Somethings went wrong</h2>
                 <button
                   onClick={() => {
+                    this.setState({ hasError: false });
                     const sessionInfo = JSON.parse(
                       sessionStorage.getItem("state")
                     );
                     if (sessionInfo) {
-                      this.setState({ hasError: false });
+                      console.log("had sessionInfo");
                       this.props.login(sessionInfo.user);
                     } else {
-                      this.setState({ hasError: false });
+                      console.log("did not have session info");
                       this.props.history.push("/");
                     }
                   }}
@@ -44,4 +45,4 @@ class Error extends Component {
   }
 }
 
-export default Error;
+export default withRouter(Error);

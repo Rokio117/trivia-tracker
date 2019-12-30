@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import "./pickTeam.css";
 import TriviaContext from "../../../context";
-import store from "../../../store";
+
 class PickTeam extends Component {
   constructor(props) {
     super(props);
@@ -16,10 +16,8 @@ class PickTeam extends Component {
       return <p>Please select a team</p>;
     }
   };
-
   componentDidMount() {
-    throw new Error("Handle the error");
-    //this.props.handlePageReload("/teamPick");
+    this.props.handlePageReload("/teamPick");
   }
   render() {
     return (

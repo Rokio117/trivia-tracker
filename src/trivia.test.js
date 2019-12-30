@@ -30,16 +30,22 @@ describe("Home Components", () => {
   });
   it("Home renders without crashing", () => {
     ReactDOM.render(
-      <Home />,
-
+      <BrowserRouter>
+        <Home
+          handlePageReload={endpoint => {
+            console.log(endpoint);
+          }}
+        />
+      </BrowserRouter>,
       div
     );
     ReactDOM.unmountComponentAtNode(div);
   });
   it("navBar renders without crashing", () => {
     ReactDOM.render(
-      <NavBar />,
-
+      <BrowserRouter>
+        <NavBar />
+      </BrowserRouter>,
       div
     );
     ReactDOM.unmountComponentAtNode(div);
@@ -87,7 +93,11 @@ describe("Form Components", () => {
   it("CreateEvent form renders without crashing", () => {
     ReactDOM.render(
       <BrowserRouter>
-        <CreateEvent />
+        <CreateEvent
+          handlePageReload={endpoint => {
+            console.log(endpoint);
+          }}
+        />
       </BrowserRouter>,
       div
     );
@@ -105,7 +115,11 @@ describe("Form Components", () => {
   it("manageTeam renders without crashing", () => {
     ReactDOM.render(
       <BrowserRouter>
-        <ManageTeam />
+        <ManageTeam
+          handlePageReload={endpoint => {
+            console.log(endpoint);
+          }}
+        />
       </BrowserRouter>,
       div
     );
@@ -114,7 +128,11 @@ describe("Form Components", () => {
   it("pickTeam renders without crashing", () => {
     ReactDOM.render(
       <BrowserRouter>
-        <PickTeam />
+        <PickTeam
+          handlePageReload={endpoint => {
+            console.log(endpoint);
+          }}
+        />
       </BrowserRouter>,
       div
     );
@@ -141,7 +159,11 @@ describe("Form Components", () => {
   it("settings renders without crashing", () => {
     ReactDOM.render(
       <BrowserRouter>
-        <Settings />
+        <Settings
+          handlePageReload={endpoint => {
+            console.log(endpoint);
+          }}
+        />
       </BrowserRouter>,
       div
     );
