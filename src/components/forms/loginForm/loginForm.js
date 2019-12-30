@@ -3,14 +3,15 @@ import { withRouter } from "react-router-dom";
 import "./loginForm.css";
 import store from "../../../store";
 import { tokenFunctions } from "../../../tokenService";
-
+import { passwordHelper } from "../showPassword";
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loginName: "",
       loginPassword: "",
-      loginError: false
+      loginError: false,
+      buttonOption: "show"
     };
   }
 
@@ -66,12 +67,26 @@ class LoginForm extends Component {
           ></input>
           <label htmlFor="logPassword">Password</label>
           <input
+            type="password"
             id="logPassword"
             required
             onChange={e => {
               this.setState({ loginPassword: e.target.value });
             }}
           ></input>
+          <button
+            id="logPwShowOrHide"
+            onClick={e => {
+              e.preventDefault();
+              passwordHelper.showPassword("logPassword", "logPwShowOrHide");
+              if (this.state.buttonOption === "show") {
+                this.setState({ buttonOption: "hide" });
+              } else this.setState({ buttonOption: "show" });
+            }}
+            value="show"
+          >
+            {this.state.buttonOption}
+          </button>
           {this.loginError(this.state.loginError)}
           <button type="submit">Login</button>
         </form>

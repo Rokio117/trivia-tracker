@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./registerUser.css";
 import store from "../../../store";
 import { tokenFunctions } from "../../../tokenService";
+import { passwordHelper } from "../showPassword";
 class RegisterUserRefactor extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,8 @@ class RegisterUserRefactor extends Component {
       teamusername: undefined,
       passwordMatch: true,
       uniqueusername: true,
-      noTeamFound: false
+      noTeamFound: false,
+      buttonOption: "show"
     };
   }
 
@@ -113,7 +115,8 @@ class RegisterUserRefactor extends Component {
           <label htmlFor="password">Password:</label>
           <input
             id="password"
-            type="text"
+            className="pwAndRepeatePw"
+            type="password"
             required
             onChange={e =>
               this.setState({
@@ -125,7 +128,8 @@ class RegisterUserRefactor extends Component {
           <label htmlFor="repeatPassword">Repeat Password:</label>
           <input
             id="repeatPassword"
-            type="text"
+            className="pwAndRepeatePw"
+            type="password"
             required
             onChange={e =>
               this.setState({
@@ -135,6 +139,19 @@ class RegisterUserRefactor extends Component {
             }
           ></input>
           {this.mustRepeat(this.state.passwordMatch)}
+          <button
+            onClick={e => {
+              e.preventDefault();
+              passwordHelper.showPasswords("pwAndRepeatePw");
+              if (this.state.buttonOption === "show") {
+                this.setState({ buttonOption: "hide" });
+              } else {
+                this.setState({ buttonOption: "show" });
+              }
+            }}
+          >
+            {this.state.buttonOption}
+          </button>
           <label htmlFor="teamCode">
             Team User Name (if your team is already registered type it's User
             Name here)
