@@ -68,6 +68,14 @@ class NoTeamPage extends Component {
                 loginUser={this.props.loginUser}
                 loginTeam={this.props.loginTeam}
               />
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.logout();
+                }}
+              >
+                Log out
+              </button>
             </div>
           );
         }}

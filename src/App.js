@@ -251,6 +251,7 @@ class App extends Component {
                     login={this.login}
                     loginTeam={this.loginTeam}
                     loginUser={this.login}
+                    logout={this.logout}
                   />
                 );
               }}
