@@ -50,7 +50,9 @@ class ManageTeam extends Component {
                 value.teamInfo.teamcode
               )
               .then(res => {
-                if (res.error === "Unauthorized request ") {
+                if (res.message) {
+                  this.props.history.push("/error");
+                } else if (res.error === "Unauthorized request ") {
                   this.props.history.push("/error");
                 } else
                   this.props.login(
@@ -139,7 +141,9 @@ class ManageTeam extends Component {
                         this.state.newMemberRank
                       )
                       .then(response => {
-                        if (response.error) {
+                        if (response.message) {
+                          this.props.history.push("/error");
+                        } else if (response.error) {
                           this.setState({
                             addPlayorError: true,
                             serverErrorMessage: response.error
@@ -201,7 +205,9 @@ class ManageTeam extends Component {
                         value.teamInfo.teamcode
                       )
                       .then(response => {
-                        if (response.error === "Unauthorized request ") {
+                        if (response.message) {
+                          this.props.history.push("/error");
+                        } else if (response.error === "Unauthorized request ") {
                           this.props.history.push("/error");
                         } else
                           this.props.login(
@@ -237,7 +243,9 @@ class ManageTeam extends Component {
                         value.teamInfo.teamcode
                       )
                       .then(response => {
-                        if (response.error === "Unauthorized request ") {
+                        if (response.message) {
+                          this.props.history.push("/error");
+                        } else if (response.error === "Unauthorized request ") {
                           this.props.history.push("/error");
                         } else this.props.login(value.user);
                       });

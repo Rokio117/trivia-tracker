@@ -33,7 +33,6 @@ class CreateEvent extends Component {
           className="personLabel"
         >
           {person.nickname}
-
           <input
             onClick={e => {
               this.setState({
@@ -212,7 +211,11 @@ class CreateEvent extends Component {
                       store
                         .addEvent(newEvent, value.teamInfo.teamcode)
                         .then(response => {
-                          if (response.error === "Unauthorized request ") {
+                          if (response.message) {
+                            this.props.history.push("/error");
+                          } else if (
+                            response.error === "Unauthorized request "
+                          ) {
                             this.props.history.push("/error");
                           } else
                             this.props.login(

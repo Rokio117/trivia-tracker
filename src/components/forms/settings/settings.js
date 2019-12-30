@@ -47,7 +47,9 @@ class Settings extends Component {
           onSubmit={e => {
             e.preventDefault();
             store.userExists(newusername).then(userExists => {
-              if (userExists.length) {
+              if (userExists.message) {
+                this.props.history.push("/error");
+              } else if (userExists.length) {
                 this.setState({ duplicateusername: true });
               } else
                 return store
@@ -104,7 +106,9 @@ class Settings extends Component {
           onSubmit={e => {
             e.preventDefault();
             store.changePlayerName(this.state.newName, username).then(res => {
-              if (res.error === "Unauthorized request ") {
+              if (res.message) {
+                this.props.history.push("/error");
+              } else if (res.error === "Unauthorized request ") {
                 this.props.history.push("/error");
               } else return this.props.login(username);
             });

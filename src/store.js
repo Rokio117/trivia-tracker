@@ -57,11 +57,16 @@ const store = {
     });
   },
   teamExists(teamCode) {
-    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/exists`).then(
-      res => {
+    return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/exists`)
+      .then(res => {
         return res.json();
-      }
-    );
+      })
+      .catch(error => {
+        const errorMessage = {
+          message: "An error occurred. Please try again later"
+        };
+        return errorMessage;
+      });
   },
   userExists(username) {
     return fetch(`${config.API_ENDPOINT}/users/${username}/exists`)
@@ -122,9 +127,16 @@ const store = {
         username: playerUserName,
         role: role
       })
-    }).then(res => {
-      return res.json();
-    });
+    })
+      .then(res => {
+        return res.json();
+      })
+      .catch(error => {
+        const errorMessage = {
+          message: "An error occurred. Please try again later"
+        };
+        return errorMessage;
+      });
   },
   changeRole(username, role, teamCode) {
     return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/${username}/role`, {
@@ -134,9 +146,16 @@ const store = {
         authorization: `basic ${tokenFunctions.getAuthToken()}`
       },
       body: JSON.stringify({ role: role })
-    }).then(res => {
-      return res.json();
-    });
+    })
+      .then(res => {
+        return res.json();
+      })
+      .catch(error => {
+        const errorMessage = {
+          message: "An error occurred. Please try again later"
+        };
+        return errorMessage;
+      });
   },
   changeWinnings(winnings, teamCode) {
     return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/winnings`, {
@@ -146,9 +165,16 @@ const store = {
         authorization: `basic ${tokenFunctions.getAuthToken()}`
       },
       body: JSON.stringify({ winnings: winnings })
-    }).then(res => {
-      return res.json();
-    });
+    })
+      .then(res => {
+        return res.json();
+      })
+      .catch(error => {
+        const errorMessage = {
+          message: "An error occurred. Please try again later"
+        };
+        return errorMessage;
+      });
   },
   changeTeamName(name, teamCode) {
     return fetch(`${config.API_ENDPOINT}/teams/${teamCode}/team`, {
@@ -158,9 +184,16 @@ const store = {
         authorization: `basic ${tokenFunctions.getAuthToken()}`
       },
       body: JSON.stringify({ newname: name })
-    }).then(res => {
-      return res.json();
-    });
+    })
+      .then(res => {
+        return res.json();
+      })
+      .catch(error => {
+        const errorMessage = {
+          message: "An error occurred. Please try again later"
+        };
+        return errorMessage;
+      });
   },
   changeusername(newusername, username) {
     return fetch(`${config.API_ENDPOINT}/users/${username}`, {
@@ -201,9 +234,16 @@ const store = {
         position: event.position,
         winnings: event.winnings
       })
-    }).then(res => {
-      return res.json();
-    });
+    })
+      .then(res => {
+        return res.json();
+      })
+      .catch(error => {
+        const errorMessage = {
+          message: "An error occurred. Please try again later"
+        };
+        return errorMessage;
+      });
   }
 };
 

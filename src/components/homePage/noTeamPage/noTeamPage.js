@@ -43,7 +43,9 @@ class NoTeamPage extends Component {
                     store
                       .addToTeam(value.user, this.state.teamCode, "Member")
                       .then(response => {
-                        if (!response.error) {
+                        if (response.message) {
+                          this.props.history.push("/error");
+                        } else if (!response.error) {
                           this.props.login(value.user);
                         } else {
                           this.setState({ noTeamFound: true });

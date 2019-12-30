@@ -53,6 +53,9 @@ class App extends Component {
     //as well as fetching the user and team info and storing it in state
 
     store.getUser(username).then(userInfo => {
+      if (userInfo.message) {
+        this.props.history.push("/");
+      }
       store
         .getTeamsForUser(username)
         .then(userTeams => {

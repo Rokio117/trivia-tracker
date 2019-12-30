@@ -51,7 +51,9 @@ class RegisterTeam extends Component {
                       store
                         .teamExists(this.state.teamusername)
                         .then(response => {
-                          if (response.length) {
+                          if (response.message) {
+                            this.props.history.push("/error");
+                          } else if (response.length) {
                             this.setState({ nameTaken: true });
                           } else {
                             const winnings =
