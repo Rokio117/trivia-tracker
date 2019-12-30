@@ -54,7 +54,6 @@ class Settings extends Component {
                 return store
                   .changeusername(newusername, username)
                   .then(response => {
-                    console.log(response, "response of changeusername");
                     if (response[0].username) {
                       this.props.login(newusername);
                     }
@@ -98,6 +97,7 @@ class Settings extends Component {
           onSubmit={e => {
             e.preventDefault();
             store.changePlayerName(this.state.newName, username).then(res => {
+              console.log(res, "response of change player name");
               return this.props.login(username);
             });
           }}

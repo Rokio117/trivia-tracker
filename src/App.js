@@ -8,7 +8,7 @@ import PickTeam from "./components/forms/pickTeam/pickTeam";
 import RegisterTeam from "./components/forms/registerTeam/registerTeam";
 
 import Settings from "./components/forms/settings/settings";
-
+import ErrorDisplay from "./components/homePage/ErrorDisplay/errorDisplay";
 import Home from "./components/homePage/home/home";
 
 import NoTeamPage from "./components/homePage/noTeamPage/noTeamPage";
@@ -22,6 +22,7 @@ import "./App.css";
 import store from "./store";
 import { tokenFunctions } from "./tokenService";
 import Error from "./components/errorBoundary";
+
 export const APP_STATE_KEY = "appState";
 
 class App extends Component {
@@ -150,8 +151,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state, "this.state in render");
-
     return (
       <TriviaContext.Provider
         value={{
@@ -250,6 +249,12 @@ class App extends Component {
                 return (
                   <NoTeamPage login={this.login} loginTeam={this.loginTeam} />
                 );
+              }}
+            ></Route>
+            <Route
+              path="/error"
+              component={() => {
+                return <ErrorDisplay login={this.login} />;
               }}
             ></Route>
           </Switch>
