@@ -267,7 +267,7 @@ class ManageTeam extends Component {
                   type="button"
                   onClick={() => this.props.history.push("/home")}
                 >
-                  Cancel
+                  Go Back
                 </button>
               </div>
             );
