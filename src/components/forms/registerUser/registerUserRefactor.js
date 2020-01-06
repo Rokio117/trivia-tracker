@@ -17,7 +17,8 @@ class RegisterUserRefactor extends Component {
       noTeamFound: false,
       buttonOption: "show",
       connectionError: "",
-      connectionMessage: ""
+      connectionMessage: "",
+      extended: false
     };
   }
 
@@ -41,11 +42,37 @@ class RegisterUserRefactor extends Component {
       return <p className="error">{message}</p>;
     }
   };
-  render() {
+
+  smallRegisterForm(registerFormId) {
+    if (!this.state.extended) {
+      return (
+        <div
+          id="smallRegisterForm"
+          onClick={e => {
+            this.state.extended
+              ? this.setState({ extended: false })
+              : this.setState({ extended: true });
+          }}
+        >
+          <label htmlFor="signUp" className="formLabel">
+            New? <span className="smallFormChoice">Sign up</span>
+          </label>
+        </div>
+      );
+    } else return this.fullRegisterForm(registerFormId);
+  }
+
+  fullRegisterForm(registerFormId, message) {
     return (
-      <div id="registerForm">
+      <div id={`${registerFormId}`}>
         <label htmlFor="signUp" className="formLabel">
-          New? Sign Up
+          {message}
+          <span
+            className="smallFormChoice"
+            onClick={e => this.setState({ extended: false })}
+          >
+            {` Sign up`}
+          </span>
         </label>
         <form
           id="signUp"
@@ -153,6 +180,7 @@ class RegisterUserRefactor extends Component {
           ></input>
           {this.mustRepeat(this.state.passwordMatch)}
           <button
+            className="showPasswordsButton"
             onClick={e => {
               e.preventDefault();
               passwordHelper.showPasswords("pwAndRepeatePw");
@@ -185,9 +213,19 @@ class RegisterUserRefactor extends Component {
             }
           ></input>
           {this.noTeamFound(this.state.noTeamFound)}
-          <button type="submit">Submit</button>
+          <button type="submit" className="loginButton">
+            Submit
+          </button>
         </form>
       </div>
+    );
+  }
+  render() {
+    return (
+      <>
+        {this.smallRegisterForm("displayedRegisterForm")}
+        {this.fullRegisterForm("registerForm", "New?")}
+      </>
     );
   }
 }

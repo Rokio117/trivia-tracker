@@ -2,3 +2,52 @@
   box-sizing: border-box;
   text-align: center;
 }
+html {
+  background-color: rgb(50, 50, 50);
+}
+h1,
+h2,
+h3 {
+  color: orange;
+  text-shadow: 1px 1px black;
+}
+
+fieldset {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: cornflowerblue;
+}
+
+#smallLoginForm,
+#smallRegisterForm,
+#smallWelcomeInfo,
+#smallWelcomeChoice {
+  visibility: hidden;
+}
+@media screen and (max-width: 415px) {
+  /* these styles get added at width 415+ */
+  #loginForm,
+  #registerForm,
+  #welcomeInfo {
+    display: none;
+  }
+  #smallLoginForm,
+  #smallRegisterForm,
+  #smallWelcomeInfo,
+  #smallWelcomeChoice {
+    visibility: visible;
+  }
+  #smallScreenNav {
+    visibility: visible;
+  }
+  #smallScreenLogoutButton {
+    visibility: visible;
+  }
+  #navParent {
+    display: none;
+  }
+  html {
+    padding: 15px;
+  }
+}

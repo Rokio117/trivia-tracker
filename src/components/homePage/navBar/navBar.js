@@ -4,38 +4,106 @@ import "./navBar.css";
 import TriviaContext from "../../../context";
 import { withRouter } from "react-router-dom";
 class NavBar extends Component {
-  roleRender = role => {
+  constructor(props) {
+    super(props);
+    this.state = { extended: false };
+  }
+  roleRender = (role, style) => {
     if (role === "Captain") {
-      return (
-        <>
-          <NavLink className="navBarLink" to={"/manage"}>
-            Manage Team
-          </NavLink>
+      if (style === "small") {
+        return (
+          <>
+            <div className="miniNavBar">
+              <NavLink className="navBarLink" to={"/manage"}>
+                Manage Team
+              </NavLink>
+            </div>
+
+            <div className="miniNavBar">
+              <NavLink className="navBarLink" to={"/addEvent"}>
+                Add Event
+              </NavLink>
+            </div>
+          </>
+        );
+      } else
+        return (
+          <>
+            <NavLink className="navBarLink" to={"/manage"}>
+              Manage Team
+            </NavLink>
+
+            <NavLink className="navBarLink" to={"/addEvent"}>
+              Add Event
+            </NavLink>
+          </>
+        );
+    }
+
+    if (role === "Reporter") {
+      if (style === "small") {
+        return (
+          <>
+            <div className="miniNavBar">
+              <NavLink className="navBarLink" to={"/addEvent"}>
+                Add Event
+              </NavLink>
+            </div>
+          </>
+        );
+      } else
+        return (
           <NavLink className="navBarLink" to={"/addEvent"}>
             Add Event
           </NavLink>
-        </>
-      );
-    }
-    if (role === "Reporter") {
-      return (
-        <>
-          <NavLink className="navBarLink" to={"/addEvent"}>
-            Create Event
-          </NavLink>
-        </>
-      );
+        );
     }
   };
-  chooseTeamRender = number => {
+
+  chooseTeamRender = (number, style) => {
     if (number > 1) {
-      return (
-        <NavLink className="navBarLink" to={"/teamPick"}>
-          Choose Team
-        </NavLink>
-      );
+      if (style === "small") {
+        return (
+          <div className="miniNavBar">
+            <NavLink className="navBarLink" to={"/teamPick"}>
+              Choose team
+            </NavLink>
+          </div>
+        );
+      } else
+        return (
+          <NavLink className="navBarLink" to={"/teamPick"}>
+            Choose team
+          </NavLink>
+        );
     }
   };
+
+  smallScreenExtender(value, memberRole) {
+    if (this.state.extended) {
+      return (
+        <div id="blurBackground">
+          <nav id="dropDownNavWindow">
+            <h3 id="smallSettingsHeader">Settings</h3>
+            {this.chooseTeamRender(value.userTeams.length, "small")}
+            <div className="miniNavBar">
+              <NavLink className="navBarLink " to={"/settings"}>
+                User settings
+              </NavLink>
+            </div>
+
+            <div className="miniNavBar">
+              <NavLink className="navBarLink " to={"/new"}>
+                New team
+              </NavLink>
+            </div>
+
+            {this.roleRender(memberRole, "small")}
+          </nav>
+        </div>
+      );
+    }
+  }
   render() {
     return (
       <TriviaContext.Consumer>
@@ -45,20 +113,47 @@ class NavBar extends Component {
               member => member.username === value.userInfo.username
             ).role;
             return (
-              <nav id="navParent">
-                <p id="greeting">Hello, {value.userInfo.nickname}</p>
-                {this.chooseTeamRender(value.userTeams.length)}
-                <NavLink className="navBarLink" to={"/settings"}>
-                  Settings
-                </NavLink>
-                <NavLink className="navBarLink" to={"/new"}>
-                  New team
-                </NavLink>
-                {this.roleRender(memberRole)}
-                <button id="log-out-button" onClick={() => this.props.logout()}>
-                  Log out
-                </button>
-              </nav>
+              <>
+                <nav id="navParent">
+                  <p id="greeting">Hello, {value.userInfo.nickname}</p>
+                  {this.chooseTeamRender(value.userTeams.length)}
+                  <NavLink className="navBarLink" to={"/settings"}>
+                    User settings
+                  </NavLink>
+                  <NavLink className="navBarLink" to={"/new"}>
+                    New team
+                  </NavLink>
+                  {this.roleRender(memberRole)}
+                  <button
+                    id="log-out-button"
+                    onClick={() => this.props.logout()}
+                  >
+                    Log out
+                  </button>
+                </nav>
+                <div id="smallScreenNav">
+                  {this.smallScreenExtender(value, memberRole)}
+                  <p id="greeting">Hello, {value.userInfo.nickname}</p>
+                  <button
+                    id="dropDownMenu"
+                    onClick={e => {
+                      if (this.state.extended) {
+                        this.setState({ extended: false });
+                      } else this.setState({ extended: true });
+                    }}
+                  >
+                    <span className="hamburger"></span>
+                    <span className="hamburger"></span>
+                    <span className="hamburger bottomHamburger"></span>
+                  </button>
+                  <button
+                    id="smallScreenLogoutButton"
+                    onClick={() => this.props.logout()}
+                  >
+                    Log out
+                  </button>
+                </div>
+              </>
             );
           }
         }}

@@ -1,0 +1,15 @@
+#smallWelcomeChoice {
+  width: 30%;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 20px;
+  color: orange;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+}
+
+#closeInfoButton {
+  font-size: 20px;
+  color: orange;
+  text-shadow: 1px 1px black;
+}

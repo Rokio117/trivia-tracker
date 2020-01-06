@@ -22,8 +22,10 @@ class Roster extends Component {
             ));
             return (
               <section id="roster">
-                <h2>Roster</h2>
-                <label htmlFor="members">Members:</label>
+                <h3>Roster</h3>
+                <label htmlFor="members" id="membersLabel">
+                  Members:
+                </label>
                 <ul id="members">{members}</ul>
               </section>
             );

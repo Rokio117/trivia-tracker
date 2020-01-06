@@ -13,7 +13,8 @@ class LoginForm extends Component {
       loginError: false,
       buttonOption: "show",
       connectionError: false,
-      connectionMessage: ""
+      connectionMessage: "",
+      extended: false
     };
   }
 
@@ -57,11 +58,16 @@ class LoginForm extends Component {
     }
   };
 
-  render() {
+  fullLoginMenu(message, id) {
     return (
-      <div id="loginForm">
-        <label htmlFor="login" className="formLabel">
-          Already Signed up? Login
+      <div id={`${id}`}>
+        <label
+          htmlFor="login"
+          className="formLabel"
+          onClick={e => this.setState({ extended: false })}
+        >
+          {message}
+          <span className="smallFormChoice">Login</span>
         </label>
         <form
           id="login"
@@ -89,7 +95,7 @@ class LoginForm extends Component {
             }}
           ></input>
           <button
-            id="logPwShowOrHide"
+            className="showPasswordsButton"
             onClick={e => {
               e.preventDefault();
               passwordHelper.showPassword("logPassword", "logPwShowOrHide");
@@ -106,9 +112,39 @@ class LoginForm extends Component {
             this.state.connectionError,
             this.state.connectionMessage
           )}
-          <button type="submit">Login</button>
+          <button type="submit" className="loginButton">
+            Login
+          </button>
         </form>
       </div>
+    );
+  }
+
+  smallLoginMenu(id) {
+    if (!this.state.extended) {
+      return (
+        <div
+          id="smallLoginForm"
+          onClick={e => {
+            this.state.extended
+              ? this.setState({ extended: false })
+              : this.setState({ extended: true });
+          }}
+        >
+          <label htmlFor="login" className="formLabel">
+            Already Signed up? <span className="smallFormChoice">Login</span>
+          </label>
+        </div>
+      );
+    } else return this.fullLoginMenu("", "smallLoginForm");
+  }
+
+  render() {
+    return (
+      <>
+        {this.smallLoginMenu()}
+        {this.fullLoginMenu("Already signed up?", "loginForm")}
+      </>
     );
   }
 }

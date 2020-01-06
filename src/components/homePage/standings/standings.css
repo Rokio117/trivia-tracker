@@ -8,13 +8,11 @@ li {
   margin-right: auto;
 }
 
-#standings {
-  background-color: #aaa;
-}
-
 #wins {
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
+  color: orange;
+  text-shadow: 1px 1px black;
 }
 .place {
   display: inline;
@@ -25,4 +23,14 @@ p,
 ul,
 label {
   font-weight: bold;
+}
+
+#standings {
+  background-color: cornflowerblue;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid orange;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }

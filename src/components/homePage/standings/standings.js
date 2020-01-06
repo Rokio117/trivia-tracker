@@ -11,7 +11,7 @@ class Standings extends Component {
           return (
             <section id="standings">
               <h2>Standings</h2>
-              <p id="wins">{`Total Wins(top 3) ${value.teamInfo.wins}`}</p>
+              <h3 id="wins">{`Total Wins(top 3) ${value.teamInfo.wins}`}</h3>
               <p id="firstPlace" className="place">
                 1st: {value.teamInfo.firstplace}
               </p>
