@@ -27,6 +27,11 @@
   left: 0;
   top: 0;
   margin: 0px;
+  background-color: rgb(50, 50, 50);
+  border: none;
+}
+#dropDownMenu:focus {
+  border: none;
 }
 .hamburger {
   display: block;
@@ -36,7 +41,7 @@
   width: 100%;
   margin-top: 5px;
 
-  background-color: black;
+  background-color: orange;
 }
 .bottomHamburger {
   margin-bottom: 5px;
@@ -88,6 +93,19 @@ a:hover {
   color: white;
 }
 a:active {
+  color: white;
+}
+
+#greeting {
+  color: orange;
+}
+.logoutButton {
+  color: orange;
+  background: none;
+  border: none;
+  font-size: 15px;
+}
+.logoutButton:hover {
   color: white;
 }
 /* Media queries */

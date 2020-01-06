@@ -78,17 +78,21 @@ class RegisterUserRefactor extends Component {
           id="signUp"
           onSubmit={e => {
             e.preventDefault();
+            this.props.setLoading();
             if (this.state.signUpPassword !== this.state.signUpRepeatPassword) {
+              this.props.setLoading();
               this.setState({ passwordMatch: false });
             } else {
               store.userExists(this.state.signUpusername).then(userId => {
                 if (userId.message) {
+                  this.props.setLoading();
                   this.setState({
                     connectionError: true,
                     connectionMessage: userId.message
                   });
                 }
                 if (userId.length) {
+                  this.props.setLoading();
                   this.setState({ uniqueusername: false });
                 } else {
                   const newUser = {
@@ -99,6 +103,7 @@ class RegisterUserRefactor extends Component {
                   if (this.state.teamusername) {
                     store.teamExists(this.state.teamusername).then(teamId => {
                       if (!teamId.length) {
+                        this.props.setLoading();
                         this.setState({ noTeamFound: true });
                       } else {
                         store
@@ -110,7 +115,7 @@ class RegisterUserRefactor extends Component {
                                 newUser.password
                               )
                             );
-
+                            this.props.setLoading();
                             this.props.login(newUser.username);
                           });
                       }
@@ -123,7 +128,7 @@ class RegisterUserRefactor extends Component {
                           newUser.password
                         )
                       );
-
+                      this.props.setLoading();
                       this.props.login(newUser.username);
                     });
                   }

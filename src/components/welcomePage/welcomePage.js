@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 import LoginForm from "../forms/loginForm/loginForm";
 import RegisterUserRefactor from "../forms/registerUser/registerUserRefactor";
+import { loader } from "../../components/loader";
 import "./welcomePage.css";
 class WelcomePage extends Component {
   constructor(props) {
     super(props);
-    this.state = { extended: false };
+    this.state = { extended: false, loading: false };
   }
+
+  setLoading = () => {
+    this.state.loading
+      ? this.setState({ loading: false })
+      : this.setState({ loading: true });
+  };
 
   aboutRender() {
     if (this.state.extended) {
@@ -36,9 +43,11 @@ class WelcomePage extends Component {
         </div>
       );
   }
+
   render() {
     return (
       <div>
+        {loader.displayLoading(this.state.loading)}
         <h1>Trivia Tracker</h1>
         <p id="welcomeInfo">
           Trivia Tracker is an app designed to help you keep track of your
@@ -49,10 +58,12 @@ class WelcomePage extends Component {
         <LoginForm
           loginUser={this.props.login}
           loginTeam={this.props.loginTeam}
+          setLoading={this.setLoading}
         />
         <RegisterUserRefactor
           login={this.props.login}
           loginTeam={this.props.loginTeam}
+          setLoading={this.setLoading}
         />
         {this.aboutRender()}
       </div>

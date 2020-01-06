@@ -5,10 +5,6 @@
 form {
   display: inline-block;
 }
-p {
-  margin-left: 80px;
-  margin-right: 80px;
-}
 
 label,
 input {

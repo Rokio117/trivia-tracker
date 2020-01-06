@@ -125,6 +125,7 @@ class NavBar extends Component {
                   </NavLink>
                   {this.roleRender(memberRole)}
                   <button
+                    className="logoutButton"
                     id="log-out-button"
                     onClick={() => this.props.logout()}
                   >
@@ -147,6 +148,7 @@ class NavBar extends Component {
                     <span className="hamburger bottomHamburger"></span>
                   </button>
                   <button
+                    className="logoutButton"
                     id="smallScreenLogoutButton"
                     onClick={() => this.props.logout()}
                   >

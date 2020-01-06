@@ -4,6 +4,7 @@ import "./loginForm.css";
 import store from "../../../store";
 import { tokenFunctions } from "../../../tokenService";
 import { passwordHelper } from "../showPassword";
+import { loader } from "../../../components/loader";
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -19,10 +20,13 @@ class LoginForm extends Component {
   }
 
   validateLogin = (username, password) => {
+    this.props.setLoading();
+
     tokenFunctions.saveAuthToken(
       tokenFunctions.makeBasicAuthToken(username, password)
     );
     store.getUser(username).then(response => {
+      this.props.setLoading();
       if (response.message) {
         this.setState({
           connectionError: true,
@@ -60,63 +64,69 @@ class LoginForm extends Component {
 
   fullLoginMenu(message, id) {
     return (
-      <div id={`${id}`}>
-        <label
-          htmlFor="login"
-          className="formLabel"
-          onClick={e => this.setState({ extended: false })}
-        >
-          {message}
-          <span className="smallFormChoice">Login</span>
-        </label>
-        <form
-          id="login"
-          onSubmit={e => {
-            e.preventDefault();
-
-            this.validateLogin(this.state.loginName, this.state.loginPassword);
-          }}
-        >
-          <label htmlFor="logName">User Name</label>
-          <input
-            id="logName"
-            required
-            onChange={e => {
-              this.setState({ loginName: e.target.value, loginError: false });
-            }}
-          ></input>
-          <label htmlFor="logPassword">Password</label>
-          <input
-            type="password"
-            id="logPassword"
-            required
-            onChange={e => {
-              this.setState({ loginPassword: e.target.value });
-            }}
-          ></input>
-          <button
-            className="showPasswordsButton"
-            onClick={e => {
-              e.preventDefault();
-              passwordHelper.showPassword("logPassword", "logPwShowOrHide");
-              if (this.state.buttonOption === "show") {
-                this.setState({ buttonOption: "hide" });
-              } else this.setState({ buttonOption: "show" });
-            }}
-            value="show"
+      <>
+        <div id={`${id}`}>
+          <label
+            htmlFor="login"
+            className="formLabel"
+            onClick={e => this.setState({ extended: false })}
           >
-            {this.state.buttonOption}
-          </button>
-          {this.loginError(this.state.loginError)}
-          {this.connectionError(
-            this.state.connectionError,
-            this.state.connectionMessage
-          )}
-          <button type="submit" className="loginButton">
-            Login
-          </button>
-        </form>
-      </div>
+            {message}
+            <span className="smallFormChoice">Login</span>
+          </label>
+          <form
+            id="login"
+            onSubmit={e => {
+              e.preventDefault();
+
+              this.validateLogin(
+                this.state.loginName,
+                this.state.loginPassword
+              );
+            }}
+          >
+            <label htmlFor="logName">User Name</label>
+            <input
+              id="logName"
+              required
+              onChange={e => {
+                this.setState({ loginName: e.target.value, loginError: false });
+              }}
+            ></input>
+            <label htmlFor="logPassword">Password</label>
+            <input
+              type="password"
+              id="logPassword"
+              required
+              onChange={e => {
+                this.setState({ loginPassword: e.target.value });
+              }}
+            ></input>
+            <button
+              id="logPwShowOrHide"
+              className="showPasswordsButton"
+              onClick={e => {
+                e.preventDefault();
+                passwordHelper.showPassword("logPassword", "logPwShowOrHide");
+                if (this.state.buttonOption === "show") {
+                  this.setState({ buttonOption: "hide" });
+                } else this.setState({ buttonOption: "show" });
+              }}
+              value="show"
+            >
+              {this.state.buttonOption}
+            </button>
+            {this.loginError(this.state.loginError)}
+            {this.connectionError(
+              this.state.connectionError,
+              this.state.connectionMessage
+            )}
+            <button type="submit" className="loginButton">
+              Login
+            </button>
+          </form>
+        </div>
+      </>
     );
   }
 

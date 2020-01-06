@@ -11,4 +11,51 @@
 
 #compressedList {
   margin: 0px;
+  height: 50px;
+  border-bottom: 2px solid orange;
+  display: flex;
+  justify-content: space-between;
+}
+#eventContainer {
+  padding: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+#eventContainer {
+  background-color: rgb(50, 50, 50);
+  color: orange;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: 2px solid orange;
+}
+#extendButton {
+  height: 100%;
+  margin: 0;
+  margin-right: 10px;
+  border-right: 2px solid orange;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  background: rgb(50, 50, 50);
+  border-radius: 10px;
+  width: 40px;
+  color: cornflowerblue;
+
+  font-size: 20px;
+}
+
+.historyHeader {
+  text-align: center;
+  margin-left: auto;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+#attendanceList {
+  list-style-type: none;
+  padding-left: 0;
 }

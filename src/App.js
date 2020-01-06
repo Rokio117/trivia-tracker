@@ -34,7 +34,8 @@ class App extends Component {
       userInfo: {},
       teamInfo: {},
       teamMembers: [],
-      loggedIn: false
+      loggedIn: false,
+      loading: false
     };
   }
 
