@@ -47,12 +47,24 @@ fieldset {
   }
 }
 @media screen and (max-width: 550px) {
-  #historyHeaderLocation {
+  #historyButtonContainer {
+    width: 40%;
+  }
+  .historyHeader {
+    width: 60%;
+  }
+  .rosterRoleLabel,
+  .rosterRole,
+  .rosterLabel {
     display: none;
   }
 }
+
 @media screen and (max-width: 768px) {
   /* these styles get added at width 415+ */
+  #historyHeaderLocation {
+    display: none;
+  }
   #loginForm,
   #registerForm,
   #welcomeInfo {
@@ -75,5 +87,24 @@ fieldset {
   }
   html {
     padding: 15px;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .memberList {
+    margin-bottom: 20px;
+    background-color: rgb(50, 50, 50);
+    width: 80%;
+    border: 2px solid orange;
+    border-radius: 10px;
+  }
+  .rosterLabel {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .rosterName {
+    color: cornflowerblue;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 }

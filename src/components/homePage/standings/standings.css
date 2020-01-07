@@ -42,7 +42,8 @@ label {
 }
 
 #standings,
-#roster {
+#roster,
+#historyListContainer {
   background-color: cornflowerblue;
   width: 80%;
   margin-left: auto;

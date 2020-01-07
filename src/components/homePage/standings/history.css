@@ -7,6 +7,7 @@
   padding: 0px;
   padding-left: 8px;
   padding-right: 8px;
+  margin: 0;
 }
 
 #compressedList {
@@ -15,6 +16,8 @@
   border-bottom: 2px solid orange;
   display: flex;
   justify-content: space-between;
+  height: 70px;
+  text-overflow: clip;
 }
 #eventContainer {
   padding: 0px;
@@ -23,6 +26,11 @@
   height: 100%;
 }
 
+.attendancePlayer {
+  padding-bottom: 10px;
+}
+#history {
+}
 #eventContainer {
   background-color: rgb(50, 50, 50);
   color: orange;
@@ -35,18 +43,30 @@
 }
 #extendButton {
   height: 100%;
-  margin: 0;
-  margin-right: 10px;
+
   border-right: 2px solid orange;
   border-left: none;
   border-top: none;
   border-bottom: none;
   background: rgb(50, 50, 50);
   border-radius: 10px;
-  width: 40px;
+  width: 50%;
   color: cornflowerblue;
-
   font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.historyListLabel {
+  font-weight: bold;
+}
+.historyListData {
+  color: cornflowerblue !important;
+}
+#historyButtonContainer {
+  width: 30%;
+  display: flex;
+  align-items: flex-start;
 }
 
 .historyHeader {
@@ -54,6 +74,10 @@
   margin-left: auto;
   padding-top: 10px;
   padding-right: 10px;
+  width: 30%;
+}
+.historyHeaderLocation {
+  width: 30%;
 }
 #attendanceList {
   list-style-type: none;

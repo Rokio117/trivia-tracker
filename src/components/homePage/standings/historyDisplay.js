@@ -13,21 +13,49 @@ class HistoryDisplay extends Component {
   };
   arrow = currentExtended => {
     if (currentExtended) {
-      return "△";
+      return "▲";
     }
-    return "▽";
+    return "▼";
   };
   fullHistoryInfo(attendance) {
     if (this.state.extended) {
       return (
         <>
-          <h4>Details</h4>
+          <h3>Details</h3>
           <li key={this.props.event.eventdate}>
-            <div>Date: {this.props.event.eventdate}</div>
-            <div>Location: {this.props.event.locationname}</div>
-            <div>Outcome: {this.props.event.outcome} </div>
-            <div>Position: {this.props.event.position}</div>
-            <div>{`Winnings: $${this.props.event.winnings}`}</div>
+            <div className="historyListLabel">
+              Date:{" "}
+              <span className="historyListData">
+                {this.props.event.eventdate}
+              </span>
+            </div>
+            <div className="historyListLabel">
+              Location:{" "}
+              <span className="historyListData">
+                {this.props.event.locationname}
+              </span>
+            </div>
+            <div className="historyListLabel">
+              Outcome:{" "}
+              <span className="historyListData">
+                {this.props.event.outcome}
+              </span>
+            </div>
+            <div className="historyListLabel">
+              Position:{" "}
+              <span className="historyListData">
+                {this.props.event.position}
+              </span>
+            </div>
+            <div className="historyListLabel">
+              Winnings:{" "}
+              <span className="historyListData">
+                ${this.props.event.winnings}
+              </span>
+            </div>
+            <h3 for="attendanceList" id="attendanceLabel">
+              Attendance:
+            </h3>
             <ul id="attendanceList">{attendance}</ul>
           </li>
         </>
@@ -38,19 +66,25 @@ class HistoryDisplay extends Component {
     const attendance = this.props.event.roster.map(player => {
       const playerName = members.find(member => member.username === player)
         .nickname;
-      return <li key={player}>{playerName}</li>;
+      return (
+        <li key={player} className="attendancePlayer">
+          {playerName}
+        </li>
+      );
     });
 
     return (
       <div id="eventContainer">
         <li id="compressedList" key={this.props.event.eventdate}>
-          <button
-            id="extendButton"
-            type="button"
-            onClick={() => this.changeExtended(this.state.extended)}
-          >
-            {this.arrow(this.state.extended)}
-          </button>
+          <div id="historyButtonContainer">
+            <button
+              id="extendButton"
+              type="button"
+              onClick={() => this.changeExtended(this.state.extended)}
+            >
+              {this.arrow(this.state.extended)}
+            </button>
+          </div>
           <span className="historyHeader">{this.props.event.eventdate}</span>
           <span className="historyHeader" id="historyHeaderLocation">
             {this.props.event.locationname}
