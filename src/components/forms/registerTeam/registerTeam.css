@@ -17,3 +17,14 @@ button {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+#registerTeamSubmitButton,
+#registerTeamCancelButton {
+  background: rgb(50, 50, 50);
+
+  -webkit-appearance: none;
+  color: orange;
+  border-radius: 5px;
+  border: 2px solid orange;
+  width: 40%;
+  font-weight: bolder;
+}

@@ -22,7 +22,11 @@ class RegisterTeam extends Component {
   buttonChoice = team => {
     if (team) {
       return (
-        <button type="button" onClick={() => this.props.history.push("/home")}>
+        <button
+          type="button"
+          id="registerTeamCancelButton"
+          onClick={() => this.props.history.push("/home")}
+        >
           Cancel
         </button>
       );
@@ -126,7 +130,7 @@ class RegisterTeam extends Component {
                     <label htmlFor="winnings">Winnings</label>
                     <input
                       type="number"
-                      id="winnings"
+                      id="addTeamWinnings"
                       placeholder="0"
                       onChange={e => {
                         this.setState({ winnings: e.target.value });
@@ -159,7 +163,9 @@ class RegisterTeam extends Component {
                         this.setState({ thirds: e.target.value });
                       }}
                     ></input>
-                    <button type="submit">Submit</button>
+                    <button type="submit" id="registerTeamSubmitButton">
+                      Submit
+                    </button>
                     {this.buttonChoice(Object.keys(value.teamInfo).length)}
                   </form>
                 </fieldset>
