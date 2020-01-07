@@ -41,6 +41,7 @@ class ManageTeam extends Component {
       });
       return (
         <form
+          id="changeRoleForm"
           onSubmit={e => {
             e.preventDefault();
             store
@@ -63,7 +64,7 @@ class ManageTeam extends Component {
               });
           }}
         >
-          <fieldset>
+          <fieldset id="changeRoleFieldset">
             <legend htmlFor="changeRole">Change Role</legend>
             <label htmlFor="teammateSelect">Player:</label>
             <select
@@ -106,7 +107,9 @@ class ManageTeam extends Component {
               <option value="Member">Member</option>
               <option value="Guest">Guest</option>
             </select>
-            <button type="submit">Submit</button>
+            <button className="manageTeamSubmitButton" type="submit">
+              Submit
+            </button>
           </fieldset>
         </form>
       );
@@ -131,6 +134,7 @@ class ManageTeam extends Component {
                 </header>
 
                 <form
+                  id="addPlayerForm"
                   onSubmit={e => {
                     //add player to team
                     e.preventDefault();
@@ -157,7 +161,7 @@ class ManageTeam extends Component {
                       });
                   }}
                 >
-                  <fieldset>
+                  <fieldset id="addPlayerFieldset">
                     <legend htmlFor="addPlayer">
                       Add Player(must use player User Name):
                     </legend>
@@ -191,12 +195,15 @@ class ManageTeam extends Component {
                       <option value="Guest">Guest</option>
                     </select>
                     {this.addUserErrorDisplay(this.state.addPlayorError)}
-                    <button type="submit">Submit</button>
+                    <button className="manageTeamSubmitButton" type="submit">
+                      Submit
+                    </button>
                   </fieldset>
                 </form>
                 {this.changeRole(value)}
 
                 <form
+                  id="changeWinningsForm"
                   onSubmit={e => {
                     e.preventDefault();
                     store
@@ -218,7 +225,7 @@ class ManageTeam extends Component {
                       });
                   }}
                 >
-                  <fieldset>
+                  <fieldset id="changeWinningsFieldset">
                     <legend htmlFor="winnings">Winnings</legend>
 
                     <input
@@ -230,11 +237,14 @@ class ManageTeam extends Component {
                         this.setState({ winnings: e.target.value })
                       }
                     ></input>
-                    <button type="submit">Submit</button>
+                    <button className="manageTeamSubmitButton" type="submit">
+                      Submit
+                    </button>
                   </fieldset>
                 </form>
 
                 <form
+                  id="changeTeamNameForm"
                   onSubmit={e => {
                     e.preventDefault();
                     store
@@ -251,7 +261,7 @@ class ManageTeam extends Component {
                       });
                   }}
                 >
-                  <fieldset>
+                  <fieldset id="changeTeamNameFieldset">
                     <legend htmlFor="teamName">Team Name:</legend>
                     <input
                       required
@@ -260,10 +270,14 @@ class ManageTeam extends Component {
                       placeholder={value.teamInfo.teamname}
                       onChange={e => this.setState({ newName: e.target.value })}
                     ></input>
-                    <button type="submit">Submit</button>
+                    <button className="manageTeamSubmitButton" type="submit">
+                      Submit
+                    </button>
                   </fieldset>
                 </form>
                 <button
+                  className="manageTeamSubmitButton"
+                  id="goBackButton"
                   type="button"
                   onClick={() => this.props.history.push("/home")}
                 >

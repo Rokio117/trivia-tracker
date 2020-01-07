@@ -28,3 +28,8 @@ button {
   width: 40%;
   font-weight: bolder;
 }
+#registerTeamForm {
+  background: cornflowerblue;
+  border: 2px solid orange;
+  border-radius: 10px;
+}

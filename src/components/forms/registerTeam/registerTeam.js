@@ -47,128 +47,125 @@ class RegisterTeam extends Component {
                 <header>
                   <h2>Register Team</h2>
                 </header>
-                <fieldset>
-                  <form
-                    onSubmit={e => {
-                      e.preventDefault();
 
-                      store
-                        .teamExists(this.state.teamusername)
-                        .then(response => {
-                          if (response.message) {
+                <form
+                  id="registerTeamForm"
+                  onSubmit={e => {
+                    e.preventDefault();
+
+                    store.teamExists(this.state.teamusername).then(response => {
+                      if (response.message) {
+                        this.props.history.push("/error");
+                      } else if (response.length) {
+                        this.setState({ nameTaken: true });
+                      } else {
+                        const winnings =
+                          parseInt(this.state.firsts) +
+                          parseInt(this.state.seconds) +
+                          parseInt(this.state.thirds);
+                        const newTeam = {
+                          teamname: this.state.teamName,
+                          teamcode: this.state.teamusername,
+                          members: [
+                            {
+                              username: value.userInfo.username,
+                              role: "Captain"
+                            }
+                          ],
+                          wins: winnings,
+                          firstplace: parseInt(this.state.firsts),
+                          secondplace: parseInt(this.state.seconds),
+                          thirdplace: parseInt(this.state.thirds),
+                          winnings: parseInt(this.state.winnings),
+                          history: []
+                        };
+                        //push new team into DB, then add team to player info
+                        store.postNewteam(newTeam).then(newTeamResponse => {
+                          if (
+                            newTeamResponse.error === "Unauthorized request "
+                          ) {
                             this.props.history.push("/error");
-                          } else if (response.length) {
-                            this.setState({ nameTaken: true });
-                          } else {
-                            const winnings =
-                              parseInt(this.state.firsts) +
-                              parseInt(this.state.seconds) +
-                              parseInt(this.state.thirds);
-                            const newTeam = {
-                              teamname: this.state.teamName,
-                              teamcode: this.state.teamusername,
-                              members: [
-                                {
-                                  username: value.userInfo.username,
-                                  role: "Captain"
-                                }
-                              ],
-                              wins: winnings,
-                              firstplace: parseInt(this.state.firsts),
-                              secondplace: parseInt(this.state.seconds),
-                              thirdplace: parseInt(this.state.thirds),
-                              winnings: parseInt(this.state.winnings),
-                              history: []
-                            };
-                            //push new team into DB, then add team to player info
-                            store.postNewteam(newTeam).then(newTeamResponse => {
-                              if (
-                                newTeamResponse.error ===
-                                "Unauthorized request "
-                              ) {
-                                this.props.history.push("/error");
-                              } else
-                                store
-                                  .addToTeam(
-                                    value.userInfo.username,
-                                    newTeamResponse[0].teamcode,
-                                    "Captain"
-                                  )
-                                  .then(response => {
-                                    return this.props.loginUser(
-                                      value.userInfo.username,
-                                      newTeamResponse[0].teamcode
-                                    );
-                                  });
-                            });
-                          }
+                          } else
+                            store
+                              .addToTeam(
+                                value.userInfo.username,
+                                newTeamResponse[0].teamcode,
+                                "Captain"
+                              )
+                              .then(response => {
+                                return this.props.loginUser(
+                                  value.userInfo.username,
+                                  newTeamResponse[0].teamcode
+                                );
+                              });
                         });
+                      }
+                    });
+                  }}
+                >
+                  <label htmlFor="teamusername">Team User Name:</label>
+                  <input
+                    type="text"
+                    id="teamusername"
+                    required
+                    onChange={e => {
+                      this.setState({
+                        teamusername: e.target.value,
+                        nameTaken: false
+                      });
                     }}
-                  >
-                    <label htmlFor="teamusername">Team User Name:</label>
-                    <input
-                      type="text"
-                      id="teamusername"
-                      required
-                      onChange={e => {
-                        this.setState({
-                          teamusername: e.target.value,
-                          nameTaken: false
-                        });
-                      }}
-                    ></input>
-                    {this.takenName(this.state.nameTaken)}
-                    <label htmlFor="teamName">Team Name:</label>
-                    <input
-                      type="text"
-                      id="teamName"
-                      required
-                      onChange={e => {
-                        this.setState({ teamName: e.target.value });
-                      }}
-                    ></input>
-                    <label htmlFor="winnings">Winnings</label>
-                    <input
-                      type="number"
-                      id="addTeamWinnings"
-                      placeholder="0"
-                      onChange={e => {
-                        this.setState({ winnings: e.target.value });
-                      }}
-                    ></input>
-                    <label htmlFor="first">1st Place Wins:</label>
-                    <input
-                      type="number"
-                      id="first"
-                      placeholder="0"
-                      onChange={e => {
-                        this.setState({ firsts: e.target.value });
-                      }}
-                    ></input>
-                    <label htmlFor="second">2nd Place Wins:</label>
-                    <input
-                      type="number"
-                      id="second"
-                      placeholder="0"
-                      onChange={e => {
-                        this.setState({ seconds: e.target.value });
-                      }}
-                    ></input>
-                    <label htmlFor="third">3rd Place Wins:</label>
-                    <input
-                      type="number"
-                      id="third"
-                      placeholder="0"
-                      onChange={e => {
-                        this.setState({ thirds: e.target.value });
-                      }}
-                    ></input>
-                    <button type="submit" id="registerTeamSubmitButton">
-                      Submit
-                    </button>
-                    {this.buttonChoice(Object.keys(value.teamInfo).length)}
-                  </form>
-                </fieldset>
+                  ></input>
+                  {this.takenName(this.state.nameTaken)}
+                  <label htmlFor="teamName">Team Name:</label>
+                  <input
+                    type="text"
+                    id="teamName"
+                    required
+                    onChange={e => {
+                      this.setState({ teamName: e.target.value });
+                    }}
+                  ></input>
+                  <label htmlFor="winnings">Winnings</label>
+                  <input
+                    type="number"
+                    id="addTeamWinnings"
+                    placeholder="0"
+                    onChange={e => {
+                      this.setState({ winnings: e.target.value });
+                    }}
+                  ></input>
+                  <label htmlFor="first">1st Place Wins:</label>
+                  <input
+                    type="number"
+                    id="first"
+                    placeholder="0"
+                    onChange={e => {
+                      this.setState({ firsts: e.target.value });
+                    }}
+                  ></input>
+                  <label htmlFor="second">2nd Place Wins:</label>
+                  <input
+                    type="number"
+                    id="second"
+                    placeholder="0"
+                    onChange={e => {
+                      this.setState({ seconds: e.target.value });
+                    }}
+                  ></input>
+                  <label htmlFor="third">3rd Place Wins:</label>
+                  <input
+                    type="number"
+                    id="third"
+                    placeholder="0"
+                    onChange={e => {
+                      this.setState({ thirds: e.target.value });
+                    }}
+                  ></input>
+                  <button type="submit" id="registerTeamSubmitButton">
+                    Submit
+                  </button>
+                  {this.buttonChoice(Object.keys(value.teamInfo).length)}
+                </form>
               </div>
             );
           }

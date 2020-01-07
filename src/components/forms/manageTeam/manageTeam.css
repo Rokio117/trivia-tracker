@@ -1,8 +1,3 @@
-#newRoleChange,
-#addPlayer {
-  display: inline-block;
-  height: 24px;
-}
 form {
   display: block;
 
@@ -13,4 +8,50 @@ fieldset {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+#changeRoleFieldset,
+#addPlayerFieldset,
+#changeWinningsFieldset,
+#changeTeamNameFieldset {
+  background: none;
+  border: 2px solid rgb(50, 50, 50);
+  color: rgb(50, 50, 50);
+  font-weight: bold;
+}
+
+#changeRoleForm,
+#addPlayerForm,
+#changeWinningsForm,
+#changeTeamNameForm {
+  background: cornflowerblue;
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 2px solid orange;
+  border-radius: 10px;
+}
+.manageTeamSubmitButton {
+  background: rgb(50, 50, 50);
+
+  -webkit-appearance: none;
+  color: orange;
+  border-radius: 5px;
+  border: 2px solid orange;
+  width: 40%;
+  font-weight: bolder;
+}
+#addPlayer,
+#winnings,
+#teamName {
+  width: 80%;
+}
+#teammateSelect,
+#roleChange,
+#newRoleChange {
+  width: 60%;
+  height: 40px;
+  border: 2px solid orange;
+  background-color: rgb(50, 50, 50);
+  color: orange;
+  font-size: 100%;
 }
