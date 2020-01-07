@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  text-align: center;
+  /* text-align: center; */
 }
 html {
   background-color: rgb(50, 50, 50);
@@ -10,6 +10,10 @@ h2,
 h3 {
   color: orange;
   text-shadow: 1px 1px black;
+}
+
+select {
+  margin-top: 15px;
 }
 
 fieldset {
@@ -25,6 +29,21 @@ fieldset {
 #smallWelcomeChoice {
   visibility: hidden;
 }
+#loginForm,
+#registerForm,
+#smallLoginForm,
+#displayedRegisterForm,
+#smallRegisterForm,
+#welcomeInfo,
+#smallWelcomeChoice,
+#smallWelcomeInfo,
+#selectTeam {
+  background-color: cornflowerblue;
+  border: 2px solid orange;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 15px;
+}
 
 .loader {
   border: 16px solid orange;
@@ -37,6 +56,20 @@ fieldset {
   position: absolute;
   top: 50%;
   left: 50%;
+}
+
+input {
+  margin-left: auto;
+  margin-right: auto;
+  height: 40px;
+  border: 2px solid orange;
+  background: rgb(50, 50, 50);
+  color: white;
+  padding: 0;
+  padding-left: 10px;
+  text-align: left;
+  font-size: 100%;
+  width: 60%;
 }
 @keyframes spin {
   0% {
@@ -59,11 +92,17 @@ fieldset {
     display: none;
   }
 }
+#selectTeam {
+  width: 60%;
+}
 
 @media screen and (max-width: 768px) {
   /* these styles get added at width 415+ */
   #historyHeaderLocation {
     display: none;
+  }
+  #selectTeam {
+    width: 80%;
   }
   #loginForm,
   #registerForm,

@@ -185,6 +185,7 @@ class RegisterUserRefactor extends Component {
           ></input>
           {this.mustRepeat(this.state.passwordMatch)}
           <button
+            type="button"
             className="showPasswordsButton"
             onClick={e => {
               e.preventDefault();

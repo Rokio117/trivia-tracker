@@ -25,7 +25,11 @@ class PickTeam extends Component {
         {value => {
           if (value.teamInfo && value.userInfo) {
             const teamList = value.userTeams.map(team => (
-              <option value={team.teamcode} key={team.teamcode}>
+              <option
+                value={team.teamcode}
+                key={team.teamcode}
+                id="selectTeamOption"
+              >
                 {team.teamname}
               </option>
             ));
@@ -34,44 +38,48 @@ class PickTeam extends Component {
                 <header>
                   <h1>Select Team:</h1>
                 </header>
-                <fieldset>
-                  <form
-                    onSubmit={e => {
-                      e.preventDefault();
-                      if (this.state.selectedTeam === "none") {
-                        this.setState({ selectError: true });
-                      }
-                      if (this.state.selectedTeam !== "none") {
-                        //const teamInfo = store.getTeam(this.state.selectedTeam);
-                        const teamInfo = value.userTeams.filter(
-                          team => team.teamcode === this.state.selectedTeam
-                        )[0];
 
-                        this.props.loginTeam(teamInfo);
-                      }
-                    }}
+                <form
+                  id="selectTeam"
+                  onSubmit={e => {
+                    e.preventDefault();
+                    if (this.state.selectedTeam === "none") {
+                      this.setState({ selectError: true });
+                    }
+                    if (this.state.selectedTeam !== "none") {
+                      //const teamInfo = store.getTeam(this.state.selectedTeam);
+                      const teamInfo = value.userTeams.filter(
+                        team => team.teamcode === this.state.selectedTeam
+                      )[0];
+
+                      this.props.loginTeam(teamInfo);
+                    }
+                  }}
+                >
+                  <select
+                    id="teamSelector"
+                    required
+                    onChange={e =>
+                      this.setState({
+                        selectedTeam: e.target.value
+                      })
+                    }
                   >
-                    <select
-                      required
-                      onChange={e =>
-                        this.setState({
-                          selectedTeam: e.target.value
-                        })
-                      }
-                    >
-                      <option value=""></option>
-                      {teamList}
-                    </select>
-                    {this.selectError(this.state.selectError)}
-                    <button type="submit">Submit</button>
-                    <button
-                      type="button"
-                      onClick={() => this.props.history.push("/home")}
-                    >
-                      Cancel
-                    </button>
-                  </form>
-                </fieldset>
+                    <option value=""></option>
+                    {teamList}
+                  </select>
+                  {this.selectError(this.state.selectError)}
+                  <button type="submit" className="submitButton">
+                    Submit
+                  </button>
+                  <button
+                    className="cancelButton"
+                    type="button"
+                    onClick={() => this.props.history.push("/home")}
+                  >
+                    Cancel
+                  </button>
+                </form>
               </div>
             );
           }

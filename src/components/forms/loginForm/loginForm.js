@@ -90,7 +90,10 @@ class LoginForm extends Component {
               id="logName"
               required
               onChange={e => {
-                this.setState({ loginName: e.target.value, loginError: false });
+                this.setState({
+                  loginName: e.target.value,
+                  loginError: false
+                });
               }}
             ></input>
             <label htmlFor="logPassword">Password</label>
@@ -102,7 +105,9 @@ class LoginForm extends Component {
                 this.setState({ loginPassword: e.target.value });
               }}
             ></input>
+
             <button
+              type="button"
               id="logPwShowOrHide"
               className="showPasswordsButton"
               onClick={e => {

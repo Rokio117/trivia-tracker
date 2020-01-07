@@ -29,8 +29,7 @@
 .attendancePlayer {
   padding-bottom: 10px;
 }
-#history {
-}
+
 #eventContainer {
   background-color: rgb(50, 50, 50);
   color: orange;
@@ -70,7 +69,6 @@
 }
 
 .historyHeader {
-  text-align: center;
   margin-left: auto;
   padding-top: 10px;
   padding-right: 10px;
