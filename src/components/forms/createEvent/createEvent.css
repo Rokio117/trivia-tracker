@@ -25,7 +25,76 @@ p {
 }
 .memberSelect {
   display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(50, 50, 50);
+  color: orange;
 }
 .error {
   color: red;
 }
+#outcomeFieldset,
+#attendanceFieldset,
+#locationFieldset {
+  background: none;
+  border: 2px solid rgb(50, 50, 50);
+  color: rgb(50, 50, 50);
+  font-weight: bold;
+}
+
+#createEventForm {
+  padding: 15px;
+  background: cornflowerblue;
+  border: 2px solid orange;
+  border-radius: 10px;
+}
+#createEventSubmitButton,
+#createEventDeleteButton {
+  background: rgb(50, 50, 50);
+
+  -webkit-appearance: none;
+  color: orange;
+  border-radius: 5px;
+  border: 2px solid orange;
+  width: 40%;
+  font-weight: bolder;
+}
+
+/* .radioContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: rgb(50, 50, 50);
+}
+.positionLabel input:checked ~ .checkBox {
+  background-color: orange;
+}
+.checkBox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.radioContainer input:checked ~ .checkBox:after {
+  display: block;
+}
+.positionLabel .checkBox:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+} */

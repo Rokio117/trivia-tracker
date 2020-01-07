@@ -84,6 +84,7 @@ class CreateEvent extends Component {
           <label>Position</label>
 
           <select
+            id="positionSelector"
             onChange={e =>
               this.setState({
                 position: e.target.value,
@@ -111,41 +112,47 @@ class CreateEvent extends Component {
       return (
         <>
           <label>Position:</label>
-          <label htmlFor="first" id="positionLabel" className="positionLabel">
+          <label htmlFor="first" id="positionLabel" className="radioContainer">
             1st:
             <input
+              className="createEventRadioButton"
               onClick={e =>
                 this.setState({ position: "1st", positionReminder: false })
               }
               type="radio"
               name="position"
-              className="position"
               id="first"
-            ></input>
+            >
+              <span className="checkbox"></span>
+            </input>
           </label>
           <label htmlFor="second" className="positionLabel">
             2nd:
             <input
+              className="radioContainer"
               onClick={e =>
                 this.setState({ position: "2nd", positionReminder: false })
               }
               type="radio"
               name="position"
-              className="position"
               id="second"
-            ></input>
+            >
+              <span className="checkbox"></span>
+            </input>
           </label>
-          <label htmlFor="third" className="positionLabel">
+          <label htmlFor="third" className="radioContainer">
             3rd:
             <input
+              className="createEventRadioButton"
               onClick={e =>
                 this.setState({ position: "3rd", positionReminder: false })
               }
               type="radio"
               name="position"
-              className="position"
               id="third"
-            ></input>
+            >
+              <span className="checkbox"></span>
+            </input>
           </label>
           {this.positionReminder(this.state.positionReminder)}
 
@@ -226,12 +233,17 @@ class CreateEvent extends Component {
                     }
                   }}
                 >
-                  <fieldset>
+                  <fieldset id="outcomeFieldset">
                     <legend>Outcome</legend>
                     <p>Win:</p>
-                    <label htmlFor="win" id="winLabel">
+                    <label
+                      htmlFor="win"
+                      id="winLabel"
+                      className="radioContainer"
+                    >
                       Yes
                       <input
+                        className="createEventRadioButton"
                         type="radio"
                         name="winLoss"
                         value="Yes"
@@ -240,11 +252,18 @@ class CreateEvent extends Component {
                         onClick={() =>
                           this.setState({ win: true, lossToggle: false })
                         }
-                      ></input>
+                      >
+                        <span className="checkbox"></span>
+                      </input>
                     </label>
-                    <label htmlFor="loss" id="lossLabel">
+                    <label
+                      htmlFor="loss"
+                      id="lossLabel"
+                      className="radioContainer"
+                    >
                       No
                       <input
+                        className="createEventRadioButton"
                         type="radio"
                         name="winLoss"
                         value="No"
@@ -257,7 +276,9 @@ class CreateEvent extends Component {
                             lossToggle: true
                           })
                         }
-                      ></input>
+                      >
+                        <span className="checkbox"></span>
+                      </input>
                     </label>
                     <br></br>
                     {this.lossToggle(this.state.lossToggle)}
@@ -265,14 +286,14 @@ class CreateEvent extends Component {
                   </fieldset>
 
                   <br></br>
-                  <fieldset>
+                  <fieldset id="attendanceFieldset">
                     <legend htmlFor="attendance">Attendance</legend>
                     {this.attendance(value.teamMembers)}
                     {this.attendanceReminder(this.state.attendanceReminder)}
                   </fieldset>
 
                   <br></br>
-                  <fieldset>
+                  <fieldset id="locationFieldset">
                     <legend>Details</legend>
                     <label htmlFor="location">Location:</label>
                     <input
@@ -292,14 +313,17 @@ class CreateEvent extends Component {
                       id="date"
                       onChange={e => this.setState({ date: e.target.value })}
                     ></input>
-                    <button type="submit">Submit</button>
-                    <button
-                      type="button"
-                      onClick={() => this.props.history.push("/home")}
-                    >
-                      Cancel
+                    <button type="submit" id="createEventSubmitButton">
+                      Submit
                     </button>
                   </fieldset>
+                  <button
+                    id="createEventDeleteButton"
+                    type="button"
+                    onClick={() => this.props.history.push("/home")}
+                  >
+                    Cancel
+                  </button>
                 </form>
               </div>
             );
