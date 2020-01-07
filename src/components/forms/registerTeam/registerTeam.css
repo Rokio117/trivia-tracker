@@ -33,3 +33,14 @@ button {
   border: 2px solid orange;
   border-radius: 10px;
 }
+
+#placements {
+  border: 2px solid rgb(50, 50, 50);
+  margin-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 10px;
+  width: 60%;
+}
+#placementsHeader {
+  font-weight: bold;
+}

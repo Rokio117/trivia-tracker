@@ -177,7 +177,7 @@ button {
   .memberList {
     margin-bottom: 20px;
     background-color: rgb(50, 50, 50);
-    width: 80%;
+    width: 50%;
     border: 2px solid orange;
     border-radius: 10px;
   }
@@ -189,5 +189,30 @@ button {
     color: cornflowerblue;
     padding-top: 5px;
     padding-bottom: 5px;
+  }
+  .compressedList {
+    width: 50%;
+  }
+  #eventContainer {
+    widows: 50%;
+  }
+  #history {
+    width: 50%;
+  }
+  #placeContainer {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #changeUserName,
+  #changeNameSettings,
+  #changeSettingsSection,
+  #registerTeamForm {
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

@@ -41,8 +41,7 @@ fieldset {
   font-weight: bolder;
 }
 #addPlayer,
-#winnings,
-#teamName {
+#winnings {
   width: 80%;
 }
 #teammateSelect,

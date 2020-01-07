@@ -145,33 +145,36 @@ class RegisterTeam extends Component {
                       this.setState({ winnings: e.target.value });
                     }}
                   ></input>
-                  <label htmlFor="first">1st Place Wins:</label>
-                  <input
-                    type="number"
-                    id="first"
-                    placeholder="0"
-                    onChange={e => {
-                      this.setState({ firsts: e.target.value });
-                    }}
-                  ></input>
-                  <label htmlFor="second">2nd Place Wins:</label>
-                  <input
-                    type="number"
-                    id="second"
-                    placeholder="0"
-                    onChange={e => {
-                      this.setState({ seconds: e.target.value });
-                    }}
-                  ></input>
-                  <label htmlFor="third">3rd Place Wins:</label>
-                  <input
-                    type="number"
-                    id="third"
-                    placeholder="0"
-                    onChange={e => {
-                      this.setState({ thirds: e.target.value });
-                    }}
-                  ></input>
+                  <fieldset id="placements">
+                    <legend id="placementsHeader">Placements</legend>
+                    <label htmlFor="first">1st Place Wins:</label>
+                    <input
+                      type="number"
+                      id="first"
+                      placeholder="0"
+                      onChange={e => {
+                        this.setState({ firsts: e.target.value });
+                      }}
+                    ></input>
+                    <label htmlFor="second">2nd Place Wins:</label>
+                    <input
+                      type="number"
+                      id="second"
+                      placeholder="0"
+                      onChange={e => {
+                        this.setState({ seconds: e.target.value });
+                      }}
+                    ></input>
+                    <label htmlFor="third">3rd Place Wins:</label>
+                    <input
+                      type="number"
+                      id="third"
+                      placeholder="0"
+                      onChange={e => {
+                        this.setState({ thirds: e.target.value });
+                      }}
+                    ></input>
+                  </fieldset>
                   <button type="submit" id="registerTeamSubmitButton">
                     Submit
                   </button>
