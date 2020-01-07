@@ -16,7 +16,10 @@ class CreateEvent extends Component {
       date: "",
       blankAttendance: true,
       attendanceReminder: false,
-      positionReminder: false
+      positionReminder: false,
+      firstRadio: false,
+      secondRadio: false,
+      thirdRadio: false
     };
   }
 
@@ -26,7 +29,7 @@ class CreateEvent extends Component {
 
   attendance = people => {
     return people.map(person => (
-      <div key={person.username}>
+      <div key={person.username} className="personContainer">
         <label
           htmlFor={person.username}
           key={person.username}
@@ -107,53 +110,87 @@ class CreateEvent extends Component {
     }
   };
 
+  radioClicked(position) {
+    if (this.state[position]) {
+      const changedPosition = { position: false };
+      this.setState(changedPosition);
+    } else {
+      const trueChangedPosition = { position: true };
+      this.setState(trueChangedPosition);
+    }
+  }
+
+  radioStyle(position) {
+    if (this.state[position]) {
+      return "checked";
+    } else return "notChecked";
+  }
+
   renderPositionWinnings = state => {
     if (state.win) {
       return (
         <>
           <label>Position:</label>
-          <label htmlFor="first" id="positionLabel" className="radioContainer">
-            1st:
-            <input
-              className="createEventRadioButton"
-              onClick={e =>
-                this.setState({ position: "1st", positionReminder: false })
-              }
-              type="radio"
-              name="position"
-              id="first"
-            >
-              <span className="checkbox"></span>
-            </input>
-          </label>
-          <label htmlFor="second" className="positionLabel">
-            2nd:
-            <input
-              className="radioContainer"
-              onClick={e =>
-                this.setState({ position: "2nd", positionReminder: false })
-              }
-              type="radio"
-              name="position"
-              id="second"
-            >
-              <span className="checkbox"></span>
-            </input>
-          </label>
-          <label htmlFor="third" className="radioContainer">
-            3rd:
-            <input
-              className="createEventRadioButton"
-              onClick={e =>
-                this.setState({ position: "3rd", positionReminder: false })
-              }
-              type="radio"
-              name="position"
-              id="third"
-            >
-              <span className="checkbox"></span>
-            </input>
-          </label>
+          <div className="radioFlexContainer">
+            <div className="radioContainer">
+              <span className="radioLabel">1st:</span>
+              <label className="radioShell">
+                <input
+                  className="radioButton"
+                  onClick={e => {
+                    console.log("clicked");
+                    this.radioClicked("firstRadio");
+                    this.setState({ position: "1st", positionReminder: false });
+                  }}
+                  type="radio"
+                  name="position"
+                  id="first"
+                ></input>
+                <span
+                  className={`checkbox ${this.radioStyle("firstRadio")}`}
+                ></span>
+              </label>
+            </div>
+            <div className="radioContainer">
+              <span className="radioLabel">2nd:</span>
+              <label className="radioShell">
+                <input
+                  className="radioButton"
+                  onClick={e => {
+                    console.log("clicked");
+                    this.radioClicked("secondRadio");
+                    this.setState({ position: "2nd", positionReminder: false });
+                  }}
+                  type="radio"
+                  name="position"
+                  id="second"
+                ></input>
+                <span
+                  className={`checkbox ${this.radioStyle("secondRadio")}`}
+                ></span>
+              </label>
+            </div>
+            <div className="radioContainer">
+              <span className="radioLabel">3rd:</span>
+              <label className="radioShell">
+                <input
+                  className="radioButton"
+                  onClick={e => {
+                    console.log("clicked");
+                    this.radioClicked("thirdRadio");
+                    this.setState({ position: "3rd", positionReminder: false });
+                  }}
+                  type="radio"
+                  name="position"
+                  id="third"
+                ></input>
+                <span
+                  className={`checkbox ${this.radioStyle("thirdRadio")}`}
+                ></span>
+              </label>
+            </div>
+          </div>
+
           {this.positionReminder(this.state.positionReminder)}
 
           <br></br>
@@ -243,7 +280,7 @@ class CreateEvent extends Component {
                     >
                       Yes
                       <input
-                        className="createEventRadioButton"
+                        className="radioButton"
                         type="radio"
                         name="winLoss"
                         value="Yes"
@@ -252,9 +289,8 @@ class CreateEvent extends Component {
                         onClick={() =>
                           this.setState({ win: true, lossToggle: false })
                         }
-                      >
-                        <span className="checkbox"></span>
-                      </input>
+                      ></input>
+                      {/* <span className="checkbox"></span> */}
                     </label>
                     <label
                       htmlFor="loss"
@@ -263,7 +299,7 @@ class CreateEvent extends Component {
                     >
                       No
                       <input
-                        className="createEventRadioButton"
+                        className="radioButton"
                         type="radio"
                         name="winLoss"
                         value="No"
@@ -276,9 +312,8 @@ class CreateEvent extends Component {
                             lossToggle: true
                           })
                         }
-                      >
-                        <span className="checkbox"></span>
-                      </input>
+                      ></input>
+                      {/* <span className="checkbox"></span> */}
                     </label>
                     <br></br>
                     {this.lossToggle(this.state.lossToggle)}

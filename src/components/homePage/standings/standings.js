@@ -11,7 +11,7 @@ class Standings extends Component {
           return (
             <>
               <section id="standings">
-                <h2>Standings</h2>
+                <h2 id="standingsLabel">Standings</h2>
                 <h3 id="wins">{`Total Wins(top 3): ${value.teamInfo.wins}`}</h3>
                 <div id="placeContainer">
                   <div id="firstPlace" className="place">

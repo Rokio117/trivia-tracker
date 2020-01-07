@@ -166,108 +166,108 @@ class App extends Component {
           team: this.state.team
         }}
       >
-        <Error login={this.login}>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              component={props => {
-                return (
-                  <WelcomePage loginTeam={this.loginTeam} login={this.login} />
-                );
-              }}
-            ></Route>
-            <Route
-              path="/teamPick"
-              component={props => {
-                return (
-                  <PickTeam
-                    loggedIn={this.state.loggedIn}
-                    changeTeam={this.changeTeam}
-                    loginTeam={this.loginTeam}
-                    handlePageReload={this.handlePageReload}
-                  />
-                );
-              }}
-            ></Route>
-            <Route
-              path="/manage"
-              component={props => {
-                return (
-                  <ManageTeam
-                    login={this.login}
-                    loginTeam={this.loginTeam}
-                    handlePageReload={this.handlePageReload}
-                  />
-                );
-              }}
-            ></Route>
-            <Route
-              path="/settings"
-              component={props => {
-                return (
-                  <Settings
-                    login={this.login}
-                    handlePageReload={this.handlePageReload}
-                  />
-                );
-              }}
-            ></Route>
-            <Route
-              path="/addEvent"
-              component={props => {
-                return (
-                  <CreateEvent
-                    handlePageReload={this.handlePageReload}
-                    login={this.login}
-                  />
-                );
-              }}
-            ></Route>
-            <Route
-              path="/new"
-              component={props => {
-                return (
-                  <RegisterTeam
-                    loginUser={this.login}
-                    loginTeam={this.loginTeam}
-                    handlePageReload={this.handlePageReload}
-                  />
-                );
-              }}
-            ></Route>
-            <Route
-              path="/home"
-              component={props => {
-                return (
-                  <Home
-                    logout={this.logout}
-                    handlePageReload={this.handlePageReload}
-                  />
-                );
-              }}
-            ></Route>
-            <Route
-              path="/noTeam"
-              component={props => {
-                return (
-                  <NoTeamPage
-                    login={this.login}
-                    loginTeam={this.loginTeam}
-                    loginUser={this.login}
-                    logout={this.logout}
-                  />
-                );
-              }}
-            ></Route>
-            <Route
-              path="/error"
-              component={() => {
-                return <ErrorDisplay login={this.login} />;
-              }}
-            ></Route>
-          </Switch>
-        </Error>
+        {/* <Error login={this.login}> */}
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={props => {
+              return (
+                <WelcomePage loginTeam={this.loginTeam} login={this.login} />
+              );
+            }}
+          ></Route>
+          <Route
+            path="/teamPick"
+            component={props => {
+              return (
+                <PickTeam
+                  loggedIn={this.state.loggedIn}
+                  changeTeam={this.changeTeam}
+                  loginTeam={this.loginTeam}
+                  handlePageReload={this.handlePageReload}
+                />
+              );
+            }}
+          ></Route>
+          <Route
+            path="/manage"
+            component={props => {
+              return (
+                <ManageTeam
+                  login={this.login}
+                  loginTeam={this.loginTeam}
+                  handlePageReload={this.handlePageReload}
+                />
+              );
+            }}
+          ></Route>
+          <Route
+            path="/settings"
+            component={props => {
+              return (
+                <Settings
+                  login={this.login}
+                  handlePageReload={this.handlePageReload}
+                />
+              );
+            }}
+          ></Route>
+          <Route
+            path="/addEvent"
+            component={props => {
+              return (
+                <CreateEvent
+                  handlePageReload={this.handlePageReload}
+                  login={this.login}
+                />
+              );
+            }}
+          ></Route>
+          <Route
+            path="/new"
+            component={props => {
+              return (
+                <RegisterTeam
+                  loginUser={this.login}
+                  loginTeam={this.loginTeam}
+                  handlePageReload={this.handlePageReload}
+                />
+              );
+            }}
+          ></Route>
+          <Route
+            path="/home"
+            component={props => {
+              return (
+                <Home
+                  logout={this.logout}
+                  handlePageReload={this.handlePageReload}
+                />
+              );
+            }}
+          ></Route>
+          <Route
+            path="/noTeam"
+            component={props => {
+              return (
+                <NoTeamPage
+                  login={this.login}
+                  loginTeam={this.loginTeam}
+                  loginUser={this.login}
+                  logout={this.logout}
+                />
+              );
+            }}
+          ></Route>
+          <Route
+            path="/error"
+            component={() => {
+              return <ErrorDisplay login={this.login} />;
+            }}
+          ></Route>
+        </Switch>
+        {/* </Error> */}
       </TriviaContext.Provider>
     );
   }

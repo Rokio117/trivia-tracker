@@ -27,12 +27,12 @@ class NoTeamPage extends Component {
               <header>
                 <h1>Home</h1>
               </header>
-              <p>
+              <p id="noTeamParagraph">
                 It looks like you don't have a team! You can register your team,
                 or if your team is already registered get their code to be
                 added!
               </p>
-              <fieldset>
+              <fieldset id="noTeamSignInForm">
                 <h2>Sign In:</h2>
                 <label htmlFor="teamForm">Team User Name: </label>
                 <form
@@ -63,7 +63,9 @@ class NoTeamPage extends Component {
                     }
                   ></input>
                   {this.noTeamFound(this.state.noTeamFound)}
-                  <button type="submit">Submit</button>
+                  <button type="submit" id="noTeamPageSubmitButton">
+                    Submit
+                  </button>
                 </form>
               </fieldset>
               <RegisterTeam
@@ -71,6 +73,7 @@ class NoTeamPage extends Component {
                 loginTeam={this.props.loginTeam}
               />
               <button
+                id="noTeamPageLogOutButton"
                 onClick={e => {
                   e.preventDefault();
                   this.props.logout();

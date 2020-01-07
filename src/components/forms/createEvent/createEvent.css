@@ -24,11 +24,14 @@ p {
   margin-right: 15px;
 }
 .memberSelect {
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 10px;
+  padding: 0;
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-color: rgb(50, 50, 50);
-  color: orange;
+  height: 25px;
+  width: 25px;
 }
 .error {
   color: red;
@@ -59,42 +62,49 @@ p {
   width: 40%;
   font-weight: bolder;
 }
-
-/* .radioContainer input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.checkBox {
-  position: absolute;
-  top: 0;
-  left: 0;
+.radioButton {
   height: 25px;
-  width: 25px;
+}
+.radioContainer {
+  width: 30%;
+  display: inline-block;
+}
+#positionSelector {
+  width: 60%;
+  height: 40px;
+  border: 2px solid orange;
   background-color: rgb(50, 50, 50);
+  color: orange;
+  font-size: 100%;
 }
-.positionLabel input:checked ~ .checkBox {
-  background-color: orange;
+.personContainer {
+  padding: 5px;
 }
-.checkBox:after {
-  content: "";
-  position: absolute;
+/* .radioContainer{
+  display: inline-block;
+}
+.notChecked {
   display: none;
 }
-.radioContainer input:checked ~ .checkBox:after {
+.radioShell {
   display: block;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 8px solid rgb(50, 50, 50);
+  background: rgb(50, 50, 50);
 }
-.positionLabel .checkBox:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
+.checkbox {
+  display: block;
+  width: 10px;
   height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-} */
+  border-radius: 50%;
+  background-color: orange;
+  border: 5px solid orange;
+}
+.hidden {
+  visibility: hidden;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}  */

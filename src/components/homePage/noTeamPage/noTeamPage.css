@@ -25,3 +25,22 @@ button {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+#noTeamSignInForm {
+  border: 2px solid orange;
+  border-radius: 10px;
+}
+#noTeamParagraph {
+  color: orange;
+  margin-bottom: 10px;
+}
+#noTeamPageSubmitButton,
+#noTeamPageLogOutButton {
+  background: rgb(50, 50, 50);
+
+  -webkit-appearance: none;
+  color: orange;
+  border-radius: 5px;
+  border: 2px solid orange;
+  width: 40%;
+  font-weight: bolder;
+}
