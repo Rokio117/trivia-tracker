@@ -11,12 +11,16 @@
 }
 #log-out-button {
   margin: 0px;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: inherit;
 }
 #greeting {
   margin: 0px;
 }
 .navBarLink {
   text-decoration: none;
+  font-weight: bold;
 }
 #dropDownMenu {
   width: 60px;
@@ -48,15 +52,14 @@
 }
 
 #smallScreenLogoutButton {
-  visibility: hidden;
   position: absolute;
   right: 0;
   top: 0;
   margin: 0;
 }
-#smallScreenNav {
+/* #smallScreenNav {
   visibility: hidden;
-}
+} */
 #dropDownNavWindow {
   background-color: rgb(50, 50, 50);
   border: 2px solid orange;
