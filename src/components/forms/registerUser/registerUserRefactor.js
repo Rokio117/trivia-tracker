@@ -78,11 +78,13 @@ class RegisterUserRefactor extends Component {
           id="signUp"
           onSubmit={e => {
             e.preventDefault();
-            this.props.setLoading();
+
             if (this.state.signUpPassword !== this.state.signUpRepeatPassword) {
-              this.props.setLoading();
+              console.log("pw dont match");
+
               this.setState({ passwordMatch: false });
             } else {
+              this.props.setLoading();
               store.userExists(this.state.signUpusername).then(userId => {
                 if (userId.message) {
                   this.props.setLoading();

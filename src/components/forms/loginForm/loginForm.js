@@ -26,22 +26,25 @@ class LoginForm extends Component {
       tokenFunctions.makeBasicAuthToken(username, password)
     );
     store.getUser(username).then(response => {
-      this.props.setLoading();
       if (response.message) {
+        this.props.setLoading();
         this.setState({
           connectionError: true,
           connectionMessage: response.message
         });
       } else if (response.error) {
+        this.props.setLoading();
         this.setState({ loginError: true });
 
         return false;
       } else if (response[0].password !== password) {
+        this.props.setLoading();
         this.setState({ loginError: true });
 
         return false;
       }
       if (response[0].id) {
+        this.props.setLoading();
         this.setState({ loginError: false });
         this.props.loginUser(username);
         this.props.history.push("/home");

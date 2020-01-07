@@ -13,6 +13,7 @@ class WelcomePage extends Component {
     this.state.loading
       ? this.setState({ loading: false })
       : this.setState({ loading: true });
+    console.log("setLoading ran", this.state.loading);
   };
 
   aboutRender() {
