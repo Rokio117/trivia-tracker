@@ -10,10 +10,12 @@ button {
   margin-bottom: 15px;
 }
 #selectTeam {
-  margin-bottom: 0 !important;
-  margin-top: 0 !important;
+  /* margin: 0 !important;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
+  background-color: cornflowerblue;
+  border: 2px solid orange;
+  border-radius: 10px;
 }
 
 #teamSelector {
