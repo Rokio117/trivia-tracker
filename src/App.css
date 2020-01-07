@@ -23,12 +23,12 @@ fieldset {
   background-color: cornflowerblue;
 }
 
-#smallLoginForm,
+/* #smallLoginForm,
 #smallRegisterForm,
 #smallWelcomeInfo,
 #smallWelcomeChoice {
   visibility: hidden;
-}
+} */
 #loginForm,
 #registerForm,
 #smallLoginForm,
@@ -123,6 +123,16 @@ button {
   outline: none !important;
 }
 
+@media screen and (min-width: 768px) {
+  /* up to 768px */
+  #smallLoginForm,
+  #smallRegisterForm,
+  #smallWelcomeInfo,
+  #smallWelcomeChoice {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 550px) {
   #historyButtonContainer {
     width: 40%;
@@ -140,8 +150,8 @@ button {
   width: 60%;
 }
 
-@media screen and (max-width: 768px) {
-  /* these styles get added at width 415+ */
+@media screen and (max-width: 767px) {
+  /* these styles get added below width 768 */
   #historyHeaderLocation {
     display: none;
   }
@@ -153,18 +163,18 @@ button {
   #welcomeInfo {
     display: none;
   }
-  #smallLoginForm,
+  /* #smallLoginForm,
   #smallRegisterForm,
   #smallWelcomeInfo,
   #smallWelcomeChoice {
     visibility: visible;
-  }
-  #smallScreenNav {
+  } */
+  /* #smallScreenNav {
     visibility: visible;
   }
   #smallScreenLogoutButton {
     visibility: visible;
-  }
+  } */
   #navParent {
     display: none;
   }
@@ -210,9 +220,28 @@ button {
   #changeUserName,
   #changeNameSettings,
   #changeSettingsSection,
-  #registerTeamForm {
-    width: 65%;
+  #registerTeamForm,
+  #welcomeInfo,
+  #loginForm,
+  #registerForm,
+  #addPlayerForm,
+  #changeRoleForm,
+  #changeWinningsForm,
+  #changeTeamNameForm,
+  #createEventForm,
+  #noTeamSignInForm {
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
+  }
+  #welcomeInfo {
+    padding: 15px;
+  }
+
+  #addPlayerForm,
+  #changeRoleForm,
+  #changeWinningsForm,
+  #changeTeamNameForm {
+    margin-bottom: 20px;
   }
 }
