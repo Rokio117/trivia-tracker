@@ -44,6 +44,7 @@ class Settings extends Component {
     if (state) {
       return (
         <form
+          id="changeUserNameForm"
           onSubmit={e => {
             e.preventDefault();
             store.userExists(newusername).then(userExists => {
@@ -82,9 +83,11 @@ class Settings extends Component {
             }
           ></input>
           {this.duplicateusername(this.state.duplicateusername)}
-          <button type="submit">Submit</button>
+          <button type="submit" className="settingsSubmitButton">
+            Submit
+          </button>
           <button
-            id="changeName"
+            className="settingsCancelButton"
             type="button"
             onClick={e =>
               this.setState({
@@ -103,6 +106,7 @@ class Settings extends Component {
     if (state) {
       return (
         <form
+          className="changeNameForm"
           onSubmit={e => {
             e.preventDefault();
             store.changePlayerName(this.state.newName, username).then(res => {
@@ -120,9 +124,11 @@ class Settings extends Component {
             id="name"
             onChange={e => this.setState({ newName: e.target.value })}
           ></input>
-          <button type="submit">Submit</button>
+          <button type="submit" className="settingsSubmitButton">
+            Submit
+          </button>
           <button
-            id="changeName"
+            className="settingsCancelButton"
             type="button"
             onClick={e =>
               this.setState({
@@ -145,10 +151,11 @@ class Settings extends Component {
               <header>
                 <h1>Settings</h1>
               </header>
-              <section>
+              <section id="changeSettingsSection">
                 <div id="changeusername">
                   {`User Name: ${value.userInfo.username}`}
                   <button
+                    className="changeUserNameButton"
                     type="button"
                     onClick={e =>
                       this.setState({
@@ -170,6 +177,7 @@ class Settings extends Component {
                 <div id="changeNameSettings">
                   {`Name: ${value.userInfo.nickname}`}
                   <button
+                    className="changeNameSettingsButton"
                     type="button"
                     onClick={e =>
                       this.setState({
@@ -184,15 +192,15 @@ class Settings extends Component {
                     value.userInfo.username
                   )}
                 </div>
-                <div>{`Team User Name: ${value.teamInfo.teamcode}`}</div>
+                <div id="teamUserNameLabel">{`Team User Name: ${value.teamInfo.teamcode}`}</div>
+                <button
+                  id="settingsBottomCancelButton"
+                  type="button"
+                  onClick={e => this.props.history.push("/home")}
+                >
+                  Cancel
+                </button>
               </section>
-
-              <button
-                type="button"
-                onClick={e => this.props.history.push("/home")}
-              >
-                Cancel
-              </button>
             </div>
           );
         }}
