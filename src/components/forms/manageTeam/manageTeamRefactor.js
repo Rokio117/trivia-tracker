@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import store from "../../../store";
 import TriviaContext from "../../../context";
 import "./manageTeam.css";
+import { loader } from "../../loader";
 class ManageTeam extends Component {
   constructor(props) {
     super(props);
@@ -19,12 +20,19 @@ class ManageTeam extends Component {
       noChangeRank: false,
       serverErrorMessage: "",
       addPlayorError: false,
-      playerCurrentRank: ""
+      playerCurrentRank: "",
+      loading: false
     };
   }
 
   componentDidMount() {
     this.props.handlePageReload("/manage");
+  }
+
+  setLoading() {
+    this.state.loading
+      ? this.setState({ loading: false })
+      : this.setState({ loading: true });
   }
 
   changeRole = value => {
@@ -44,6 +52,7 @@ class ManageTeam extends Component {
           id="changeRoleForm"
           onSubmit={e => {
             e.preventDefault();
+            this.setLoading(); //loading is true
             store
               .changeRole(
                 this.state.userToChange,
@@ -52,15 +61,17 @@ class ManageTeam extends Component {
               )
               .then(res => {
                 if (res.message) {
+                  this.setLoading();
                   this.props.history.push("/error");
                 } else if (res.error === "Unauthorized request ") {
+                  this.setLoading();
                   this.props.history.push("/error");
-                } else
-                  this.props.login(
-                    value.userInfo.username,
-                    value.teamInfo.teamcode,
-                    "/manage"
-                  );
+                } else this.setLoading();
+                this.props.login(
+                  value.userInfo.username,
+                  value.teamInfo.teamcode,
+                  "/manage"
+                );
               });
           }}
         >
@@ -129,6 +140,7 @@ class ManageTeam extends Component {
           if (value.teamMembers) {
             return (
               <div>
+                {loader.displayLoading(this.state.loading)}
                 <header>
                   <h1>Manage Team</h1>
                 </header>
@@ -138,6 +150,7 @@ class ManageTeam extends Component {
                   onSubmit={e => {
                     //add player to team
                     e.preventDefault();
+                    this.setLoading(); //loading set to true
                     store
                       .addToTeam(
                         this.state.addPlayer,
@@ -146,18 +159,22 @@ class ManageTeam extends Component {
                       )
                       .then(response => {
                         if (response.message) {
+                          this.setLoading();
                           this.props.history.push("/error");
                         } else if (response.error) {
+                          this.setLoading();
                           this.setState({
                             addPlayorError: true,
                             serverErrorMessage: response.error
                           });
-                        } else
+                        } else {
+                          this.setLoading();
                           this.props.login(
                             value.userInfo.username,
                             value.teamInfo.teamcode,
                             "/manage"
                           );
+                        }
                       });
                   }}
                 >
@@ -206,6 +223,7 @@ class ManageTeam extends Component {
                   id="changeWinningsForm"
                   onSubmit={e => {
                     e.preventDefault();
+                    this.setLoading(); //loading set to true
                     store
                       .changeWinnings(
                         parseInt(this.state.winnings),
@@ -213,15 +231,17 @@ class ManageTeam extends Component {
                       )
                       .then(response => {
                         if (response.message) {
+                          this.setLoading();
                           this.props.history.push("/error");
                         } else if (response.error === "Unauthorized request ") {
+                          this.setLoading();
                           this.props.history.push("/error");
-                        } else
-                          this.props.login(
-                            value.userInfo.username,
-                            value.teamInfo.teamcode,
-                            "/manage"
-                          );
+                        } else this.setLoading();
+                        this.props.login(
+                          value.userInfo.username,
+                          value.teamInfo.teamcode,
+                          "/manage"
+                        );
                       });
                   }}
                 >
@@ -247,6 +267,7 @@ class ManageTeam extends Component {
                   id="changeTeamNameForm"
                   onSubmit={e => {
                     e.preventDefault();
+                    this.setLoading(); //loading set to true
                     store
                       .changeTeamName(
                         this.state.newName,
@@ -254,8 +275,10 @@ class ManageTeam extends Component {
                       )
                       .then(response => {
                         if (response.message) {
+                          this.setLoading();
                           this.props.history.push("/error");
                         } else if (response.error === "Unauthorized request ") {
+                          this.setLoading();
                           this.props.history.push("/error");
                         } else this.props.login(value.user);
                       });

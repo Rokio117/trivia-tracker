@@ -99,6 +99,12 @@ class NavBar extends Component {
             </div>
 
             {this.roleRender(memberRole, "small")}
+            <button
+              onClick={e => this.setState({ extended: false })}
+              id="settingsCancelButton"
+            >
+              Cancel
+            </button>
           </nav>
         </div>
       );

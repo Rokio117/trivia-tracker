@@ -69,8 +69,13 @@
 }
 
 .historyHeader {
+  display: inline-flex;
+  align-items: center;
+  height: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
   margin-left: auto;
-  padding-top: 10px;
+
   padding-right: 10px;
   width: 30%;
 }

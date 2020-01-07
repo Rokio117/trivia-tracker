@@ -78,11 +78,24 @@
 }
 .miniNavBar {
   margin: 10px;
-  border: 2px solid cornflowerblue;
+  border: 2px solid orange;
   border-radius: 5px;
   padding: 8px;
   overflow: hidden;
 }
+#settingsCancelButton {
+  margin: 10px;
+  border: 2px solid orange;
+  border-radius: 5px;
+  padding: 8px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  background: rgb(50, 50, 50);
+  color: orange;
+}
+
 a:link {
   color: orange;
 }

@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import "./createEvent.css";
 import TriviaContext from "../../../context";
 import store from "../../../store";
+import { loader } from "../../loader";
 class CreateEvent extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,8 @@ class CreateEvent extends Component {
       positionReminder: false,
       firstRadio: false,
       secondRadio: false,
-      thirdRadio: false
+      thirdRadio: false,
+      loading: false
     };
   }
 
@@ -216,6 +218,9 @@ class CreateEvent extends Component {
       return <p className="error">Pick a player</p>;
     }
   };
+  setLoading = loading => {
+    this.setState({ loading: loading });
+  };
   render() {
     return (
       <TriviaContext.Consumer>
@@ -223,6 +228,7 @@ class CreateEvent extends Component {
           if (value.teamInfo.members) {
             return (
               <div>
+                {loader.displayLoading(this.state.loading)}
                 <header>
                   <h1>Create Event</h1>
                 </header>
@@ -231,10 +237,13 @@ class CreateEvent extends Component {
                   id="createEventForm"
                   onSubmit={e => {
                     e.preventDefault();
+                    this.setLoading();
                     if (this.state.attendance.length === 0) {
+                      this.setLoading();
                       this.setState({ attendanceReminder: true });
                     }
                     if (!this.state.position) {
+                      this.setLoading();
                       this.setState({ positionReminder: true });
                     }
                     if (
@@ -256,16 +265,18 @@ class CreateEvent extends Component {
                         .addEvent(newEvent, value.teamInfo.teamcode)
                         .then(response => {
                           if (response.message) {
+                            this.setLoading();
                             this.props.history.push("/error");
                           } else if (
                             response.error === "Unauthorized request "
                           ) {
+                            this.setLoading();
                             this.props.history.push("/error");
-                          } else
-                            this.props.login(
-                              value.userInfo.username,
-                              value.teamInfo.teamcode
-                            );
+                          } else this.setLoading();
+                          this.props.login(
+                            value.userInfo.username,
+                            value.teamInfo.teamcode
+                          );
                         });
                     }
                   }}

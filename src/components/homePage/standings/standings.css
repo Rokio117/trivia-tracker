@@ -61,6 +61,8 @@ label {
 }
 #winnings {
   margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
 }
 #history {
   width: 80%;

@@ -85,10 +85,10 @@ class HistoryDisplay extends Component {
               {this.arrow(this.state.extended)}
             </button>
           </div>
-          <span className="historyHeader">{this.props.event.eventdate}</span>
-          <span className="historyHeader" id="historyHeaderLocation">
+          <div className="historyHeader">{this.props.event.eventdate}</div>
+          <div className="historyHeader" id="historyHeaderLocation">
             {this.props.event.locationname}
-          </span>
+          </div>
         </li>
 
         <div id="historyDetails">{this.fullHistoryInfo(attendance)}</div>

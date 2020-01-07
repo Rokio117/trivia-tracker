@@ -78,6 +78,10 @@ input {
 .error {
   margin: 10px;
 }
+
+#smallScreenLogoutButton {
+  font-weight: bold;
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -86,6 +90,39 @@ input {
     transform: rotate(360deg);
   }
 }
+
+.submitButton:hover,
+.cancelButton:hover,
+.settingsSubmitButton:hover,
+.settingsCancelButton:hover,
+.changeUserNameButton:hover,
+.changeNameSettingsButton:hover,
+#settingsBottomCancelButton:hover,
+#registerTeamSubmitButton:hover,
+#registerTeamCancelButton:hover,
+.manageTeamSubmitButton:hover,
+#createEventSubmitButton:hover,
+#createEventDeleteButton:hover,
+.showPasswordsButton:hover,
+.loginButton:hover,
+#noTeamPageSubmitButton:hover,
+#noTeamPageLogOutButton:hover {
+  border-right: 5px solid orange;
+  border-bottom: 5px solid orange;
+  border-radius: 10px;
+  outline: none;
+}
+.showPasswordsButton,
+.loginButton,
+.submitButton,
+.cancelButton {
+  border: 2px solid orange;
+  border-radius: 10px;
+}
+button {
+  outline: none !important;
+}
+
 @media screen and (max-width: 550px) {
   #historyButtonContainer {
     width: 40%;

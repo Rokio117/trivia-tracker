@@ -4,6 +4,7 @@ import "./settings.css";
 import TriviaContext from "../../../context";
 import store from "../../../store";
 import { tokenFunctions } from "../../../tokenService";
+import { loader } from "../../loader";
 class Settings extends Component {
   constructor(props) {
     super(props);
@@ -12,14 +13,17 @@ class Settings extends Component {
       newusername: "",
       changeName: false,
       changeusername: false,
-      duplicateusername: false
+      duplicateusername: false,
+      loading: false
     };
   }
 
   componentDidMount() {
     this.props.handlePageReload("/settings");
   }
-
+  setLoading = loading => {
+    this.setState({ loading: loading });
+  };
   validateusername = username => {
     store
       .getUser(username)
@@ -47,18 +51,23 @@ class Settings extends Component {
           id="changeUserNameForm"
           onSubmit={e => {
             e.preventDefault();
+            this.setLoading(true);
             store.userExists(newusername).then(userExists => {
               if (userExists.message) {
+                this.setLoading(false);
                 this.props.history.push("/error");
               } else if (userExists.length) {
+                this.setLoading(false);
                 this.setState({ duplicateusername: true });
               } else
                 return store
                   .changeusername(newusername, username)
                   .then(response => {
                     if (response.error === "Unauthorized request ") {
+                      this.setLoading(false);
                       this.props.history.push("/error");
                     } else if (response[0].username) {
+                      this.setLoading(false);
                       tokenFunctions.clearAuthToken();
                     }
                   })
@@ -66,6 +75,7 @@ class Settings extends Component {
                     tokenFunctions.saveAuthToken(
                       tokenFunctions.makeBasicAuthToken(newusername, password)
                     );
+                    this.setLoading(false);
                     this.props.login(newusername);
                   });
             });
@@ -148,6 +158,7 @@ class Settings extends Component {
         {value => {
           return (
             <div>
+              {loader.displayLoading(this.state.loading)}
               <header>
                 <h1>Settings</h1>
               </header>

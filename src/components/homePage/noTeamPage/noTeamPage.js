@@ -4,12 +4,14 @@ import store from "../../../store";
 import { withRouter } from "react-router-dom";
 import "./noTeamPage.css";
 import TriviaContext from "../../../context";
+import { loader } from "../../loader";
 class NoTeamPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       teamCode: "",
-      noTeamFound: false
+      noTeamFound: false,
+      loading: false
     };
   }
 
@@ -18,12 +20,19 @@ class NoTeamPage extends Component {
       return <p className="error">Team not found</p>;
     }
   };
+
+  setLoading = () => {
+    this.state.loading
+      ? this.setState({ loading: false })
+      : this.setState({ loading: true });
+  };
   render() {
     return (
       <TriviaContext.Consumer>
         {value => {
           return (
             <div>
+              {loader.displayLoading(this.state.loading)}
               <header>
                 <h1>Home</h1>
               </header>
@@ -39,15 +48,18 @@ class NoTeamPage extends Component {
                   id="teamForm"
                   onSubmit={e => {
                     e.preventDefault();
-
+                    this.setLoading();
                     store
                       .addToTeam(value.user, this.state.teamCode, "Member")
                       .then(response => {
                         if (response.message) {
+                          this.setLoading();
                           this.props.history.push("/error");
                         } else if (!response.error) {
+                          this.setLoading();
                           this.props.login(value.user);
                         } else {
+                          this.setLoading();
                           this.setState({ noTeamFound: true });
                         }
                       });

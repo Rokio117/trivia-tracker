@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import "./registerTeam.css";
 import TriviaContext from "../../../context";
+import { loader } from "../../loader";
 import store from "../../../store";
 
 class RegisterTeam extends Component {
@@ -16,7 +17,8 @@ class RegisterTeam extends Component {
       firsts: 0,
       seconds: 0,
       thirds: 0,
-      nameTaken: false
+      nameTaken: false,
+      loading: false
     };
   }
   buttonChoice = team => {
@@ -37,6 +39,10 @@ class RegisterTeam extends Component {
       return <p className="error">That name is taken</p>;
     }
   };
+
+  setLoading = loading => {
+    this.setState({ loading: loading });
+  };
   render() {
     return (
       <TriviaContext.Consumer>
@@ -44,6 +50,7 @@ class RegisterTeam extends Component {
           if (value.userInfo) {
             return (
               <div>
+                {loader.displayLoading(this.state.loading)}
                 <header>
                   <h2>Register Team</h2>
                 </header>
@@ -52,11 +59,13 @@ class RegisterTeam extends Component {
                   id="registerTeamForm"
                   onSubmit={e => {
                     e.preventDefault();
-
+                    this.setLoading(true);
                     store.teamExists(this.state.teamusername).then(response => {
                       if (response.message) {
+                        this.setLoading(false);
                         this.props.history.push("/error");
                       } else if (response.length) {
+                        this.setLoading(false);
                         this.setState({ nameTaken: true });
                       } else {
                         const winnings =
@@ -84,6 +93,7 @@ class RegisterTeam extends Component {
                           if (
                             newTeamResponse.error === "Unauthorized request "
                           ) {
+                            this.setLoading(false);
                             this.props.history.push("/error");
                           } else
                             store
@@ -93,6 +103,7 @@ class RegisterTeam extends Component {
                                 "Captain"
                               )
                               .then(response => {
+                                this.setLoading(false);
                                 return this.props.loginUser(
                                   value.userInfo.username,
                                   newTeamResponse[0].teamcode
