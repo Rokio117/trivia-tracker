@@ -83,29 +83,31 @@ class NavBar extends Component {
     if (this.state.extended) {
       return (
         <div id="blurBackground">
-          <nav id="dropDownNavWindow">
-            <h3 id="smallSettingsHeader">Settings</h3>
-            {this.chooseTeamRender(value.userTeams.length, "small")}
-            <div className="miniNavBar">
-              <NavLink className="navBarLink " to={"/settings"}>
-                User settings
-              </NavLink>
-            </div>
+          <div id="windowFrame">
+            <nav id="dropDownNavWindow">
+              <h3 id="smallSettingsHeader">Settings</h3>
+              {this.chooseTeamRender(value.userTeams.length, "small")}
+              <div className="miniNavBar">
+                <NavLink className="navBarLink " to={"/settings"}>
+                  User settings
+                </NavLink>
+              </div>
 
-            <div className="miniNavBar">
-              <NavLink className="navBarLink " to={"/new"}>
-                New team
-              </NavLink>
-            </div>
+              <div className="miniNavBar">
+                <NavLink className="navBarLink " to={"/new"}>
+                  New team
+                </NavLink>
+              </div>
 
-            {this.roleRender(memberRole, "small")}
-            <button
-              onClick={e => this.setState({ extended: false })}
-              id="settingsCancelButton"
-            >
-              Cancel
-            </button>
-          </nav>
+              {this.roleRender(memberRole, "small")}
+              <button
+                onClick={e => this.setState({ extended: false })}
+                id="settingsCancelButton"
+              >
+                Cancel
+              </button>
+            </nav>
+          </div>
         </div>
       );
     }

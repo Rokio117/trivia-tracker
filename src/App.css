@@ -179,9 +179,6 @@ button {
   #navParent {
     display: none;
   }
-  html {
-    padding: 15px;
-  }
 }
 
 @media screen and (min-width: 550px) {

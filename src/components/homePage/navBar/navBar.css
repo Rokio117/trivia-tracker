@@ -64,20 +64,29 @@
   background-color: rgb(50, 50, 50);
   border: 2px solid orange;
   color: white;
-  width: 80%;
-  height: 70%;
-  position: absolute;
-  top: 15%;
-  right: 14%;
+  width: 300px;
+  height: 70vh;
+  position: fixed;
+  right: 50%;
+  top: 15vh;
+  margin-right: -150px;
   padding: 15px;
   border-radius: 10px;
   overflow: hidden;
 }
 #blurBackground {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   backdrop-filter: blur(15px);
+  padding-bottom: 100px;
+}
+#windowFrame {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  overflow: hidden;
 }
 .miniNavBar {
   margin: 10px;
