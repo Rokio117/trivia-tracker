@@ -80,31 +80,3 @@ p {
 .personContainer {
   padding: 5px;
 }
-/* .radioContainer{
-  display: inline-block;
-}
-.notChecked {
-  display: none;
-}
-.radioShell {
-  display: block;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  border: 8px solid rgb(50, 50, 50);
-  background: rgb(50, 50, 50);
-}
-.checkbox {
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: darkorange;
-  border: 5px solid darkorange;
-}
-.hidden {
-  visibility: hidden;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}  */

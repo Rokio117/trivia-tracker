@@ -259,8 +259,6 @@ class CreateEvent extends Component {
                         position: this.state.position,
                         winnings: parseInt(this.state.winnings) || 0
                       };
-
-                      //this will become a /post request
                       store
                         .addEvent(newEvent, value.teamInfo.teamcode)
                         .then(response => {
@@ -301,7 +299,6 @@ class CreateEvent extends Component {
                           this.setState({ win: true, lossToggle: false })
                         }
                       ></input>
-                      {/* <span className="checkbox"></span> */}
                     </label>
                     <label
                       htmlFor="loss"
@@ -324,7 +321,6 @@ class CreateEvent extends Component {
                           })
                         }
                       ></input>
-                      {/* <span className="checkbox"></span> */}
                     </label>
                     <br></br>
                     {this.lossToggle(this.state.lossToggle)}

@@ -16,12 +16,11 @@ import NoTeamPage from "./components/homePage/noTeamPage/noTeamPage";
 import WelcomePage from "./components/welcomePage/welcomePage";
 
 import TriviaContext from "./context";
-import ManageTeam from "../src/components/forms/manageTeam/manageTeamRefactor";
+import ManageTeam from "./components/forms/manageTeam/manageTeam";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import store from "./store";
 import { tokenFunctions } from "./tokenService";
-import Error from "./components/errorBoundary";
 
 export const APP_STATE_KEY = "appState";
 
