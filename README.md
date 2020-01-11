@@ -12,6 +12,7 @@ example, a Captain can add events to the teams history and change the teams sett
 
 ## Technologies Used
 ![](readmeimages/React-logo.png)
+<img src="readmeimages/React-logo.png" width="50" >
 Trivia Tracker was created using ReactJs framework. The API 
 
 
