@@ -112,9 +112,23 @@ class LoginForm extends Component {
               this.state.connectionError,
               this.state.connectionMessage
             )}
-            <button type="submit" className="loginButton">
-              Login
-            </button>
+            <div id="loginButtonContainer">
+              <button type="submit" name="userSubmit" className="loginButton">
+                Login
+              </button>
+
+              <button
+                type="button"
+                name="demoSubmit"
+                id="loginAsGuestButton"
+                onClick={e => {
+                  e.preventDefault();
+                  this.validateLogin("Demo", "password");
+                }}
+              >
+                Login as guest
+              </button>
+            </div>
           </form>
         </div>
       </>

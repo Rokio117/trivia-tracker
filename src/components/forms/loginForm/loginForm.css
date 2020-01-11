@@ -29,7 +29,8 @@ label {
 .showPasswordsButton,
 .loginButton,
 .cancelButton,
-.submitButton {
+.submitButton,
+#loginAsGuestButton {
   background-color: rgb(50, 50, 50);
   border: none;
   -webkit-appearance: none;
@@ -50,4 +51,11 @@ label {
 #signUp,
 #selectTeam {
   width: 100%;
+}
+#loginButtonContainer {
+  display: flex;
+  width: 70%;
+  justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
 }

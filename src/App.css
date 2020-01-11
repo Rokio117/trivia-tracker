@@ -94,7 +94,8 @@ button {
 .showPasswordsButton,
 .loginButton,
 .submitButton,
-.cancelButton {
+.cancelButton,
+#loginAsGuestButton {
   border: 2px solid darkOrange;
   border-radius: 10px;
 }
