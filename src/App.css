@@ -85,28 +85,6 @@ input {
   }
 }
 
-/* .submitButton:hover,
-.cancelButton:hover,
-.settingsSubmitButton:hover,
-.settingsCancelButton:hover,
-.changeUserNameButton:hover,
-.changeNameSettingsButton:hover,
-#settingsBottomCancelButton:hover,
-#registerTeamSubmitButton:hover,
-#registerTeamCancelButton:hover,
-.manageTeamSubmitButton:hover,
-#createEventSubmitButton:hover,
-#createEventDeleteButton:hover,
-.showPasswordsButton:hover,
-.loginButton:hover,
-#noTeamPageSubmitButton:hover,
-#noTeamPageLogOutButton:hover {
-  border-right: 5px solid darkOrange;
-  border-bottom: 5px solid darkOrange;
-  border-radius: 10px;
-  outline: none;
-} */
-
 button {
   border-right: 5px solid darkOrange;
   border-bottom: 5px solid darkOrange;
