@@ -22,15 +22,15 @@ button {
   background: rgb(50, 50, 50);
 
   -webkit-appearance: none;
-  color: orange;
+  color: darkorange;
   border-radius: 5px;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   width: 40%;
   font-weight: bolder;
 }
 #registerTeamForm {
   background: cornflowerblue;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   border-radius: 10px;
 }
 

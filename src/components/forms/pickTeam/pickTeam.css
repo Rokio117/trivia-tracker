@@ -14,15 +14,15 @@ button {
   margin-left: auto;
   margin-right: auto; */
   background-color: cornflowerblue;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   border-radius: 10px;
 }
 
 #teamSelector {
   width: 60%;
   height: 40px;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   background-color: rgb(50, 50, 50);
-  color: orange;
+  color: darkorange;
   font-size: 100%;
 }

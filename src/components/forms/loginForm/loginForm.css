@@ -33,14 +33,14 @@ label {
   background-color: rgb(50, 50, 50);
   border: none;
   -webkit-appearance: none;
-  color: orange;
+  color: darkorange;
   border-radius: 5px;
-  outline: 1px solid orange;
+  outline: 1px solid darkorange;
   width: 30%;
 }
 .smallFormChoice {
   padding: 4px;
-  color: orange;
+  color: darkorange;
   text-shadow: 3px 0px black;
   display: block;
   margin-left: auto;

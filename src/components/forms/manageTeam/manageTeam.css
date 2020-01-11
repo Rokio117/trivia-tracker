@@ -27,16 +27,16 @@ fieldset {
   background: cornflowerblue;
   margin-bottom: 15px;
   padding: 15px;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   border-radius: 10px;
 }
 .manageTeamSubmitButton {
   background: rgb(50, 50, 50);
 
   -webkit-appearance: none;
-  color: orange;
+  color: darkorange;
   border-radius: 5px;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   width: 40%;
   font-weight: bolder;
 }
@@ -49,8 +49,8 @@ fieldset {
 #newRoleChange {
   width: 60%;
   height: 40px;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   background-color: rgb(50, 50, 50);
-  color: orange;
+  color: darkorange;
   font-size: 100%;
 }

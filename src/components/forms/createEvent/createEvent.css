@@ -48,7 +48,7 @@ p {
 #createEventForm {
   padding: 15px;
   background: cornflowerblue;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   border-radius: 10px;
 }
 #createEventSubmitButton,
@@ -56,9 +56,9 @@ p {
   background: rgb(50, 50, 50);
 
   -webkit-appearance: none;
-  color: orange;
+  color: darkorange;
   border-radius: 5px;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   width: 40%;
   font-weight: bolder;
 }
@@ -72,9 +72,9 @@ p {
 #positionSelector {
   width: 60%;
   height: 40px;
-  border: 2px solid orange;
+  border: 2px solid darkorange;
   background-color: rgb(50, 50, 50);
-  color: orange;
+  color: darkorange;
   font-size: 100%;
 }
 .personContainer {
@@ -99,8 +99,8 @@ p {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: orange;
-  border: 5px solid orange;
+  background-color: darkorange;
+  border: 5px solid darkorange;
 }
 .hidden {
   visibility: hidden;

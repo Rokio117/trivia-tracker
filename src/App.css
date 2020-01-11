@@ -8,7 +8,7 @@ html {
 h1,
 h2,
 h3 {
-  color: orange;
+  color: darkOrange;
   text-shadow: 1px 1px black;
 }
 
@@ -23,12 +23,6 @@ fieldset {
   background-color: cornflowerblue;
 }
 
-/* #smallLoginForm,
-#smallRegisterForm,
-#smallWelcomeInfo,
-#smallWelcomeChoice {
-  visibility: hidden;
-} */
 #loginForm,
 #registerForm,
 #smallLoginForm,
@@ -38,7 +32,7 @@ fieldset {
 #smallWelcomeChoice,
 #smallWelcomeInfo {
   background-color: cornflowerblue;
-  border: 2px solid orange;
+  border: 2px solid darkOrange;
   border-radius: 10px;
   padding: 5px;
   margin: 15px;
@@ -48,9 +42,9 @@ fieldset {
   margin-right: auto;
 }
 .loader {
-  border: 16px solid orange;
+  border: 16px solid darkOrange;
   border-top: 16px solid rgb(50, 50, 50);
-  color: orange;
+  color: darkOrange;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -66,7 +60,7 @@ input {
   margin-left: auto;
   margin-right: auto;
   height: 40px;
-  border: 2px solid orange;
+  border: 2px solid darkOrange;
   background: rgb(50, 50, 50);
   color: white;
   padding: 0;
@@ -91,7 +85,7 @@ input {
   }
 }
 
-.submitButton:hover,
+/* .submitButton:hover,
 .cancelButton:hover,
 .settingsSubmitButton:hover,
 .settingsCancelButton:hover,
@@ -107,8 +101,15 @@ input {
 .loginButton:hover,
 #noTeamPageSubmitButton:hover,
 #noTeamPageLogOutButton:hover {
-  border-right: 5px solid orange;
-  border-bottom: 5px solid orange;
+  border-right: 5px solid darkOrange;
+  border-bottom: 5px solid darkOrange;
+  border-radius: 10px;
+  outline: none;
+} */
+
+button {
+  border-right: 5px solid darkOrange;
+  border-bottom: 5px solid darkOrange;
   border-radius: 10px;
   outline: none;
 }
@@ -116,7 +117,7 @@ input {
 .loginButton,
 .submitButton,
 .cancelButton {
-  border: 2px solid orange;
+  border: 2px solid darkOrange;
   border-radius: 10px;
 }
 button {
@@ -164,18 +165,7 @@ button {
   #welcomeInfo {
     display: none;
   }
-  /* #smallLoginForm,
-  #smallRegisterForm,
-  #smallWelcomeInfo,
-  #smallWelcomeChoice {
-    visibility: visible;
-  } */
-  /* #smallScreenNav {
-    visibility: visible;
-  }
-  #smallScreenLogoutButton {
-    visibility: visible;
-  } */
+
   #navParent {
     display: none;
   }
@@ -186,7 +176,7 @@ button {
     margin-bottom: 20px;
     background-color: rgb(50, 50, 50);
     width: 50%;
-    border: 2px solid orange;
+    border: 2px solid darkOrange;
     border-radius: 10px;
   }
   .rosterLabel {
