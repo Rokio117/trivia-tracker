@@ -5,6 +5,8 @@ import TriviaContext from "../../../context";
 import { loader } from "../../loader";
 import store from "../../../store";
 
+//allows user of any rank to create a new team
+
 class RegisterTeam extends Component {
   constructor(props) {
     super(props);

@@ -13,9 +13,11 @@ class ErrorDisplay extends Component {
           onClick={() => {
             this.setState({ hasError: false });
             const sessionInfo = JSON.parse(sessionStorage.getItem("state"));
+            //if the user has session info in storage logs them back in
             if (sessionInfo) {
               this.props.login(sessionInfo.user);
             } else {
+              //otherwise sends them to login screen
               this.props.history.push("/");
             }
           }}

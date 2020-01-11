@@ -57,9 +57,7 @@
   top: 0;
   margin: 0;
 }
-/* #smallScreenNav {
-  visibility: hidden;
-} */
+/* Styles for the screen after hamburger button is pressed */
 #dropDownNavWindow {
   background-color: rgb(50, 50, 50);
   border: 2px solid darkorange;
@@ -74,6 +72,7 @@
   border-radius: 10px;
   overflow: hidden;
 }
+/* blurs background while menu is open */
 #blurBackground {
   position: fixed;
   width: 100%;
@@ -81,6 +80,7 @@
   backdrop-filter: blur(15px);
   padding-bottom: 100px;
 }
+/* used to help position the opened hamburger form */
 #windowFrame {
   position: fixed;
   width: 100%;
@@ -133,4 +133,4 @@ a:active {
 .logoutButton:hover {
   color: white;
 }
-/* Media queries */
+/* Media queries are held in app.css*/

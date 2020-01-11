@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import "./pickTeam.css";
 import TriviaContext from "../../../context";
 
+//Form for user to choose which teams info to display
+
 class PickTeam extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +49,6 @@ class PickTeam extends Component {
                       this.setState({ selectError: true });
                     }
                     if (this.state.selectedTeam !== "none") {
-                      //const teamInfo = store.getTeam(this.state.selectedTeam);
                       const teamInfo = value.userTeams.filter(
                         team => team.teamcode === this.state.selectedTeam
                       )[0];

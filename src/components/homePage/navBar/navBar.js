@@ -8,6 +8,10 @@ class NavBar extends Component {
     super(props);
     this.state = { extended: false };
   }
+  //The options available to the player depend on their rank
+  //players with role Captain have all access
+  //players with role reporter cannot manage the team
+  //players with role member or guest cannot report an event or modify the team
   roleRender = (role, style) => {
     if (role === "Captain") {
       if (style === "small") {
@@ -59,7 +63,7 @@ class NavBar extends Component {
         );
     }
   };
-
+  //the option to choose which team to display only renders if the player is on multiple teams
   chooseTeamRender = (number, style) => {
     if (number > 1) {
       if (style === "small") {
@@ -78,7 +82,7 @@ class NavBar extends Component {
         );
     }
   };
-
+  //nav menu to display while on mobile devices
   smallScreenExtender(value, memberRole) {
     if (this.state.extended) {
       return (

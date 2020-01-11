@@ -3,6 +3,8 @@ import LoginForm from "../forms/loginForm/loginForm";
 import RegisterUser from "../forms/registerUser/registerUser";
 import { loader } from "../../components/loader";
 import "./welcomePage.css";
+
+//the page the user will see upon loading the app
 class WelcomePage extends Component {
   constructor(props) {
     super(props);

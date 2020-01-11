@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./registerUser.css";
 import store from "../../../store";
 import { tokenFunctions } from "../../../tokenService";
-import { passwordHelper } from "../showPassword";
+
 class RegisterUser extends Component {
   constructor(props) {
     super(props);
@@ -80,8 +80,6 @@ class RegisterUser extends Component {
             e.preventDefault();
 
             if (this.state.signUpPassword !== this.state.signUpRepeatPassword) {
-              console.log("pw dont match");
-
               this.setState({ passwordMatch: false });
             } else {
               this.props.setLoading();

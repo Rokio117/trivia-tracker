@@ -3,6 +3,9 @@ import "./standings.css";
 import TriviaContext from "../../../context";
 import HistoryList from "./historyList";
 
+//this component shows the winnings, number of wins, and numbers of 1st,2nd,and 3rd place wins
+//Also renders the historyList component
+
 class Standings extends Component {
   render() {
     return (

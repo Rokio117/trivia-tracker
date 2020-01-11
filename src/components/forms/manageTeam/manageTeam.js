@@ -4,6 +4,10 @@ import store from "../../../store";
 import TriviaContext from "../../../context";
 import "./manageTeam.css";
 import { loader } from "../../loader";
+
+//Form available only to players with role of captain on team
+//Allows captains to modify info for the team and add players
+
 class ManageTeam extends Component {
   constructor(props) {
     super(props);

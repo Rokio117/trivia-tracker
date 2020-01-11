@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./history.css";
 import TriviaContext from "../../../context";
+
+//this component formats and returns an individual history component to historyList
+//where it is then displayed
 class HistoryDisplay extends Component {
   constructor(props) {
     super(props);

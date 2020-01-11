@@ -4,6 +4,8 @@ import "./createEvent.css";
 import TriviaContext from "../../../context";
 import store from "../../../store";
 import { loader } from "../../loader";
+
+//Allows players with role reporter or captain to add an event to the teams history
 class CreateEvent extends Component {
   constructor(props) {
     super(props);

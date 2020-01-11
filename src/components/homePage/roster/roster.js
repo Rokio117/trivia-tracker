@@ -4,6 +4,8 @@ import TriviaContext from "../../../context";
 import "./roster.css";
 
 import { withRouter } from "react-router-dom";
+
+//displays current members of the team
 class Roster extends Component {
   static defaultProps = {};
   render() {

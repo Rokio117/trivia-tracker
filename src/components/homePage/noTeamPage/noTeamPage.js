@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import "./noTeamPage.css";
 import TriviaContext from "../../../context";
 import { loader } from "../../loader";
+//page user is taken to upon logging in or registering where if they are not on a team
 class NoTeamPage extends Component {
   constructor(props) {
     super(props);

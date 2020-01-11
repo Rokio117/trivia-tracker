@@ -5,6 +5,8 @@ import TriviaContext from "../../../context";
 import store from "../../../store";
 import { tokenFunctions } from "../../../tokenService";
 import { loader } from "../../loader";
+
+//allows user to change their personal settings such as username and name
 class Settings extends Component {
   constructor(props) {
     super(props);

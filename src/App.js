@@ -2,21 +2,16 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 import CreateEvent from "../src/components/forms/createEvent/createEvent";
-
-//import ManageTeam from "./components/forms/manageTeam/manageTeam";
 import PickTeam from "./components/forms/pickTeam/pickTeam";
 import RegisterTeam from "./components/forms/registerTeam/registerTeam";
-
 import Settings from "./components/forms/settings/settings";
 import ErrorDisplay from "./components/homePage/ErrorDisplay/errorDisplay";
 import Home from "./components/homePage/home/home";
-
 import NoTeamPage from "./components/homePage/noTeamPage/noTeamPage";
-
 import WelcomePage from "./components/welcomePage/welcomePage";
-
-import TriviaContext from "./context";
 import ManageTeam from "./components/forms/manageTeam/manageTeam";
+import TriviaContext from "./context";
+
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import store from "./store";
@@ -79,9 +74,6 @@ class App extends Component {
               teamMembers: teamInfo.members,
               loggedIn: true
             };
-
-            //revisit persist for server side
-            //localStorage.setItem(APP_STATE_KEY, JSON.stringify(appState));
           }
           if (userTeams.length === 0) {
             appState = {
@@ -103,18 +95,15 @@ class App extends Component {
           }
 
           this.setState(appState);
-
+          //sets state in session storage to be retrieved upon page refresh or error
           sessionStorage.setItem("state", JSON.stringify(appState));
           this.props.history.push(location);
         });
-      //if the member does not have a team
     });
   };
 
   loginTeam = teamInfo => {
     const teamMembers = teamInfo.members;
-    //teamMembers is supposed to be list of username,role,and nickname
-    //for each team member
 
     if (!this.state.userTeams.includes(teamInfo)) {
       const teamList = [...this.state.userTeams, teamInfo];
@@ -165,7 +154,6 @@ class App extends Component {
           team: this.state.team
         }}
       >
-        {/* <Error login={this.login}> */}
         <Switch>
           <Route
             exact
@@ -266,7 +254,6 @@ class App extends Component {
             }}
           ></Route>
         </Switch>
-        {/* </Error> */}
       </TriviaContext.Provider>
     );
   }
