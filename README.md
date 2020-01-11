@@ -13,12 +13,9 @@ example, a Captain can add events to the teams history and change the teams sett
 ## Technologies Used
 
 <img src="readmeimages/React-logo.png" width="50" >
-Trivia Tracker was created using ReactJs framework. The API 
+Trivia Tracker was created using ReactJs framework. 
 
 
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
 
 
 ## Available Scripts
