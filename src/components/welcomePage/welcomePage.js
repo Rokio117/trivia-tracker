@@ -6,7 +6,7 @@ import "./welcomePage.css";
 class WelcomePage extends Component {
   constructor(props) {
     super(props);
-    this.state = { extended: false, loading: false };
+    this.state = { extended: true, loading: false };
   }
 
   setLoading = () => {

@@ -15,7 +15,7 @@ class RegisterUserRefactor extends Component {
       passwordMatch: true,
       uniqueusername: true,
       noTeamFound: false,
-      buttonOption: "show",
+
       connectionError: "",
       connectionMessage: "",
       extended: false
@@ -186,21 +186,7 @@ class RegisterUserRefactor extends Component {
             }
           ></input>
           {this.mustRepeat(this.state.passwordMatch)}
-          <button
-            type="button"
-            className="showPasswordsButton"
-            onClick={e => {
-              e.preventDefault();
-              passwordHelper.showPasswords("pwAndRepeatePw");
-              if (this.state.buttonOption === "show") {
-                this.setState({ buttonOption: "hide" });
-              } else {
-                this.setState({ buttonOption: "show" });
-              }
-            }}
-          >
-            {this.state.buttonOption}
-          </button>
+
           {this.connectionError(
             this.state.connectionError,
             this.state.connectionMessage

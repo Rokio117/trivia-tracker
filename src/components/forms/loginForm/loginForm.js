@@ -3,8 +3,7 @@ import { withRouter } from "react-router-dom";
 import "./loginForm.css";
 import store from "../../../store";
 import { tokenFunctions } from "../../../tokenService";
-import { passwordHelper } from "../showPassword";
-import { loader } from "../../../components/loader";
+
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +11,6 @@ class LoginForm extends Component {
       loginName: "",
       loginPassword: "",
       loginError: false,
-      buttonOption: "show",
       connectionError: false,
       connectionMessage: "",
       extended: false
@@ -109,21 +107,6 @@ class LoginForm extends Component {
               }}
             ></input>
 
-            <button
-              type="button"
-              id="logPwShowOrHide"
-              className="showPasswordsButton"
-              onClick={e => {
-                e.preventDefault();
-                passwordHelper.showPassword("logPassword", "logPwShowOrHide");
-                if (this.state.buttonOption === "show") {
-                  this.setState({ buttonOption: "hide" });
-                } else this.setState({ buttonOption: "show" });
-              }}
-              value="show"
-            >
-              {this.state.buttonOption}
-            </button>
             {this.loginError(this.state.loginError)}
             {this.connectionError(
               this.state.connectionError,
