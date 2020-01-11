@@ -3,7 +3,7 @@ import "./registerUser.css";
 import store from "../../../store";
 import { tokenFunctions } from "../../../tokenService";
 import { passwordHelper } from "../showPassword";
-class RegisterUserRefactor extends Component {
+class RegisterUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -223,4 +223,4 @@ class RegisterUserRefactor extends Component {
     );
   }
 }
-export default RegisterUserRefactor;
+export default RegisterUser;

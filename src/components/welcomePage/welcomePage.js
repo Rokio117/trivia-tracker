@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LoginForm from "../forms/loginForm/loginForm";
-import RegisterUserRefactor from "../forms/registerUser/registerUserRefactor";
+import RegisterUser from "../forms/registerUser/registerUser";
 import { loader } from "../../components/loader";
 import "./welcomePage.css";
 class WelcomePage extends Component {
@@ -61,7 +61,7 @@ class WelcomePage extends Component {
           loginTeam={this.props.loginTeam}
           setLoading={this.setLoading}
         />
-        <RegisterUserRefactor
+        <RegisterUser
           login={this.props.login}
           loginTeam={this.props.loginTeam}
           setLoading={this.setLoading}
