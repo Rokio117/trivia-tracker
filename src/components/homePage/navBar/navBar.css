@@ -5,7 +5,8 @@
 #navParent {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  justify-content: space-between;
   border-bottom: 2px solid darkorange;
   padding: 15px;
 }
