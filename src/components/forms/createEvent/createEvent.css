@@ -64,6 +64,7 @@ p {
 }
 .radioButton {
   height: 25px;
+  background: none;
 }
 .radioContainer {
   width: 30%;
