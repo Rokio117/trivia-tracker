@@ -12,7 +12,9 @@ Each user will have a specific role within their team(s). For example, if the us
 
 ## Technologies Used
 
-<img src="readmeimages/React-logo.png" width="50" >
+<img src="readmeimages/React-logo.png" width="50">
+<img src="readmeimages/js.png" width="50>
+<img src="readmeimages/CSS3_logo_and_wordmark.svg.png" width="50">
 Trivia Tracker was created using ReactJs framework. 
 
 ## API
