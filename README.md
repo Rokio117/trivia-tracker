@@ -17,8 +17,8 @@ Each user will have a specific role within their team(s). For example, if the us
  
 
 
-
-Trivia Tracker was created using ReactJs framework and styled using CSS. 
+Trivia Tracker was created using Javascript, ReactJs, and CSS.
+Trivia Tracker was created using responsive mobile-first web disign. 
 
 ## Take A Look
 Welcome Page | History Section | Nav Menu | Create Event Form 
