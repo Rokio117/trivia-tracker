@@ -21,10 +21,10 @@ Each user will have a specific role within their team(s). For example, if the us
 Trivia Tracker was created using ReactJs framework and styled using CSS. 
 
 ## Take A Look
-Welcome Page | Nav Menu | Create Event Form 
------------- | -------- | -------------------
+Welcome Page | History Section | Nav Menu | Create Event Form 
+------------ | ------------ | ------------ | ------------
 
-<img src="readmeimages/phoneWelcomePage.jpg" alt="welcome page as seen on a phone" width="200px"> | <img src="readmeimages/phoneNavMenu.jpg" alt="nav menu seen on a phone" width="200px"> | <img src="readmeimages/phoneCreateEvent.jpg" alt="create event screen on a phone" width="200px">
+<img src="readmeimages/phoneWelcomePage.jpg" alt="welcome page as seen on a phone" width="200px"> | <img src="readmeimages/phoneHistory.jpg" alt="team history as seen on a phone" width ="200px"> | <img src="readmeimages/phoneNavMenu.jpg" alt="nav menu seen on a phone" width="200px"> | <img src="readmeimages/phoneCreateEvent.jpg" alt="create event screen on a phone" width="200px">
 
 Home Page (large screen)
 
