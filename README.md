@@ -6,9 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## What is Trivia Tracker?
 
-Trivia tracker is a webpage that helps pub trivia players keep track of their teams progress and members. After a user registers they are taken to a page where they can either create a team or enter a teamcode to be added to a team. Once on a team the user will be taken to the home page where the information for that team is displayed. 
+Trivia tracker is a webpage that helps pub trivia players keep track of their team's progress and members. After a user registers they are taken to a page where they can either create a team or enter a teamcode to be added to a team. Once on a team the user will be taken to the home page where the information for that team is displayed. 
 
-Each user will have a specific role within their team(s). For example, if the user is a Captain they have full authority to change info about the team, add players, or add events. A guest would not be able to change any of the teams information.
+Each user will have a specific role within their team(s). For example, if the user is a Captain they have full authority to change info about the team, add players, or add events. A guest would not be able to change any of the team's information.
 
 ## Technologies Used
  <img src="readmeimages/CSS3_logo_and_wordmark.svg.png" height="50" alt="CSS logo" align="left">
