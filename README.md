@@ -11,14 +11,31 @@ Trivia tracker is a webpage that helps pub trivia players keep track of their te
 Each user will have a specific role within their team(s). For example, if the user is a Captain they have full authority to change info about the team, add players, or add events. A guest would not be able to change any of the teams information.
 
 ## Technologies Used
- <img src="readmeimages/CSS3_logo_and_wordmark.svg.png" width="50" alt="CSS logo" align="left">
- <img src="readmeimages/React-logo.png" width="50" alt="react logo" align="left"> 
- <img src="readmeimages/js.jpg" width="50 alt="javascript logo" align="center"> 
+ <img src="readmeimages/CSS3_logo_and_wordmark.svg.png" height="50" alt="CSS logo" align="left">
+ <img src="readmeimages/React-logo.png" height="50" alt="react logo" align="left"> 
+ <img src="readmeimages/js.jpg" height="50 alt="javascript logo" align="center"> 
  
 
 
 
-Trivia Tracker was created using ReactJs framework. 
+Trivia Tracker was created using ReactJs framework and styled using CSS. 
+
+## Take A Look
+Welcome Page | Nav Menu | Create Event Form 
+------------ | -------- | -------------------
+
+<img src="readmeimages/phoneWelcomePage.jpg" alt="welcome page as seen on a phone" width="200px"> | <img src="readmeimages/phoneNavMenu.jpg" alt="nav menu seen on a phone" width="200px"> | <img src="readmeimages/phoneCreateEvent.jpg" alt="create event screen on a phone" width="200px">
+
+Home Page (large screen)
+
+<img src="readmeimages/mainPageLarge.png" alt="Home page as seen on a large screen" >
+
+Register Team (large screen)
+
+<img src="readmeimages/registerTeamLarge.png" alt="Register team form on a large screen">
+
+
+                                                                                              
 
 ## API
 The API for Trivia Tracker can be found at: https://github.com/Rokio117/Bookmark--api
