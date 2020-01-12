@@ -11,10 +11,10 @@ Trivia tracker is a webpage that helps pub trivia players keep track of their te
 Each user will have a specific role within their team(s). For example, if the user is a Captain they have full authority to change info about the team, add players, or add events. A guest would not be able to change any of the teams information.
 
 ## Technologies Used
-
+ <img src="readmeimages/CSS3_logo_and_wordmark.svg.png" width="50" alt="CSS logo" align="left">
  <img src="readmeimages/React-logo.png" width="50" alt="react logo" align="left"> 
  <img src="readmeimages/js.jpg" width="50 alt="javascript logo" align="center"> 
- <img src="readmeimages/CSS3_logo_and_wordmark.svg.png" width="50" alt="CSS logo" align="right"> 
+ 
 
 
 
